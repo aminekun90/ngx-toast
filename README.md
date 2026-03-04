@@ -1,18 +1,18 @@
 # ngx-toast 🍞
 
-A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+ and React 18-19.
+A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+ and React 18-19 +.
 
 ## Demo app
 
-![Toast gif](./docs/gif-toast.gif)
+![Toast gif](./projects/ngx-toast/docs/gif-toast.gif)
 
 [View Angular Demo](https://aminekun90.github.io/ngx-toast/)
-
 [View React Demo](https://aminekun90.github.io/ngx-toast/react/)
 
-## Documentation
+## Documentations
 
-[View Documentation](https://github.com/aminekun90/ngx-toast/blob/main/projects/ngx-toast/README.md)
+[View Angular Documentation](https://github.com/aminekun90/ngx-toast/blob/main/projects/ngx-toast/README.md)
+[View React Documentation](https://github.com/aminekun90/ngx-toast/blob/main/projects/react-toast/README.md)
 
 ## Keep this project alive :coffee:
 
