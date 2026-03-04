@@ -46,19 +46,21 @@ jobs:
         run: yarn install --immutable
 
       - name: 🎭 Install Playwright Browsers
-        # This installs the browser binaries needed by Vitest
         run: npx playwright install chromium --with-deps
 
       - name: 🏗️ Build library
         shell: bash
-        run: yarn ng build ngx-toast
+        # Mise à jour avec le nouveau nom scopé
+        run: yarn build
 
       - name: 🧪 Run tests
         shell: bash
-        run: yarn ng test ngx-toast --watch=false
+        # Mise à jour avec le nouveau nom scopé
+        run: yarn test--watch=false
         env:
           VITEST_BROWSER_NAME: chromium
-          VITEST_BROWSER_HEADLESS: true
+          # On s'assure que c'est bien interprété comme une string par Vitest
+          VITEST_BROWSER_HEADLESS: 'true'
 
       - name: 🛡️ Security Audit (Linux only)
         if: matrix.os == 'ubuntu-latest' && success()
