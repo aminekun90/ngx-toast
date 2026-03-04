@@ -17,7 +17,8 @@
     "build:ng": "ng build @aminekun90/ngx-toast",
     "build:react": "yarn workspace @aminekun90/react-toast build",
     "build": "yarn prebuild && yarn build:ng && yarn build:react",
-    "test": "ng test @aminekun90/ngx-toast"
+    "test:ng": "ng test @aminekun90/ngx-toast",
+    "test:react": "yarn workspace @aminekun90/react-toast test"
   },
   "engines": {
     "node": ">=24.13.0"

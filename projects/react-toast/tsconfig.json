@@ -3,6 +3,7 @@
     "forceConsistentCasingInFileNames": true,
     "target": "ES2022",
     "useDefineForClassFields": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom", "node"],
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
