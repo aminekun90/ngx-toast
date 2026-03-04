@@ -3,7 +3,13 @@
 A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+.
 
 [![Angular Version](https://img.shields.io/badge/angular-%3E%3D21.2.0-red.svg)](https://angular.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/aminekun90/ngx-toast/graphs/commit-activity)
+[![version number](https://img.shields.io/npm/v/ngx-toast?color=green&label=version)](https://github.com/aminekun90/ngx-toast/releases)
+[![Actions Status](https://github.com/aminekun90/ngx-toast/workflows/Test/badge.svg)](https://github.com/aminekun90/ngx-toast/actions)
+[![License](https://img.shields.io/github/license/aminekun90/ngx-toast)](https://github.com/aminekun90/ngx-toast/blob/main/LICENSE)
+![node-current](https://img.shields.io/node/v/ngx-toast)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/ngx-toast)](https://socket.dev/npm/package/ngx-toast)
+[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/ngx-toast)
 
 ## Key Features
 

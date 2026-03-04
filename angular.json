@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-toast": {
+    "@aminekun90/ngx-toast": {
       "projectType": "library",
       "root": "projects/ngx-toast",
       "sourceRoot": "projects/ngx-toast/src",

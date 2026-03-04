@@ -1,15 +1,31 @@
 {
-  "name": "ngx-toast",
+  "name": "ngx-toast-workspace",
   "version": "1.0.0",
+  "author": "aminekun90",
+  "packageManager": "yarn@4.12.0",
+  "funding": "https://github.com/sponsors/aminekun90",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aminekun90/ngx-toast.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+   "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "build": "ng build @aminekun90/ngx-toast",
+    "watch": "ng build @aminekun90/ngx-toast --watch --configuration development",
+    "test": "ng test @aminekun90/ngx-toast"
   },
-  "private": true,
-  "packageManager": "yarn@4.12.0",
+  "engines": {
+    "node": ">=24.13.0"
+  },
   "dependencies": {
     "@angular/common": "^21.2.0",
     "@angular/compiler": "^21.2.0",
@@ -33,5 +49,8 @@
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
-  }
+  },
+  "workspaces": [
+    "projects/*"
+  ]
 }
