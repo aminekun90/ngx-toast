@@ -97,7 +97,16 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npm pkg set name="@aminekun90/ngx-toast"
-          npm config set @aminekun90:registry=https://npm.pkg.github.com/
-          npm config set //npm.pkg.github.com/:_authToken="${NODE_AUTH_TOKEN}"
-          npm publish --registry https://npm.pkg.github.com/ --ignore-scripts
+          PACKAGE="@aminekun90/ngx-toast"
+          VERSION="${{ steps.package.outputs.version }}"
+          REGISTRY="https://npm.pkg.github.com/"
+
+          # Check if version exists on GitHub Packages
+          if npm view "$PACKAGE@$VERSION" --registry $REGISTRY > /dev/null 2>&1; then
+            echo "✅ Version $VERSION already exists on GitHub Packages, skipping publish."
+          else
+            echo "🚀 Publishing $PACKAGE@$VERSION to GitHub Packages..."
+            npm config set $PACKAGE:registry $REGISTRY
+            npm config set //$REGISTRY:_authToken="${NODE_AUTH_TOKEN}"
+            npm publish --registry $REGISTRY --ignore-scripts
+          fi
