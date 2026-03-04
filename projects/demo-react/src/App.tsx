@@ -11,6 +11,8 @@ function AppContent() {
     <div className="hero-section">
       <span className="badge">React Version {version}</span>
       <h1>React Toast Demo 🚀</h1>
+  <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast')} className="btn btn-primary">Angular Version</button>
+      
       <p>
         A lightweight, customizable toast notification library for React. 
         Mirroring the logic of ngx-toast with React Hooks.

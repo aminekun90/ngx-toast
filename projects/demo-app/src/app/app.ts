@@ -26,4 +26,7 @@ export class App {
       position: 'bottom-right'
     });
   }
+  gotoReact() {
+    globalThis.location.href = "https://aminekun90.github.io/ngx-toast/react/";
+  }
 }
