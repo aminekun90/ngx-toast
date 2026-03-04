@@ -1,6 +1,6 @@
 {
   "name": "@aminekun90/ngx-toast",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "aminekun90",
   "funding": "https://github.com/sponsors/aminekun90",
   "peerDependencies": {
@@ -24,5 +24,21 @@
   "engines": {
     "node": ">=24.13.0"
   },
+  "keywords": [
+    "angular",
+    "ngx",
+    "toast",
+    "notification",
+    "alert",
+    "signals",
+    "angular-signals",
+    "zoneless",
+    "angular-component",
+    "ui",
+    "snackbar",
+    "popup",
+    "lightweight",
+    "typescript"
+  ],
   "sideEffects": false
 }
