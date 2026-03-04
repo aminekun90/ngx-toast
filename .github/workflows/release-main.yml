@@ -101,15 +101,15 @@ jobs:
           VERSION="${{ steps.package.outputs.version }}"
           REGISTRY="https://npm.pkg.github.com"
 
-          # Check if version exists on GitHub Packages
+          # Configure registry auth first
+          npm config set @aminekun90:registry $REGISTRY
+          npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
+
+          # Now check if version exists
           if npm view "$PACKAGE@$VERSION" --registry $REGISTRY > /dev/null 2>&1; then
             echo "✅ Version $VERSION already exists on GitHub Packages, skipping publish."
           else
             echo "🚀 Publishing $PACKAGE@$VERSION to GitHub Packages..."
-
-            npm config set @aminekun90:registry $REGISTRY
-            npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
-
             npm publish ./dist/ngx-toast \
               --registry $REGISTRY \
               --ignore-scripts
