@@ -64,10 +64,25 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
+          VERSION="${{ steps.package.outputs.version }}"
+          
           # Angular
-          npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts || echo "NG déjà publié"
-          # React (On publie depuis la racine du projet React, pas le dossier dist)
-          npm publish ./projects/react-toast --provenance --access public --ignore-scripts || echo "React déjà publié"
+          PKG_NG="@aminekun90/ngx-toast"
+          if npm view "$PKG_NG@$VERSION" > /dev/null 2>&1; then
+            echo "✅ $PKG_NG@$VERSION already exists on npm, skipping publish."
+          else
+            echo "🚀 Publishing $PKG_NG@$VERSION to npm..."
+            npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts
+          fi
+
+          # React
+          PKG_REACT="@aminekun90/react-toast"
+          if npm view "$PKG_REACT@$VERSION" > /dev/null 2>&1; then
+            echo "✅ $PKG_REACT@$VERSION already exists on npm, skipping publish."
+          else
+            echo "🚀 Publishing $PKG_REACT@$VERSION to npm..."
+            npm publish ./projects/react-toast --provenance --access public --ignore-scripts
+          fi
 
       # 4. Release GitHub
       - name: 🏷️ Create GitHub Release
@@ -88,13 +103,29 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          VERSION="${{ steps.package.outputs.version }}"
           REGISTRY="https://npm.pkg.github.com"
+
           npm config set @aminekun90:registry $REGISTRY
           npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
 
-          npm publish ./dist/ngx-toast --registry $REGISTRY --ignore-scripts || echo "NG déjà sur GHP"
-          # Correction du chemin ici aussi
-          npm publish ./projects/react-toast --registry $REGISTRY --ignore-scripts || echo "React déjà sur GHP"
+          # Angular
+          PKG_NG="@aminekun90/ngx-toast"
+          if npm view "$PKG_NG@$VERSION" --registry $REGISTRY > /dev/null 2>&1; then
+            echo "✅ $PKG_NG@$VERSION already exists on GitHub Packages, skipping publish."
+          else
+            echo "🚀 Publishing $PKG_NG@$VERSION to GitHub Packages..."
+            npm publish ./dist/ngx-toast --registry $REGISTRY --ignore-scripts
+          fi
+
+          # React
+          PKG_REACT="@aminekun90/react-toast"
+          if npm view "$PKG_REACT@$VERSION" --registry $REGISTRY > /dev/null 2>&1; then
+            echo "✅ $PKG_REACT@$VERSION already exists on GitHub Packages, skipping publish."
+          else
+            echo "🚀 Publishing $PKG_REACT@$VERSION to GitHub Packages..."
+            npm publish ./projects/react-toast --registry $REGISTRY --ignore-scripts
+          fi
 
       # 6. Build des DEMOS
       - name: 🌍 Build Demos (Angular & React)
