@@ -11,6 +11,7 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@aminekun90/ngx-toast)](https://socket.dev/npm/package/@aminekun90/ngx-toast)
 [![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@aminekun90/ngx-toast)
 
+<img src="./docs/gif-toast.gif" alt="Toast gif" width="250px" style="display: block; margin: 0 auto;">
 ## Key Features
 
 * ⚡ **Angular 21+ Optimized**: Fully supports `provideZonelessChangeDetection()`.

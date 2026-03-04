@@ -8,14 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/aminekun90/ngx-toast.git"
   },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
