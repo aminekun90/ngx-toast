@@ -85,7 +85,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd dist/ngx-toast
-          # Le nom est déjà @aminekun90/ngx-toast dans le package.json de la lib
+          npm pkg set name="@aminekun90/ngx-toast"
           npm config set @aminekun90:registry=https://npm.pkg.github.com/
-          npm publish --registry=https://npm.pkg.github.com/ --ignore-scripts
+          npm config set //npm.pkg.github.com/:_authToken="${NODE_AUTH_TOKEN}"
+          npm publish --registry https://npm.pkg.github.com/ --ignore-scripts
