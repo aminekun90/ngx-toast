@@ -11,7 +11,11 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@aminekun90/ngx-toast)](https://socket.dev/npm/package/@aminekun90/ngx-toast)
 [![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@aminekun90/ngx-toast)
 
+## Demo app
+
 ![Toast gif](./docs/gif-toast.gif)
+
+[View Demo](https://aminekun90.github.io/ngx-toast/)
 
 ## Key Features
 
