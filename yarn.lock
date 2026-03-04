@@ -166,6 +166,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@aminekun90/ngx-toast@workspace:projects/ngx-toast":
+  version: 0.0.0-use.local
+  resolution: "@aminekun90/ngx-toast@workspace:projects/ngx-toast"
+  dependencies:
+    tslib: "npm:^2.3.0"
+  peerDependencies:
+    "@angular/common": ^21.2.0
+    "@angular/core": ^21.2.0
+    "@fortawesome/angular-fontawesome": ^4.0.0
+    "@fortawesome/fontawesome-svg-core": ^7.2.0
+    "@fortawesome/free-solid-svg-icons": ^7.2.0
+    rxjs: ^7.8.0
+  languageName: unknown
+  linkType: soft
+
 "@ampproject/remapping@npm:2.3.0, @ampproject/remapping@npm:^2.3.0":
   version: 2.3.0
   resolution: "@ampproject/remapping@npm:2.3.0"
@@ -4493,17 +4508,6 @@ __metadata:
     tslib: "npm:^2.3.0"
     typescript: "npm:~5.9.2"
     vitest: "npm:^4.0.8"
-  languageName: unknown
-  linkType: soft
-
-"ngx-toast@workspace:projects/ngx-toast":
-  version: 0.0.0-use.local
-  resolution: "ngx-toast@workspace:projects/ngx-toast"
-  dependencies:
-    tslib: "npm:^2.3.0"
-  peerDependencies:
-    "@angular/common": ^21.2.0
-    "@angular/core": ^21.2.0
   languageName: unknown
   linkType: soft
 
