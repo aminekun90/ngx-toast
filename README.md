@@ -2,7 +2,7 @@
 
 A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+.
 
-![Toast gif](./projects/ngx-toast/docs/gif-toast.gif){ style="display: block; margin: 0 auto" }
+![Toast gif](./projects/ngx-toast/docs/gif-toast.gif)
 
 ## Documentation
 
