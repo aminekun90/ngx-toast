@@ -59,10 +59,8 @@ jobs:
           chmod +x ./shai-hulud-audit.sh
           ./shai-hulud-audit.sh --no-color --save-report || true
 
-      # 3. Publication sur NPM (Public)
+      # 3. Publication sur NPM (Public) avec OIDC
       - name: 🚀 Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           VERSION="${{ steps.package.outputs.version }}"
           
