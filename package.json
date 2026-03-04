@@ -1,6 +1,6 @@
 {
   "name": "ngx-toast-workspace",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "aminekun90",
   "packageManager": "yarn@4.12.0",
   "funding": "https://github.com/sponsors/aminekun90",
@@ -46,6 +46,7 @@
     "@vitest/browser-playwright": "^4.0.18",
     "jsdom": "^28.0.0",
     "ng-packagr": "^21.2.0",
+    "playwright": "^1.58.2",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
