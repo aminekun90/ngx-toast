@@ -1,0 +1,83 @@
+// projects/demo-react/src/App.scss
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  color: #1e293b;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+}
+
+.hero-section {
+  max-width: 700px;
+  
+  .badge {
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 6px 16px;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem); // Responsive size
+    font-weight: 800;
+    margin: 0.5rem 0 1.5rem 0;
+    background: linear-gradient(to right, #3b82f6, #2563eb);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.1;
+  }
+
+  p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: #64748b;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  outline: none;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.15);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+
+  &.btn-primary { background-color: #3b82f6; color: white; }
+  &.btn-success { background-color: #10b981; color: white; }
+  &.btn-warning { background-color: #f59e0b; color: white; }
+  &.btn-error   { background-color: #ef4444; color: white; }
+}
