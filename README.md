@@ -1,7 +1,8 @@
 # ngx-toast 🍞
 
 A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+.
-<img src="./projects/ngx-toast/docs/gif-toast.gif" alt="Toast gif" width="250px" style="display: block; margin: 0 auto;">
+
+![Toast gif](./projects/ngx-toast/docs/gif-toast.gif){ style="display: block; margin: 0 auto" }
 
 ## Documentation
 
