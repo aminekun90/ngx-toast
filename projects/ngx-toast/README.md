@@ -129,6 +129,16 @@ export class MyComponent {
 This library is built with Angular 21 and above.
 Node 24.13.0 or higher is required.
 
+## Keep this project alive :coffee:
+
+I dedicate time and effort on writing and maintaining this library and if it helped you and saved you time, please consider Donating!
+
+I'm grateful for your support.
+
+[Donate via PayPal](paypal.me/aminebouzahar)
+
+[![PayPal](https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://www.paypal.com/paypalme/aminebouzahar)
+
 ## Licence
 
 MIT License, By Amine Bouzahar.
