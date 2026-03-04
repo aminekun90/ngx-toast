@@ -66,7 +66,15 @@ jobs:
       # NOTE: On vérifie le chemin 'dist/ngx-toast' ou 'dist/@aminekun90/ngx-toast'
       - name: 🚀 Publish to NPM
         run: |
-          npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts
+          VERSION="${{ steps.package.outputs.version }}"
+          PACKAGE="@aminekun90/ngx-toast"
+          # Check if version exists on npm
+          if npm view "$PACKAGE@$VERSION" > /dev/null 2>&1; then
+            echo "✅ Version $VERSION already exists on npm, skipping publish."
+          else
+            echo "🚀 Publishing $PACKAGE@$VERSION to npm..."
+            npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts
+          fi
 
       - name: 🏷️ Create GitHub Release
         if: success()
@@ -74,10 +82,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ steps.package.outputs.version }}
         run: |
-          gh release create "v$VERSION" \
-            --title "v$VERSION" \
-            --generate-notes \
-            --target "main"
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "✅ GitHub release v$VERSION already exists, skipping."
+          else
+            gh release create "v$VERSION" \
+              --title "v$VERSION" \
+              --generate-notes \
+              --target "main"
+          fi
 
       # 6. Publish to GitHub Packages
       - name: 📦 Publish to GitHub Packages
