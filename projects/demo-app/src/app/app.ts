@@ -29,4 +29,10 @@ export class App {
   gotoReact() {
     globalThis.location.href = "https://aminekun90.github.io/ngx-toast/react/";
   }
+  gotoGithub() {
+    globalThis.location.href = "https://github.com/aminekun90/ngx-toast/";
+  }
+  gotoNpm() {
+    globalThis.location.href = "https://www.npmjs.com/package/@aminekun90/ngx-toast";
+  }
 }

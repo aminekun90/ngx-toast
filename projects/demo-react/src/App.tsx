@@ -11,7 +11,9 @@ function AppContent() {
     <div className="hero-section">
       <span className="badge">React Version {version}</span>
       <h1>React Toast Demo 🚀</h1>
-  <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast','_self')} className="btn btn-primary">Angular Version</button>
+      <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast','_self')} className="btn btn-primary">Angular Version</button>
+      <button onClick={() => window.open('https://github.com/aminekun90/ngx-toast/','_self')} className="btn btn-primary">GitHub</button>
+      <button onClick={() => window.open('https://www.npmjs.com/package/@aminekun90/react-toast','_self')} className="btn btn-primary">Npm</button>
       
       <p>
         A lightweight, customizable toast notification library for React. 
