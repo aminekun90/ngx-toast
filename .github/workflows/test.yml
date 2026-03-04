@@ -55,8 +55,10 @@ jobs:
 
       - name: 🧪 Run tests
         shell: bash
-        # For Vitest-based Angular testing in CI
-        run: yarn ng test ngx-toast --watch=false --browsers.name=chromium --browsers.headless=true
+        run: yarn ng test ngx-toast --watch=false
+        env:
+          VITEST_BROWSER_NAME: chromium
+          VITEST_BROWSER_HEADLESS: true
 
       - name: 🛡️ Security Audit (Linux only)
         if: matrix.os == 'ubuntu-latest' && success()
