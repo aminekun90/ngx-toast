@@ -114,3 +114,17 @@ jobs:
               --registry $REGISTRY \
               --ignore-scripts
           fi
+      # 7. Build Demo App
+      - name: 🌍 Build Demo App
+        if: success()
+        run: |
+          yarn ng build demo-app --configuration production --base-href=/ngx-toast/
+
+      # 8. Deploy Demo to GitHub Pages
+      - name: 🚀 Deploy to GitHub Pages
+        if: success()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/demo-app
+          publish_branch: gh-pages
