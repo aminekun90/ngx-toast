@@ -7,11 +7,13 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 ![Toast gif](./projects/ngx-toast/docs/gif-toast.gif)
 
 [View Angular Demo](https://aminekun90.github.io/ngx-toast/)
+
 [View React Demo](https://aminekun90.github.io/ngx-toast/react/)
 
 ## Documentations
 
 [View Angular Documentation](https://github.com/aminekun90/ngx-toast/blob/main/projects/ngx-toast/README.md)
+
 [View React Documentation](https://github.com/aminekun90/ngx-toast/blob/main/projects/react-toast/README.md)
 
 ## Keep this project alive :coffee:
