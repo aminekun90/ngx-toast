@@ -9,9 +9,11 @@
     "url": "git+https://github.com/aminekun90/ngx-toast.git"
   },
   "scripts": {
+    "preinstall": "node ./set-version.js",
+    "prebuild": "node ./set-version.js",
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build @aminekun90/ngx-toast",
+    "build": "yarn prebuild && ng build @aminekun90/ngx-toast",
     "watch": "ng build @aminekun90/ngx-toast --watch --configuration development",
     "test": "ng test @aminekun90/ngx-toast"
   },
