@@ -56,7 +56,7 @@ jobs:
       - name: 🧪 Run tests
         shell: bash
         # Mise à jour avec le nouveau nom scopé
-        run: yarn test--watch=false
+        run: yarn test --watch=false
         env:
           VITEST_BROWSER_NAME: chromium
           # On s'assure que c'est bien interprété comme une string par Vitest
