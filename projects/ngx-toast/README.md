@@ -8,8 +8,8 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 [![Actions Status](https://github.com/aminekun90/ngx-toast/workflows/Test/badge.svg)](https://github.com/aminekun90/ngx-toast/actions)
 [![License](https://img.shields.io/github/license/aminekun90/ngx-toast)](https://github.com/aminekun90/ngx-toast/blob/main/LICENSE)
 ![node-current](https://img.shields.io/node/v/ngx-toast)
-[![Socket Badge](https://socket.dev/api/badge/npm/package/ngx-toast)](https://socket.dev/npm/package/ngx-toast)
-[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/ngx-toast)
+[![Socket Badge](https://socket.dev/api/badge/npm/package/@aminekun90/ngx-toast)](https://socket.dev/npm/package/@aminekun90/ngx-toast)
+[![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@aminekun90/ngx-toast)
 
 ## Key Features
 
