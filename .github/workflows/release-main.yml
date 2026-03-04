@@ -66,8 +66,8 @@ jobs:
         run: |
           # Angular
           npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts || echo "NG déjà publié"
-          # React (Le build est dans projects/react-toast/dist)
-          npm publish ./projects/react-toast/dist --provenance --access public --ignore-scripts || echo "React déjà publié"
+          # React (On publie depuis la racine du projet React, pas le dossier dist)
+          npm publish ./projects/react-toast --provenance --access public --ignore-scripts || echo "React déjà publié"
 
       # 4. Release GitHub
       - name: 🏷️ Create GitHub Release
@@ -93,7 +93,8 @@ jobs:
           npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
 
           npm publish ./dist/ngx-toast --registry $REGISTRY --ignore-scripts || echo "NG déjà sur GHP"
-          npm publish ./projects/react-toast/dist --registry $REGISTRY --ignore-scripts || echo "React déjà sur GHP"
+          # Correction du chemin ici aussi
+          npm publish ./projects/react-toast --registry $REGISTRY --ignore-scripts || echo "React déjà sur GHP"
 
       # 6. Build des DEMOS
       - name: 🌍 Build Demos (Angular & React)
