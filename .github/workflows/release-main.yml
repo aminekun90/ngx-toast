@@ -31,10 +31,13 @@ jobs:
       - name: ⚙️ Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "22.x"
+          node-version: "24.x"
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
-
+      
+      - name: ⬆️ Ensure Latest npm # Mandatory never forgetti MOM SPAGHETTI
+        run: npm install -g npm@latest
+      
       # 1. Récupération de la version
       - name: 🆔 Get Package Info
         id: package
