@@ -1,0 +1,109 @@
+name: Release & Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 3.4.8) - Leave empty to use package.json'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  packages: write
+  issues: write
+  id-token: write # REQUIRED for OIDC
+
+jobs:
+  release:
+    name: 🚀 Build, Audit & Release
+    runs-on: ubuntu-latest
+    
+    # Matches your NPM settings "npm-publish" for OIDC
+    environment:
+      name: npm-publish
+
+    steps:
+      - name: ⬇️ Checkout Repo
+        uses: actions/checkout@v4
+
+      # REQUIRED for Yarn 4
+      - name: Enable Corepack 
+        run: corepack enable
+
+      - name: ⚙️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+          cache: "yarn"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: ⬆️ Ensure Latest npm (>= 11.5.1) # CRITICAL Required for OIDC
+        run: |
+          npm install -g npm@^11.5.1
+          npm --version
+
+      # 1. Determine Version
+      - name: 🆔 Get Package Info
+        id: package
+        run: |
+          if [ -n "${{ inputs.version }}" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION=$(node -p "require('./package.json').version")
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "📦 Target Version: $VERSION"
+
+      # 2. Install & Build
+      - name: 🛠️ Install & Build
+        run: |
+          # Yarn 4 uses --immutable instead of --frozen-lockfile
+          yarn install --immutable
+          yarn build
+
+      # 3. Security Audit (Shai-Hulud)
+      - name: 🛡️ Run Shai-Hulud Audit
+        shell: bash
+        run: |
+          chmod +x ./shai-hulud-audit.sh
+          ./shai-hulud-audit.sh --no-color --save-report || true
+
+      - name: 📤 Upload Audit Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: shai-hulud-audit-${{ github.run_number }}
+          path: "*.log"
+          retention-days: 7
+
+      # 4. Publish to Public NPM
+      # --ignore-scripts: Prevents Husky/Yarn lifecycle scripts from interfering with npm publish
+      # --provenance: Enables OIDC security
+      - name: 🚀 Publish to NPM
+        run: |
+            cd dist/ngx-toast
+            npm publish --provenance --access public --ignore-scripts
+
+      # 5. Create GitHub Release
+      - name: 🏷️ Create GitHub Release
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.package.outputs.version }}
+        run: |
+          gh release create "v$VERSION" \
+            --title "v$VERSION" \
+            --generate-notes \
+            --target "main"
+
+      # 6. Publish to GitHub Packages
+      - name: 📦 Publish to GitHub Packages
+        if: success()
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist/ngx-toast
+          npm pkg set name="@aminekun90/ngx-toast"
+          # Local config for this step only
+          npm config set @aminekun90:registry=https://npm.pkg.github.com/
+          npm publish --registry=https://npm.pkg.github.com/ --ignore-scripts
