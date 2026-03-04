@@ -45,14 +45,18 @@ jobs:
         shell: bash
         run: yarn install --immutable
 
+      - name: 🎭 Install Playwright Browsers
+        # This installs the browser binaries needed by Vitest
+        run: npx playwright install chromium --with-deps
+
       - name: 🏗️ Build library
         shell: bash
         run: yarn ng build ngx-toast
 
       - name: 🧪 Run tests
         shell: bash
-        # Using ChromeHeadless for CI environments
-        run: yarn ng test ngx-toast --watch=false --browsers=ChromeHeadless
+        # For Vitest-based Angular testing in CI
+        run: yarn ng test ngx-toast --watch=false --browsers.name=chromium --browsers.headless=true
 
       - name: 🛡️ Security Audit (Linux only)
         if: matrix.os == 'ubuntu-latest' && success()
