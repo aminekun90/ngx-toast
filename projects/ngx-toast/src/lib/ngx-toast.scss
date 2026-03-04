@@ -1,0 +1,239 @@
+// src/app/shared/toast/toast.styles.scss
+
+// -- Durée de l'animation (doit correspondre au service !) --
+$animation-duration: 500ms;
+
+/* * 1. LE CONTENEUR (par position)
+ * Il fixe le "coin" de l'écran
+ */
+.toast-container {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    // S'assure que les toasts ne peuvent pas être cliqués "à travers"
+    pointer-events: none;
+
+    &>* {
+        pointer-events: all;
+    }
+
+    // Positions
+    &.top-right {
+        top: 20px;
+        right: 20px;
+        align-items: flex-end;
+    }
+
+    &.top-left {
+        top: 20px;
+        left: 20px;
+        align-items: flex-start;
+    }
+
+    &.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        align-items: flex-end;
+    }
+
+    &.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        align-items: flex-start;
+    }
+}
+
+/* * 2. LE TOAST INDIVIDUEL (l'item)
+ */
+.toast-item {
+    display: flex;
+    min-height: 60px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 2px;
+    background: #fff;
+    color: #333;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 350px;
+    max-width: 90vw;
+    opacity: 1;
+    animation: fade-in $animation-duration ease-out forwards;
+
+    &.closing {
+        animation: fade-out $animation-duration ease-in forwards;
+    }
+
+    .toast-icon {
+        font-size: 20px;
+        margin-right: 12px;
+    }
+
+    .toast-content {
+        flex-grow: 1;
+    }
+
+    .toast-title {
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    .toast-message {
+        font-size: 14px;
+    }
+
+    .toast-close {
+        background: transparent;
+        border: none;
+        font-size: 24px;
+        color: #999;
+        cursor: pointer;
+        margin-left: 12px;
+        padding: 0;
+        line-height: 1;
+
+        &:hover {
+            color: #000;
+        }
+    }
+
+    // Couleurs par type
+    &.toast-success {
+        background: #e6f7ed;
+        border-left: 5px solid #52c41a;
+    }
+
+    &.toast-error {
+        background: #fff1f0;
+        border-left: 5px solid #f5222d;
+    }
+
+    &.toast-warning {
+        background: #fffbe6;
+        border-left: 5px solid #faad14;
+    }
+
+    &.toast-info {
+        background: #e6f7ff;
+        border-left: 5px solid #1890ff;
+    }
+
+    // -- STYLES POUR LA BARRE --
+    .toast-progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 5px; // Épaisseur de la barre
+        width: 0%; // Démarre à 0% (sera animé)
+        background: rgba(0, 0, 0, 0.2); // Couleur par défaut (atténuée)
+
+        // Lie l'animation (le nom) à la classe
+        animation-timing-function: linear;
+        animation-fill-mode: forwards; // Reste à 100% à la fin
+
+        &.increasing {
+            animation-name: fill-up;
+        }
+
+        &.decreasing {
+            animation-name: fill-down;
+        }
+    }
+
+    // Appliquer les couleurs du toast à la barre
+    &.toast-success .toast-progress-bar {
+        background-color: #52c41a;
+    }
+
+    &.toast-error .toast-progress-bar {
+        background-color: #f5222d;
+    }
+
+    &.toast-warning .toast-progress-bar {
+        background-color: #faad14;
+    }
+
+    &.toast-info .toast-progress-bar {
+        background-color: #1890ff;
+    }
+}
+
+/* * 3. LES ANIMATIONS
+ */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateX(100%); // Arrive de la droite
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%); // Part vers la droite
+    }
+}
+
+@keyframes fill-up {
+
+    // "increasing"
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes fill-down {
+
+    // "decreasing"
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+// Ajustement pour les toasts à gauche
+.toast-container.top-left .toast-item,
+.toast-container.bottom-left .toast-item {
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+            transform: translateX(-100%); // Arrive de la gauche
+        }
+
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        to {
+            opacity: 0;
+            transform: translateX(-100%); // Part vers la gauche
+        }
+    }
+}

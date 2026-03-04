@@ -1,0 +1,18 @@
+<div class="hero-section">
+  <span class="badge">Version {{ version }}</span>
+  <h1>ngx-toast</h1>
+  
+  <p>
+    A lightweight, customizable, and zoneless-ready toast notification library 
+    for Angular. Designed for performance and ease of use.
+  </p>
+
+  <div class="button-group">
+    <button class="btn btn-primary" (click)="addToast('info')">Info Toast</button>
+    <button class="btn btn-success" (click)="addToast('success')">Success Toast</button>
+    <button class="btn btn-warning" (click)="addToast('warning')">Warning Toast</button>
+    <button class="btn btn-error"   (click)="addToast('error')">Error Toast</button>
+  </div>
+</div>
+
+<ngx-toast></ngx-toast>

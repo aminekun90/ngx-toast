@@ -1,0 +1,25 @@
+<div
+  class="toast-item"
+  [ngClass]="[toastClasses(), toast.toastClass]"
+  [class.closing]="toast.closing"
+>
+  <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
+
+  <div class="toast-content">
+    @if (toast.title) {
+      <div class="toast-title">{{ toast.title }}</div>
+    }
+    <div class="toast-message">{{ toast.message }}</div>
+  </div>
+
+  <button class="toast-close" (click)="onClose()">&times;</button>
+
+  @if (toast.progressBar && toast.duration) {
+    <div
+      class="toast-progress-bar"
+      [class.increasing]="toast.progressAnimation === 'increasing'"
+      [class.decreasing]="toast.progressAnimation === 'decreasing'"
+      [style.animationDuration]="toast.duration + 'ms'"
+    ></div>
+  }
+</div>
