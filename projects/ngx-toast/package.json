@@ -1,6 +1,8 @@
 {
   "name": "@aminekun90/ngx-toast",
   "version": "1.0.0",
+  "author": "aminekun90",
+  "funding": "https://github.com/sponsors/aminekun90",
   "peerDependencies": {
     "@angular/common": "^21.2.0",
     "@angular/core": "^21.2.0",
@@ -8,6 +10,13 @@
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "rxjs": "^7.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aminekun90/ngx-toast.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "tslib": "^2.3.0"

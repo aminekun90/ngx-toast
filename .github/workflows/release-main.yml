@@ -66,8 +66,7 @@ jobs:
       # NOTE: On vérifie le chemin 'dist/ngx-toast' ou 'dist/@aminekun90/ngx-toast'
       - name: 🚀 Publish to NPM
         run: |
-          cd dist/ngx-toast
-          npm publish --provenance --access public --ignore-scripts
+          npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts
 
       - name: 🏷️ Create GitHub Release
         if: success()
