@@ -11,26 +11,29 @@ function AppContent() {
     <div className="hero-section">
       <span className="badge">React Version {version}</span>
       <h1>React Toast Demo 🚀</h1>
-      <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast','_self')} className="btn btn-primary">Angular Version</button>
-      <button onClick={() => window.open('https://github.com/aminekun90/ngx-toast/','_self')} className="btn btn-primary">GitHub</button>
-      <button onClick={() => window.open('https://www.npmjs.com/package/@aminekun90/react-toast','_self')} className="btn btn-primary">Npm</button>
-      
+      <div className="button-group">
+        <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast', '_self')} className="btn btn-primary">Angular Version</button>
+        <button onClick={() => window.open('https://github.com/aminekun90/ngx-toast/', '_self')} className="btn btn-primary">GitHub</button>
+        <button onClick={() => window.open('https://www.npmjs.com/package/@aminekun90/react-toast', '_self')} className="btn btn-primary">Npm</button>
+
+      </div>
+
       <p>
-        A lightweight, customizable toast notification library for React. 
+        A lightweight, customizable toast notification library for React.
         Mirroring the logic of ngx-toast with React Hooks.
       </p>
 
       <div className="button-group">
-        <button className="btn btn-success" onClick={() => success('Opération réussie !', 'Succès', { duration: 2000,progressBar: true })}>
+        <button className="btn btn-success" onClick={() => success('Opération réussie !', 'Succès', { duration: 2000, progressBar: true })}>
           Success Toast
         </button>
         <button className="btn btn-error" onClick={() => error('Une erreur est survenue.', 'Erreur', { progressBar: true })}>
           Error Toast
         </button>
-        <button className="btn btn-primary" onClick={() => info('Voici une information.', 'Info',{ progressBar: true })}>
+        <button className="btn btn-primary" onClick={() => info('Voici une information.', 'Info', { progressBar: true })}>
           Info Toast
         </button>
-        <button className="btn btn-warning" onClick={() => warning('Attention à cela.', 'Warning',{ progressBar: true })}>
+        <button className="btn btn-warning" onClick={() => warning('Attention à cela.', 'Warning', { progressBar: true })}>
           Warning Toast
         </button>
       </div>
