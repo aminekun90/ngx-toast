@@ -13,8 +13,10 @@
     "prebuild": "node ./set-version.js",
     "ng": "ng",
     "start": "ng serve",
-    "build": "yarn prebuild && ng build @aminekun90/ngx-toast",
-    "watch": "ng build @aminekun90/ngx-toast --watch --configuration development",
+    "start:react": "yarn workspace demo-react dev",
+    "build:ng": "ng build @aminekun90/ngx-toast",
+    "build:react": "yarn workspace @aminekun90/react-toast build",
+    "build": "yarn prebuild && yarn build:ng && yarn build:react",
     "test": "ng test @aminekun90/ngx-toast"
   },
   "engines": {
@@ -37,12 +39,16 @@
     "@angular/build": "^21.2.0",
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@vitest/browser-playwright": "^4.0.18",
     "jsdom": "^28.0.0",
     "ng-packagr": "^21.2.0",
     "playwright": "^1.58.2",
     "prettier": "^3.8.1",
-    "typescript": "~5.9.2",
+    "typescript": "~5.9.3",
+    "vite": "^6.0.0",
+    "vite-plugin-dts": "^4.0.0",
     "vitest": "^4.0.8"
   },
   "workspaces": [

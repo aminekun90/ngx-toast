@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to publish (e.g., 1.0.1) - Leave empty to use lib package.json'
+        description: 'Version to publish (e.g., 1.0.5) - Leave empty to use root package.json'
         required: false
         type: string
 
@@ -35,26 +35,23 @@ jobs:
           cache: "yarn"
           registry-url: "https://registry.npmjs.org"
 
-      - name: ⬆️ Ensure Latest npm
-        run: npm install -g npm@latest
-
-      # 1. On récupère la version depuis le dossier de la LIB
+      # 1. Récupération de la version
       - name: 🆔 Get Package Info
         id: package
         run: |
           if [ -n "${{ inputs.version }}" ]; then
             VERSION="${{ inputs.version }}"
           else
-            VERSION=$(node -p "require('./projects/ngx-toast/package.json').version")
+            VERSION=$(node -p "require('./package.json').version")
           fi
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "📦 Target Version: $VERSION"
 
-      # 2. Build explicite
-      - name: 🛠️ Install & Build
+      # 2. Installation et Build des Librairies (Angular + React)
+      - name: 🛠️ Install & Build Libraries
         run: |
           yarn install --immutable
-          yarn ng build @aminekun90/ngx-toast --configuration production
+          yarn build  # Ton script global: prebuild + build:ng + build:react
 
       - name: 🛡️ Run Shai-Hulud Audit
         shell: bash
@@ -62,20 +59,17 @@ jobs:
           chmod +x ./shai-hulud-audit.sh
           ./shai-hulud-audit.sh --no-color --save-report || true
 
-      # 4. Publish to Public NPM
-      # NOTE: On vérifie le chemin 'dist/ngx-toast' ou 'dist/@aminekun90/ngx-toast'
+      # 3. Publication sur NPM (Public)
       - name: 🚀 Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          VERSION="${{ steps.package.outputs.version }}"
-          PACKAGE="@aminekun90/ngx-toast"
-          # Check if version exists on npm
-          if npm view "$PACKAGE@$VERSION" > /dev/null 2>&1; then
-            echo "✅ Version $VERSION already exists on npm, skipping publish."
-          else
-            echo "🚀 Publishing $PACKAGE@$VERSION to npm..."
-            npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts
-          fi
+          # Angular
+          npm publish ./dist/ngx-toast --provenance --access public --ignore-scripts || echo "NG déjà publié"
+          # React (Le build est dans projects/react-toast/dist)
+          npm publish ./projects/react-toast/dist --provenance --access public --ignore-scripts || echo "React déjà publié"
 
+      # 4. Release GitHub
       - name: 🏷️ Create GitHub Release
         if: success()
         env:
@@ -83,44 +77,39 @@ jobs:
           VERSION: ${{ steps.package.outputs.version }}
         run: |
           if gh release view "v$VERSION" >/dev/null 2>&1; then
-            echo "✅ GitHub release v$VERSION already exists, skipping."
+            echo "✅ GitHub release v$VERSION déjà existante."
           else
-            gh release create "v$VERSION" \
-              --title "v$VERSION" \
-              --generate-notes \
-              --target "main"
+            gh release create "v$VERSION" --title "v$VERSION" --generate-notes --target "main"
           fi
 
-      # 6. Publish to GitHub Packages
+      # 5. Publication sur GitHub Packages
       - name: 📦 Publish to GitHub Packages
         if: success()
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          PACKAGE="@aminekun90/ngx-toast"
-          VERSION="${{ steps.package.outputs.version }}"
           REGISTRY="https://npm.pkg.github.com"
-
-          # Configure registry auth first
           npm config set @aminekun90:registry $REGISTRY
           npm config set //npm.pkg.github.com/:_authToken "${NODE_AUTH_TOKEN}"
 
-          # Now check if version exists
-          if npm view "$PACKAGE@$VERSION" --registry $REGISTRY > /dev/null 2>&1; then
-            echo "✅ Version $VERSION already exists on GitHub Packages, skipping publish."
-          else
-            echo "🚀 Publishing $PACKAGE@$VERSION to GitHub Packages..."
-            npm publish ./dist/ngx-toast \
-              --registry $REGISTRY \
-              --ignore-scripts
-          fi
-      # 7. Build Demo App
-      - name: 🌍 Build Demo App
-        if: success()
-        run: |
-          yarn ng build demo-app --configuration production --base-href=/ngx-toast/
+          npm publish ./dist/ngx-toast --registry $REGISTRY --ignore-scripts || echo "NG déjà sur GHP"
+          npm publish ./projects/react-toast/dist --registry $REGISTRY --ignore-scripts || echo "React déjà sur GHP"
 
-      # 8. Deploy Demo to GitHub Pages
+      # 6. Build des DEMOS
+      - name: 🌍 Build Demos (Angular & React)
+        run: |
+          # Build Angular Demo
+          yarn ng build demo-app --configuration production --base-href=/ngx-toast/
+          
+          # Build React Demo (on précise la base pour GitHub Pages)
+          yarn workspace demo-react vite build --base=/ngx-toast/react/
+          
+          # Préparation du dossier final pour GitHub Pages
+          # On déplace la démo React dans un sous-dossier de la démo Angular
+          mkdir -p ./dist/demo-app/browser/react
+          cp -r ./dist/demo-react/* ./dist/demo-app/browser/react/
+
+      # 7. Déploiement groupé sur GitHub Pages
       - name: 🚀 Deploy to GitHub Pages
         if: success()
         uses: peaceiris/actions-gh-pages@v4

@@ -48,19 +48,19 @@ jobs:
       - name: 🎭 Install Playwright Browsers
         run: npx playwright install chromium --with-deps
 
-      - name: 🏗️ Build library
+      - name: 🏗️ Build libraries
         shell: bash
-        # Mise à jour avec le nouveau nom scopé
-        run: yarn build
+        run: |
+          yarn build:ng
+          cd projects/react-toast && yarn build
 
       - name: 🧪 Run tests
         shell: bash
-        # Mise à jour avec le nouveau nom scopé
-        run: yarn test --watch=false
-        env:
-          VITEST_BROWSER_NAME: chromium
-          # On s'assure que c'est bien interprété comme une string par Vitest
-          VITEST_BROWSER_HEADLESS: 'true'
+        run: |
+          # Tests Angular
+          yarn ng test @aminekun90/ngx-toast --watch=false
+          # Ajoute ici tes tests React quand ils seront prêts
+          cd projects/react-toast && yarn test
 
       - name: 🛡️ Security Audit (Linux only)
         if: matrix.os == 'ubuntu-latest' && success()
