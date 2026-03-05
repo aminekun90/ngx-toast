@@ -176,8 +176,6 @@ __metadata:
 "@aminekun90/ngx-toast@workspace:projects/ngx-toast":
   version: 0.0.0-use.local
   resolution: "@aminekun90/ngx-toast@workspace:projects/ngx-toast"
-  dependencies:
-    tslib: "npm:^2.3.0"
   peerDependencies:
     "@angular/common": ^21.2.0
     "@angular/core": ^21.2.0
