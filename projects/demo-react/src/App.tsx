@@ -1,7 +1,6 @@
-import React from 'react';
 import { ToastContainer, useToast, version } from '@aminekun90/react-toast';
-import { ToastPlayground } from './components/ToastPlayground';
 import './App.scss';
+import { ToastPlayground } from './components/ToastPlayground';
 
 function AppContent() {
   const { success, error, info, warning } = useToast();
@@ -12,7 +11,7 @@ function AppContent() {
 
   return (
     <div className="hero-section">
-      <span className="badge">React Version {version}</span>
+      <span className="badge">Version {version}</span>
       <h1>React Toast Demo 🚀</h1>
       <div className="button-group links-group">
         <button onClick={() => goTo('https://aminekun90.github.io/ngx-toast/')} className="btn btn-primary">Angular Version</button>
