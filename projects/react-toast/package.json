@@ -1,6 +1,6 @@
 {
   "name": "@aminekun90/react-toast",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "type": "module",
   "main": "./dist/react-toast.umd.cjs",
   "module": "./dist/react-toast.js",
@@ -20,7 +20,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "build": "vite build --config vite.config.ts",
