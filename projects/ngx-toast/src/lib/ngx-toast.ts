@@ -17,9 +17,9 @@ import { Toast, ToastService } from "./services/Toast.service";
   styleUrls: ["./ngx-toast.scss"],
 })
 export class ToastComponent {
-   @Input({ required: true }) toast!: Toast;
+  @Input({ required: true }) toast!: Toast;
   private readonly toastService: ToastService = inject(ToastService);
-  constructor() {}
+  constructor() { }
 
   toastClasses = computed(() => {
     return `toast-${this.toast.type}`;
@@ -43,5 +43,16 @@ export class ToastComponent {
 
   onClose() {
     this.toastService.remove(this.toast.id);
+  }
+  onKeyPressHandler(_event: Event) {
+    this.onClose();
+  }
+  onKeyDownHandler(_event: Event) {
+    this.onClose();
+
+  }
+  onKeyUpHandler(_event: Event) {
+    this.onClose();
+
   }
 }

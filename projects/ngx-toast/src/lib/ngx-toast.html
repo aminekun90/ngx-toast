@@ -2,6 +2,13 @@
   class="toast-item"
   [ngClass]="[toastClasses(), toast.toastClass]"
   [class.closing]="toast.closing"
+  (click)="onClose()"
+  (onKeyPress)="onKeyPressHandler($event)"
+  (onKeyDown)="onKeyDownHandler($event)"
+  (onKeyUp)="onKeyUpHandler($event)"
+  (keypress)="onKeyPressHandler($event)"
+  (keydown)="onKeyDownHandler($event)"
+  (keyup)="onKeyUpHandler($event)"
 >
   <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
 
