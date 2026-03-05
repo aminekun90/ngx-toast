@@ -55,7 +55,14 @@
                 "input": "projects/demo-app/public"
               }
             ],
-            "styles": ["projects/demo-app/src/styles.scss"]
+            "styles": ["projects/demo-app/src/styles.scss"],
+            "allowedCommonJsDependencies": [
+              "prismjs",
+              "prismjs/components/prism-markup",
+              "prismjs/components/prism-clike",
+              "prismjs/components/prism-javascript",
+              "prismjs/components/prism-typescript"
+            ]
           },
           "configurations": {
             "production": {
