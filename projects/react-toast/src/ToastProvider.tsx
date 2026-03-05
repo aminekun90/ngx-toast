@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { ToastContext } from './ToastContext';
 import { version } from './current-version';
 import { Toast, ToastConfig } from './types';
@@ -42,8 +42,17 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const info = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "info" });
 
   return (
-    <ToastContext.Provider value={{ show, success, error, warning, info, toasts, remove, version }}>
-      {children}
-    </ToastContext.Provider>
-  );
+  <ToastContext.Provider value={useMemo(() => ({
+    show,
+    success,
+    error,
+    warning,
+    info,
+    toasts,
+    remove,
+    version
+  }), [show, success, error, warning, info, toasts, remove, version])}>
+    {children}
+  </ToastContext.Provider>
+);
 };

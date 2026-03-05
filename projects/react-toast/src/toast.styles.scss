@@ -23,18 +23,19 @@ $animation-duration: 500ms;
 
 /* 2. LE TOAST ITEM */
 .toast-item {
-    position: relative; // Nécessaire pour positionner la barre de progression en bas
+    cursor: pointer;
+    position: relative; 
     display: flex;
     min-height: 60px;
     align-items: center;
     padding: 12px 16px;
-    border-radius: 4px; // Un peu plus moderne
+    border-radius: 4px;
     background: #fff;
     color: #333;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     width: 350px;
     max-width: 90vw;
-    overflow: hidden; // Cache le débordement de la barre de progression
+    overflow: hidden; 
     opacity: 1;
     
     // Animation par défaut (pour top-right et bottom-right)

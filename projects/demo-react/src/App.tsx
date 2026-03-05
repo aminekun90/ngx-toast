@@ -9,7 +9,7 @@ function AppContent() {
 
   return (
     <div className="hero-section">
-      <span className="badge">React Version {version}</span>
+      <span className="badge">Version {version}</span>
       <h1>React Toast Demo 🚀</h1>
       <div className="button-group">
         <button onClick={() => window.open('https://aminekun90.github.io/ngx-toast', '_self')} className="btn btn-primary">Angular Version</button>

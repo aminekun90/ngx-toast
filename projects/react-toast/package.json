@@ -1,6 +1,6 @@
 {
   "name": "@aminekun90/react-toast",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "type": "module",
   "main": "./dist/react-toast.umd.cjs",
   "module": "./dist/react-toast.js",
