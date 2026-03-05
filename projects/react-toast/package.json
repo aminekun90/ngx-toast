@@ -1,10 +1,11 @@
 {
   "name": "@aminekun90/react-toast",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "type": "module",
   "main": "./dist/react-toast.umd.cjs",
   "module": "./dist/react-toast.js",
   "types": "./dist/index.d.ts",
+  "license": "MIT",
   "funding": "https://github.com/sponsors/aminekun90",
   "repository": {
     "type": "git",

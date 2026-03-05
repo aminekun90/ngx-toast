@@ -1,6 +1,6 @@
 {
   "name": "ngx-toast-workspace",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "aminekun90",
   "packageManager": "yarn@4.12.0",
   "funding": "https://github.com/sponsors/aminekun90",
@@ -33,6 +33,7 @@
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "prismjs": "^1.30.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -40,6 +41,7 @@
     "@angular/build": "^21.2.0",
     "@angular/cli": "^21.2.0",
     "@angular/compiler-cli": "^21.2.0",
+    "@types/prismjs": "^1.26.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitest/browser-playwright": "^4.0.18",

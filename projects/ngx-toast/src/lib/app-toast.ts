@@ -1,11 +1,11 @@
-// src/app/shared/toast/toast-container.component.ts
-
 import { CommonModule } from "@angular/common";
-import { Component, computed, inject } from "@angular/core";
+import { Component, computed, inject, ViewEncapsulation } from "@angular/core";
+
+// --- Remplacer par vos imports locaux dans votre projet ---
 import { ToastComponent, ToastPosition, ToastService } from "./ngx-toast";
-
-
 export * from "./services/Toast.service";
+
+
 @Component({
   selector: "ngx-toast",
   standalone: true,
@@ -20,6 +20,9 @@ export * from "./services/Toast.service";
     }
   `,
   styleUrls: ["./ngx-toast.scss"],
+  // 🔥 LA CORRECTION EST ICI 🔥
+  // Désactive l'encapsulation pour permettre au SCSS d'animer le .toast-item dans <app-toast>
+  encapsulation: ViewEncapsulation.None
 })
 export class ToastContainerComponent {
   private readonly toastService = inject(ToastService);

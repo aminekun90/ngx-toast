@@ -56,7 +56,7 @@ const ToastItem: React.FC<{ toast: Toast }> = ({ toast }) => {
 
 export const ToastContainer: React.FC = () => {
     const { toasts } = useToast();
-    const positions = ["top-right", "top-left", "bottom-right", "bottom-left"] as const;
+    const positions = ["top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center"] as const;
 
     return (
         <>

@@ -1,7 +1,17 @@
+@use "sass:map";
+
 // -- Configuration --
 $animation-duration: 500ms;
 
-/* 1. LE CONTENEUR (Positions) */
+// -- Colors by toast type --
+$toast-types: (
+    'success': (bg: #e6f7ed, border: #52c41a),
+    'error':   (bg: #fff1f0, border: #f5222d),
+    'warning': (bg: #fffbe6, border: #faad14),
+    'info':    (bg: #e6f7ff, border: #1890ff)
+);
+
+/* 1. THE CONTAINER (Positions) */
 .toast-container {
     position: fixed;
     z-index: 9999;
@@ -9,22 +19,107 @@ $animation-duration: 500ms;
     flex-direction: column;
     gap: 10px;
     font-family: Arial, Helvetica, sans-serif;
-    pointer-events: none; // Permet de cliquer sur les éléments sous le conteneur
+    pointer-events: none; // Allows clicking on elements beneath the container
 
     & > * {
-        pointer-events: all; // Réactive le clic sur le toast lui-même
+        pointer-events: all; // Re-enables clicking on the toast itself
     }
 
-    &.top-right { top: 20px; right: 20px; align-items: flex-end; }
-    &.top-left { top: 20px; left: 20px; align-items: flex-start; }
-    &.bottom-right { bottom: 20px; right: 20px; align-items: flex-end; }
-    &.bottom-left { bottom: 20px; left: 20px; align-items: flex-start; }
+    // CORRECTION : S'assure que le composant Angular se comporte comme un bloc
+    app-toast {
+        display: block;
+    }
+
+    &.top-right {
+        top: 20px;
+        right: 20px;
+        align-items: flex-end;
+        // Uses default toast-item animation
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-right $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-right $animation-duration ease-in forwards;
+            }
+        }
+    }
+
+    &.top-left {
+        top: 20px;
+        left: 20px;
+        align-items: flex-start;
+        
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-left $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-left $animation-duration ease-in forwards;
+            }
+        }
+    }
+
+    &.bottom-right {
+        bottom: 20px;
+        right: 20px;
+        align-items: flex-end;
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-left $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-left $animation-duration ease-in forwards;
+            }
+        }
+    }
+
+    &.bottom-left {
+        bottom: 20px;
+        left: 20px;
+        align-items: flex-start;
+
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-left $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-left $animation-duration ease-in forwards;
+            }
+        }
+    }
+
+    &.top-center {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        align-items: center;
+
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-down $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-up $animation-duration ease-in forwards;
+            }
+        }
+    }
+
+    &.bottom-center {
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        align-items: center;
+
+        .toast-item {
+            // CORRECTION : Utilisation du shorthand complet
+            animation: fade-in-up $animation-duration ease-out forwards;
+            &.closing {
+                animation: fade-out-down $animation-duration ease-in forwards;
+            }
+        }
+    }
 }
 
-/* 2. LE TOAST ITEM */
+/* 2. THE TOAST ITEM */
 .toast-item {
     cursor: pointer;
-    position: relative; 
+    position: relative;
     display: flex;
     min-height: 60px;
     align-items: center;
@@ -35,16 +130,8 @@ $animation-duration: 500ms;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     width: 350px;
     max-width: 90vw;
-    overflow: hidden; 
+    overflow: hidden;
     opacity: 1;
-    
-    // Animation par défaut (pour top-right et bottom-right)
-    animation: fade-in-right $animation-duration ease-out forwards;
-
-    &.closing {
-        animation: fade-out-right $animation-duration ease-in forwards;
-    }
-
     .toast-icon {
         font-size: 20px;
         margin-right: 12px;
@@ -83,13 +170,19 @@ $animation-duration: 500ms;
         }
     }
 
-    // Couleurs par type
-    &.toast-success { background: #e6f7ed; border-left: 5px solid #52c41a; }
-    &.toast-error { background: #fff1f0; border-left: 5px solid #f5222d; }
-    &.toast-warning { background: #fffbe6; border-left: 5px solid #faad14; }
-    &.toast-info { background: #e6f7ff; border-left: 5px solid #1890ff; }
+    // Dynamic color generation (Background, border, and progress bar)
+    @each $type, $colors in $toast-types {
+        &.toast-#{$type} {
+            background: map.get($colors, bg);
+            border-left: 5px solid map.get($colors, border);
 
-    /* 3. BARRE DE PROGRESSION */
+            .toast-progress-bar {
+                background-color: map.get($colors, border);
+            }
+        }
+    }
+
+    /* 3. PROGRESS BAR */
     .toast-progress-bar {
         position: absolute;
         bottom: 0;
@@ -109,42 +202,52 @@ $animation-duration: 500ms;
             animation-name: fill-down;
         }
     }
-
-    // Couleurs de la barre
-    &.toast-success .toast-progress-bar { background-color: #52c41a; }
-    &.toast-error .toast-progress-bar { background-color: #f5222d; }
-    &.toast-warning .toast-progress-bar { background-color: #faad14; }
-    &.toast-info .toast-progress-bar { background-color: #1890ff; }
 }
 
-/* 4. ANIMATIONS SPÉCIFIQUES AUX CÔTÉS */
+/* 4. SIDE-SPECIFIC ANIMATIONS */
 
-// Droite (In: droite -> centre | Out: centre -> droite)
+// Right (In: right -> center | Out: center -> right)
 @keyframes fade-in-right {
     from { opacity: 0; transform: translateX(100%); }
     to { opacity: 1; transform: translateX(0); }
 }
+
 @keyframes fade-out-right {
     from { opacity: 1; transform: translateX(0); }
     to { opacity: 0; transform: translateX(100%); }
 }
 
-// Gauche (In: gauche -> centre | Out: centre -> gauche)
+// Left (In: left -> center | Out: center -> left)
 @keyframes fade-in-left {
     from { opacity: 0; transform: translateX(-100%); }
     to { opacity: 1; transform: translateX(0); }
 }
+
 @keyframes fade-out-left {
     from { opacity: 1; transform: translateX(0); }
     to { opacity: 0; transform: translateX(-100%); }
 }
 
-// Application des animations de gauche pour les conteneurs de gauche
-.toast-container.top-left, .toast-container.bottom-left {
-    .toast-item {
-        animation-name: fade-in-left;
-        &.closing { animation-name: fade-out-left; }
-    }
+// Top / Top Center (In: top -> down | Out: down -> top)
+@keyframes fade-in-down {
+    from { opacity: 0; transform: translateY(-100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out-up {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-100%); }
+}
+
+// Bottom / Bottom Center (In: bottom -> up | Out: up -> bottom)
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(100%); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-out-down {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(100%); }
 }
 
 /* 5. PROGRESS BAR ANIMATIONS */

@@ -1,6 +1,6 @@
 {
   "name": "@aminekun90/ngx-toast",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "aminekun90",
   "funding": "https://github.com/sponsors/aminekun90",
   "peerDependencies": {
@@ -40,5 +40,6 @@
     "lightweight",
     "typescript"
   ],
+  "license": "MIT",
   "sideEffects": false
 }

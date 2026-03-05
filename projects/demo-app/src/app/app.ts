@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainerComponent, ToastService } from 'ngx-toast';
+import { ToastPlayground } from './components/ToastPlayground';
 @Component({
   selector: 'app-root',
-  imports: [ToastContainerComponent],
+  imports: [ToastContainerComponent,ToastPlayground],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })

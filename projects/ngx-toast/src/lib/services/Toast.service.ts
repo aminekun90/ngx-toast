@@ -1,11 +1,15 @@
 import { inject, Injectable, signal } from "@angular/core";
 import { NGX_TOAST_VERSION } from "../version";
+
 // 1. Définir les types (extensibles selon vos besoins)
 export type ToastPosition =
   | "top-right"
   | "top-left"
   | "bottom-right"
-  | "bottom-left";
+  | "bottom-left"
+  | "top-center"
+  | "bottom-center";
+  
 export type ToastType = "success" | "error" | "warning" | "info";
 
 export interface ToastConfig {

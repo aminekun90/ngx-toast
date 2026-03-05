@@ -1,4 +1,4 @@
-export type ToastPosition = "top-right" | "top-left" | "bottom-right" | "bottom-left";
+export type ToastPosition = "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center" | "bottom-center";
 export type ToastType = "success" | "error" | "warning" | "info";
 
 export interface ToastConfig {
