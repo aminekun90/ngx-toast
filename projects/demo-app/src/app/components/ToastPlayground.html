@@ -4,7 +4,7 @@
         <div class="form-section">
             <div class="form-grid">
                 <div class="form-group">
-                    <label for="title">Titre</label>
+                    <label for="title">Title</label>
                     <input type="text" id="title" [(ngModel)]="toastTitle" class="form-control">
                 </div>
                 <div class="form-group">
@@ -30,24 +30,24 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="duration">Durée (ms)</label>
+                    <label for="duration">Duration (ms)</label>
                     <input id="duration" type="number" [(ngModel)]="toastDuration" class="form-control" step="1000">
                 </div>
                 <div class="form-group checkbox-group">
                     <label class="checkbox-label">
                         <input type="checkbox" [(ngModel)]="toastProgressBar">
-                        <span>Afficher la barre de progression</span>
+                        <span>Show Progress bar</span>
                     </label>
                 </div>
             </div>
-            <button class="btn-launch" (click)="showCustomToast()">🚀 Tester le Toast</button>
+            <button class="btn-launch" (click)="showCustomToast()">🚀 Try me!</button>
         </div>
 
         <div class="code-preview-section">
             <h3>TypeScript</h3>
             <div class="code-block-wrapper">
                 <button class="btn-copy" (click)="copyCode(tsCode(), 'ts')" [class.copied]="copiedTs()">
-                    {{ copiedTs() ? 'Copié ! ✅' : 'Copier' }}
+                    {{ copiedTs() ? 'Copied ! ✅' : 'Copy' }}
                 </button>
                 <pre class="language-typescript"><code [innerHTML]="highlightedTsCode()"></code></pre>
             </div>
@@ -55,7 +55,7 @@
             <h3>HTML</h3>
             <div class="code-block-wrapper">
                 <button class="btn-copy" (click)="copyCode(htmlCode(), 'html')" [class.copied]="copiedHtml()">
-                    {{ copiedHtml() ? 'Copié ! ✅' : 'Copier' }}
+                    {{ copiedHtml() ? 'Copied ! ✅' : 'Copy' }}
                 </button>
                 <pre class="language-markup"><code [innerHTML]="highlightedHtmlCode()"></code></pre>
             </div>

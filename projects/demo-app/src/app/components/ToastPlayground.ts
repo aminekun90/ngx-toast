@@ -24,8 +24,8 @@ export class ToastPlayground {
   private readonly sanitizer = inject(DomSanitizer);
 
   // --- PLAYGROUND STATE (Signals) ---
-  toastTitle = signal('Message personnalisé');
-  toastMessage = signal('Ceci est un toast généré à la volée avec Angular Signals !');
+  toastTitle = signal('Custom Message');
+  toastMessage = signal('This is a custom Toast using Angular Signals !');
   toastType = signal<'success' | 'error' | 'warning' | 'info'>('success');
   toastPosition = signal<ToastPosition>('top-right');
   toastDuration = signal(3000);
@@ -48,7 +48,7 @@ export class ToastPlayground {
 import { ToastService } from '@aminekun90/ngx-toast';
 
 @Component({
-  // ... votre configuration
+  // your Config ...
 })
 export class MyComponent {
   private readonly toastService = inject(ToastService);
@@ -63,7 +63,7 @@ export class MyComponent {
 
   htmlCode = computed(() => {
     return `<button (click)="showCustomToast()">
-  Afficher le Toast
+  Show Toast
 </button>`;
   });
 

@@ -9,8 +9,8 @@ import './ToastPlayground.scss';
 
 export function ToastPlayground() {
     const { show } = useToast();
-    const [toastTitle, setToastTitle] = useState('Message personnalisé');
-    const [toastMessage, setToastMessage] = useState('Ceci est un toast généré avec React !');
+    const [toastTitle, setToastTitle] = useState('Custom Message');
+    const [toastMessage, setToastMessage] = useState('This is a custom Toast using React !');
     const [toastType, setToastType] = useState<ToastType>('success');
     const [toastPosition, setToastPosition] = useState<ToastPosition>('top-right');
     const [toastDuration, setToastDuration] = useState(3000);
@@ -63,8 +63,8 @@ export function MyComponent() {
                 <div className="form-section">
                     <div className="form-grid">
                         <div className="form-group">
-                            <label htmlFor="title">Titre</label>
-                            <input id="title"  type="text" value={toastTitle} onChange={(e) => setToastTitle(e.target.value)} className="form-control" />
+                            <label htmlFor="title">Title</label>
+                            <input id="title" type="text" value={toastTitle} onChange={(e) => setToastTitle(e.target.value)} className="form-control" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="message">Message</label>
@@ -87,17 +87,17 @@ export function MyComponent() {
                             </select>
                         </div>
                         <div className="form-group">
-                            <label htmlFor="duration">Durée (ms)</label>
+                            <label htmlFor="duration">Duration (ms)</label>
                             <input id="duration" type="number" value={toastDuration} onChange={(e) => setToastDuration(Number(e.target.value))} className="form-control" />
                         </div>
                         <div className="form-group checkbox-group">
                             <label className="checkbox-label">
                                 <input type="checkbox" checked={toastProgressBar} onChange={(e) => setToastProgressBar(e.target.checked)} />
-                                <span>Afficher la barre de progression</span>
+                                <span>Show Progress bar</span>
                             </label>
                         </div>
                     </div>
-                    <button className="btn-launch" onClick={handleTest}>🚀 Tester le Toast</button>
+                    <button className="btn-launch" onClick={handleTest}>🚀 Try me!</button>
                 </div>
 
                 <div className="code-preview-section">
