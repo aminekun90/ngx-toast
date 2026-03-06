@@ -1,21 +1,21 @@
-// projects/demo-app/src/app/app.scss
 
-:host {
+
+:host{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  font-family: 'Inter', -apple-system, sans-serif;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   color: #1e293b;
   margin: 0;
   padding: 20px;
+  text-align: center;
 }
 
 .hero-section {
   text-align: center;
-
   
   .badge {
     background-color: #e2e8f0;

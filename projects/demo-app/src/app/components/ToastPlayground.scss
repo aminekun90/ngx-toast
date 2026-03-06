@@ -18,22 +18,18 @@
     }
 }
 
-// --- NEW LAYOUT STYLES (Formulaire + Code) ---
 .playground-layout {
     display: flex;
     flex-direction: column;
     gap: 30px;
 
-    /* Sur grand écran, on met le formulaire et le code côte à côte */
     @media (min-width: 992px) {
         flex-direction: row;
         align-items: stretch;
     }
 }
 
-.form-section {
-    flex: 1;
-}
+.form-section { flex: 1; }
 
 .code-preview-section {
     flex: 1;
@@ -43,20 +39,16 @@
     border: 1px solid #e2e8f0;
 
     h3 {
-        font-size: 1rem;
-        color: #475569;
-        margin-top: 0;
-        margin-bottom: 12px;
+        font-size: 0.85rem;
+        color: #64748b;
+        margin: 0 0 12px 0;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        font-weight: 600;
+        font-weight: 700;
 
-        &:not(:first-child) {
-            margin-top: 24px;
-        }
+        &:not(:first-child) { margin-top: 24px; }
     }
 }
-// ---------------------------------------------
 
 .form-grid {
     display: grid;
@@ -75,44 +67,18 @@
         font-weight: 600;
         color: #475569;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
     }
 
     .form-control {
         padding: 10px 14px;
         border-radius: 8px;
         border: 1px solid #cbd5e1;
-        font-family: inherit;
         font-size: 1rem;
-        color: #334155;
-        transition: all 0.2s;
         background-color: #f8fafc;
-
         &:focus {
             outline: none;
             border-color: #3b82f6;
-            background-color: white;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-    }
-}
-
-.checkbox-group {
-    justify-content: flex-end;
-    padding-bottom: 8px;
-
-    .checkbox-label {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        text-transform: none;
-        font-size: 0.95rem;
-
-        input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
         }
     }
 }
@@ -121,62 +87,55 @@
     width: 100%;
     background: linear-gradient(to right, #3b82f6, #2563eb);
     color: white;
-    font-size: 1.1rem;
     font-weight: 600;
     padding: 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4);
-        transform: translateY(-2px);
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
+    transition: all 0.2s;
+    &:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(37, 99, 235, 0.4); }
 }
 
-// --- DESIGN DES BLOCS DE CODE ---
+// --- HARMONISATION DES BLOCS DE CODE ---
 .code-block-wrapper {
     position: relative;
-    background-color: #1e293b; // Fond sombre pour imiter un éditeur de code
+    background-color: #1e293b !important; 
     border-radius: 8px;
     overflow: hidden;
 
-    pre {
-        margin: 0;
-        padding: 20px;
-        overflow-x: auto;
+    pre[class*="language-"] {
+        margin: 0 !important;
+        padding: 20px !important;
+        background: transparent !important;
     }
 
-    code {
-        color: #f8fafc;
-        line-height: 1.5;
+    code[class*="language-"] {
+        color: #f8fafc !important;
+        text-shadow: none !important;
+        font-family: 'Fira Code', monospace !important;
+        font-size: 0.9rem !important;
     }
 
     .btn-copy {
         position: absolute;
         top: 8px;
         right: 8px;
-        background-color: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 10;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
         color: white;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-size: 0.8rem;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
         cursor: pointer;
-        transition: all 0.2s;
-
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        &.copied {
-            background-color: #22c55e;
-            border-color: #16a34a;
-        }
+        &.copied { background: #22c55e; border-color: #16a34a; }
     }
+}
+
+// Correctif pour les tokens injectés dynamiquement (surtout Angular)
+:host ::ng-deep, .playground-card {
+    .token.keyword { color: #c678dd; }
+    .token.string { color: #98c379; }
+    .token.function { color: #61afef; }
+    .token.comment { color: #5c6370; }
 }
