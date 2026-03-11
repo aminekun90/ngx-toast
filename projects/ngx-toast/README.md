@@ -13,8 +13,6 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 
 ## Demo app
 
-![Toast gif](./docs/gif-toast.gif)
-
 [View Demo](https://aminekun90.github.io/ngx-toast/)
 
 ## Key Features

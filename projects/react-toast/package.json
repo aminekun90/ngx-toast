@@ -1,6 +1,6 @@
 {
   "name": "@aminekun90/react-toast",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "main": "./dist/react-toast.umd.cjs",
   "module": "./dist/react-toast.js",
@@ -29,9 +29,6 @@
     "test:watch": "vitest"
   },
   "peerDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.0.0",
-    "@fortawesome/free-solid-svg-icons": "^6.0.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "react": "^18.0.0 || ^19.0.0",
     "react-dom": "^18.0.0 || ^19.0.0"
   },
@@ -53,11 +50,13 @@
     "typescript": "5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-static-copy": "^3.2.0",
     "vitest": "^4.0.18"
   },
   "keywords": [
     "react",
     "toast",
+    "ngx-toastr",
     "notification",
     "alert",
     "hooks",
