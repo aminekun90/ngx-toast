@@ -29,7 +29,7 @@ export default defineConfig({
                 { src: 'README.md', dest: '.' },
                 { src: 'LICENSE', dest: '.' },
                 { src: 'package.json', dest: '.' },
-                { src: 'docs/**', dest: 'docs' }
+                { src: 'docs/*', dest: 'docs' }
             ]
         })
     ],
