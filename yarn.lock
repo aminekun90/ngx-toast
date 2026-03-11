@@ -197,9 +197,9 @@ __metadata:
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.2"
     "@testing-library/user-event": "npm:^14.6.1"
-    "@types/jsdom": "npm:^28"
-    "@types/react": "npm:^19"
-    "@types/react-dom": "npm:^19"
+    "@types/jsdom": "npm:^28.0.0"
+    "@types/react": "npm:^19.2.14"
+    "@types/react-dom": "npm:^19.2.3"
     "@vitejs/plugin-react": "npm:^5.1.4"
     jsdom: "npm:^28.1.0"
     react: "npm:^19.2.4"
@@ -227,21 +227,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular-devkit/architect@npm:0.2102.0":
-  version: 0.2102.0
-  resolution: "@angular-devkit/architect@npm:0.2102.0"
+"@angular-devkit/architect@npm:0.2102.1":
+  version: 0.2102.1
+  resolution: "@angular-devkit/architect@npm:0.2102.1"
   dependencies:
-    "@angular-devkit/core": "npm:21.2.0"
+    "@angular-devkit/core": "npm:21.2.1"
     rxjs: "npm:7.8.2"
   bin:
     architect: bin/cli.js
-  checksum: 10c0/84a9877ac4596cd794e605aba834877152ff5a4f0d3c9c953c03259478d2e22d4786d39c29d1f77a0c979c34c786c81985971e9d44e633999a82940b9f1538e1
+  checksum: 10c0/71cd23c3a5b3d0688f2f8f0c64d3278506a5629a6923bbb64c95fe5dd5378367b7b77b11c587d627f93948477e43420d28eadc33cd4065b6928fc07695f549d5
   languageName: node
   linkType: hard
 
-"@angular-devkit/core@npm:21.2.0":
-  version: 21.2.0
-  resolution: "@angular-devkit/core@npm:21.2.0"
+"@angular-devkit/core@npm:21.2.1":
+  version: 21.2.1
+  resolution: "@angular-devkit/core@npm:21.2.1"
   dependencies:
     ajv: "npm:8.18.0"
     ajv-formats: "npm:3.0.1"
@@ -254,29 +254,29 @@ __metadata:
   peerDependenciesMeta:
     chokidar:
       optional: true
-  checksum: 10c0/ad0dd0ecdf39d6093b6a2fd4a65a7d02c507f5710c70a856ea532bd9a3cedc9c05e57161a5e63b824692f25d2c10b9c05cf8000ec729dfa120ce53ee8e79e2c0
+  checksum: 10c0/efa2b4fc86aeccc1b05e2e65c44a1ccab1e3fb277c93b4ac141b928f2b6fdf0205f2f2e97477bd2423c53b43e22518cf8f609232266845df4957b74ec7bed7db
   languageName: node
   linkType: hard
 
-"@angular-devkit/schematics@npm:21.2.0":
-  version: 21.2.0
-  resolution: "@angular-devkit/schematics@npm:21.2.0"
+"@angular-devkit/schematics@npm:21.2.1":
+  version: 21.2.1
+  resolution: "@angular-devkit/schematics@npm:21.2.1"
   dependencies:
-    "@angular-devkit/core": "npm:21.2.0"
+    "@angular-devkit/core": "npm:21.2.1"
     jsonc-parser: "npm:3.3.1"
     magic-string: "npm:0.30.21"
     ora: "npm:9.3.0"
     rxjs: "npm:7.8.2"
-  checksum: 10c0/28d4a30fa10955eeb336017dd555bb77f0312a4daf5f3f3d6de96c380dee6dc1c88c5f5dd66e90c3020662ba6d054258734be3517c14134102d2ee1e4a7bc8b4
+  checksum: 10c0/8f9c3e830e12f8e84d3b813b8dcb1182d3fac807d2132ef91b2ae6771caf4899fcca46170a28647f5ed56e238d7faf4817c2f7d43e737a5bc159df93569c56aa
   languageName: node
   linkType: hard
 
-"@angular/build@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/build@npm:21.2.0"
+"@angular/build@npm:^21.2.1":
+  version: 21.2.1
+  resolution: "@angular/build@npm:21.2.1"
   dependencies:
     "@ampproject/remapping": "npm:2.3.0"
-    "@angular-devkit/architect": "npm:0.2102.0"
+    "@angular-devkit/architect": "npm:0.2102.1"
     "@babel/core": "npm:7.29.0"
     "@babel/helper-annotate-as-pure": "npm:7.27.3"
     "@babel/helper-split-export-declaration": "npm:7.24.7"
@@ -311,7 +311,7 @@ __metadata:
     "@angular/platform-browser": ^21.0.0
     "@angular/platform-server": ^21.0.0
     "@angular/service-worker": ^21.0.0
-    "@angular/ssr": ^21.2.0
+    "@angular/ssr": ^21.2.1
     karma: ^6.4.0
     less: ^4.2.0
     ng-packagr: ^21.0.0
@@ -348,21 +348,21 @@ __metadata:
       optional: true
     vitest:
       optional: true
-  checksum: 10c0/8133ce119bb501aa15de990a392142c31abbfe2c4fb1a5e06f5331b559b99b9ceaae4f6c4a4b54e2c9225abbccb01ac9c696411fb4931fe9552f52a195ee28c2
+  checksum: 10c0/31caac24f9fa670110f6393c75421e717058461d88c5bcb1bd6304f3523fc4c96db09a53262181cc1726846f71a922b126865ddd988f531e43c0640176581bed
   languageName: node
   linkType: hard
 
-"@angular/cli@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/cli@npm:21.2.0"
+"@angular/cli@npm:^21.2.1":
+  version: 21.2.1
+  resolution: "@angular/cli@npm:21.2.1"
   dependencies:
-    "@angular-devkit/architect": "npm:0.2102.0"
-    "@angular-devkit/core": "npm:21.2.0"
-    "@angular-devkit/schematics": "npm:21.2.0"
+    "@angular-devkit/architect": "npm:0.2102.1"
+    "@angular-devkit/core": "npm:21.2.1"
+    "@angular-devkit/schematics": "npm:21.2.1"
     "@inquirer/prompts": "npm:7.10.1"
     "@listr2/prompt-adapter-inquirer": "npm:3.0.5"
     "@modelcontextprotocol/sdk": "npm:1.26.0"
-    "@schematics/angular": "npm:21.2.0"
+    "@schematics/angular": "npm:21.2.1"
     "@yarnpkg/lockfile": "npm:1.1.0"
     algoliasearch: "npm:5.48.1"
     ini: "npm:6.0.0"
@@ -376,25 +376,25 @@ __metadata:
     zod: "npm:4.3.6"
   bin:
     ng: bin/ng.js
-  checksum: 10c0/aabc3c363214ddc5cee4f97aa96b82e6bca6bf3f42a19e7be02506432683315b7d23eba94d20bc51bd93d7b4de0823e3ffab9bfdfd2acdd6087b097fe8c6e868
+  checksum: 10c0/ee01acd41f883c74ae73032b12b87b095e921edbb48fe741150f60bbc06576ba8d8db1fc9c761b5c499973d9f87937fcbc9943655115d7fc9ff003dd67c235fc
   languageName: node
   linkType: hard
 
-"@angular/common@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/common@npm:21.2.0"
+"@angular/common@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/common@npm:21.2.2"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/core": 21.2.0
+    "@angular/core": 21.2.2
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/6a47b9d3809029277be99d9ca0fae550e51d5153384b5fba2cdaf955672b60f9b232f1a6ea1bca17fc129e5f54b6661543e344c81a21b675a5b0b468af4767f8
+  checksum: 10c0/a3a0ca600421baf7526431f203e9e57ab6a88666ce55ca630838e85561d569e4a1a5d1cdade0693692ccf462dce69085e590d9662e32d9fdc513694c6abeab87
   languageName: node
   linkType: hard
 
-"@angular/compiler-cli@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/compiler-cli@npm:21.2.0"
+"@angular/compiler-cli@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/compiler-cli@npm:21.2.2"
   dependencies:
     "@babel/core": "npm:7.29.0"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
@@ -405,7 +405,7 @@ __metadata:
     tslib: "npm:^2.3.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
-    "@angular/compiler": 21.2.0
+    "@angular/compiler": 21.2.2
     typescript: ">=5.9 <6.1"
   peerDependenciesMeta:
     typescript:
@@ -413,26 +413,26 @@ __metadata:
   bin:
     ng-xi18n: bundles/src/bin/ng_xi18n.js
     ngc: bundles/src/bin/ngc.js
-  checksum: 10c0/ec99f2e6df2223462d8bdff63a00549fafbf2a53d6bcfa4cca0c23347ac39966c6cf6e2842fad4a617098c4b26db14b59e80c3b2b8f97eb7a1b412ff81bb709e
+  checksum: 10c0/8d1294087c9e0651ecdcab3ac7955a650e7ab7d197d15b74461a3f9b7304e9f3e359190b2a3124a58cd21a1597fc01fc7b379bd44e194cd5c73d933d813415a5
   languageName: node
   linkType: hard
 
-"@angular/compiler@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/compiler@npm:21.2.0"
+"@angular/compiler@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/compiler@npm:21.2.2"
   dependencies:
     tslib: "npm:^2.3.0"
-  checksum: 10c0/59fbb0030ac954db33213a7c52053c5056284136e69191c6e165d648a1ea757e43b5a537f0e8ade2d2d2d83e553d621e55448df8e95e00dc7c1689aa327f3d00
+  checksum: 10c0/aa411e0a5ddb18fc54b91d2c49f794f9ec6a4c2438044289c8c30c9d5b0eb875ebba93171ce2f25159f443907e636c511a8eff351ed2b689b8097ab78b15fb49
   languageName: node
   linkType: hard
 
-"@angular/core@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/core@npm:21.2.0"
+"@angular/core@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/core@npm:21.2.2"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/compiler": 21.2.0
+    "@angular/compiler": 21.2.2
     rxjs: ^6.5.3 || ^7.4.0
     zone.js: ~0.15.0 || ~0.16.0
   peerDependenciesMeta:
@@ -440,52 +440,52 @@ __metadata:
       optional: true
     zone.js:
       optional: true
-  checksum: 10c0/15f68aa027aa8087c959fd790753ed68a815d383408b4d871bf40bb076f98e244782199e3aefe6e69d55b2b55099ca020dc236eb95538892479914c852977b68
+  checksum: 10c0/179a90489c76dc76316887e3cbd029c015cd5ae6df7a0f08cd17a598d88fd95794e573d57ecd3cea66430d2eea4d2aa15edf8b75d92568e64ecac5c41743bc6e
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/forms@npm:21.2.0"
+"@angular/forms@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/forms@npm:21.2.2"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 21.2.0
-    "@angular/core": 21.2.0
-    "@angular/platform-browser": 21.2.0
+    "@angular/common": 21.2.2
+    "@angular/core": 21.2.2
+    "@angular/platform-browser": 21.2.2
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/017c73110d3b02780a44c6eee883237df399b46c6d6052416f037376980cd8cc715778c3f1c01cb0cc5866dc12febd74cf2a8011bdb99b372fceb1654a0dadfa
+  checksum: 10c0/ed7ebaf102f7c2dd326c1b5098b8dc411996055da11f735f3dcde756481139051dcf3e8d74cd57d59343516d5e1827617688eb3d76848660ffe02f9035e0fbff
   languageName: node
   linkType: hard
 
-"@angular/platform-browser@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/platform-browser@npm:21.2.0"
+"@angular/platform-browser@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/platform-browser@npm:21.2.2"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/animations": 21.2.0
-    "@angular/common": 21.2.0
-    "@angular/core": 21.2.0
+    "@angular/animations": 21.2.2
+    "@angular/common": 21.2.2
+    "@angular/core": 21.2.2
   peerDependenciesMeta:
     "@angular/animations":
       optional: true
-  checksum: 10c0/361cd2b5b669136d0059f1fae31ce6cc109db62e64da2678914b2cebacd456de6c95d89bb3b43767f3edd31618896c668808b377e763502bbbd793f9fff8e164
+  checksum: 10c0/87fbb04b3c0d46bed281ec46b5d01496b40cf1ec3367944f0c967dac81b4b9723dd243574ae36253ff84b20b9a7fd1093494237261f09f2b45fa7a7fba79a985
   languageName: node
   linkType: hard
 
-"@angular/router@npm:^21.2.0":
-  version: 21.2.0
-  resolution: "@angular/router@npm:21.2.0"
+"@angular/router@npm:^21.2.2":
+  version: 21.2.2
+  resolution: "@angular/router@npm:21.2.2"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 21.2.0
-    "@angular/core": 21.2.0
-    "@angular/platform-browser": 21.2.0
+    "@angular/common": 21.2.2
+    "@angular/core": 21.2.2
+    "@angular/platform-browser": 21.2.2
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/c5901ff6053a863e2133cedbcda49a92f15466b1796672173902061c1b9e043fc00743814a7c9b43fed6a740b80425422fb40c44cb37ab2a8a1ab07084efac89
+  checksum: 10c0/ab0142a9e8e66798dcaca4c2cf841e51e57fc200e10b6df4d62e29ce934ace09ac0765afefce47e13b25db30d299f379cf5916e64af9076348385b6d6e0e5e10
   languageName: node
   linkType: hard
 
@@ -540,7 +540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.29.0, @babel/core@npm:^7.23.9, @babel/core@npm:^7.28.0, @babel/core@npm:^7.29.0":
+"@babel/core@npm:7.29.0, @babel/core@npm:^7.23.9, @babel/core@npm:^7.29.0":
   version: 7.29.0
   resolution: "@babel/core@npm:7.29.0"
   dependencies:
@@ -850,24 +850,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/aix-ppc64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/aix-ppc64@npm:0.25.12"
-  conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
 "@esbuild/aix-ppc64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/aix-ppc64@npm:0.27.3"
   conditions: os=aix & cpu=ppc64
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/android-arm64@npm:0.25.12"
-  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -878,24 +864,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/android-arm@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/android-arm@npm:0.25.12"
-  conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
 "@esbuild/android-arm@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/android-arm@npm:0.27.3"
   conditions: os=android & cpu=arm
-  languageName: node
-  linkType: hard
-
-"@esbuild/android-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/android-x64@npm:0.25.12"
-  conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
@@ -906,24 +878,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/darwin-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/darwin-arm64@npm:0.25.12"
-  conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/darwin-arm64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/darwin-arm64@npm:0.27.3"
   conditions: os=darwin & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/darwin-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/darwin-x64@npm:0.25.12"
-  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
@@ -934,24 +892,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/freebsd-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/freebsd-arm64@npm:0.25.12"
-  conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/freebsd-arm64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/freebsd-arm64@npm:0.27.3"
   conditions: os=freebsd & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/freebsd-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/freebsd-x64@npm:0.25.12"
-  conditions: os=freebsd & cpu=x64
   languageName: node
   linkType: hard
 
@@ -962,24 +906,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-arm64@npm:0.25.12"
-  conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-arm64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/linux-arm64@npm:0.27.3"
   conditions: os=linux & cpu=arm64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-arm@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-arm@npm:0.25.12"
-  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
@@ -990,24 +920,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-ia32@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-ia32@npm:0.25.12"
-  conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-ia32@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/linux-ia32@npm:0.27.3"
   conditions: os=linux & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-loong64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-loong64@npm:0.25.12"
-  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -1018,24 +934,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-mips64el@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-mips64el@npm:0.25.12"
-  conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-mips64el@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/linux-mips64el@npm:0.27.3"
   conditions: os=linux & cpu=mips64el
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-ppc64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-ppc64@npm:0.25.12"
-  conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
 
@@ -1046,24 +948,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-riscv64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-riscv64@npm:0.25.12"
-  conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-riscv64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/linux-riscv64@npm:0.27.3"
   conditions: os=linux & cpu=riscv64
-  languageName: node
-  linkType: hard
-
-"@esbuild/linux-s390x@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-s390x@npm:0.25.12"
-  conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
 
@@ -1074,24 +962,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/linux-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/linux-x64@npm:0.25.12"
-  conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/linux-x64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/linux-x64@npm:0.27.3"
   conditions: os=linux & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/netbsd-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/netbsd-arm64@npm:0.25.12"
-  conditions: os=netbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -1102,24 +976,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/netbsd-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/netbsd-x64@npm:0.25.12"
-  conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/netbsd-x64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/netbsd-x64@npm:0.27.3"
   conditions: os=netbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/openbsd-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/openbsd-arm64@npm:0.25.12"
-  conditions: os=openbsd & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -1130,24 +990,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/openbsd-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/openbsd-x64@npm:0.25.12"
-  conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/openbsd-x64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/openbsd-x64@npm:0.27.3"
   conditions: os=openbsd & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/openharmony-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/openharmony-arm64@npm:0.25.12"
-  conditions: os=openharmony & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -1158,24 +1004,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/sunos-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/sunos-x64@npm:0.25.12"
-  conditions: os=sunos & cpu=x64
-  languageName: node
-  linkType: hard
-
 "@esbuild/sunos-x64@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/sunos-x64@npm:0.27.3"
   conditions: os=sunos & cpu=x64
-  languageName: node
-  linkType: hard
-
-"@esbuild/win32-arm64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/win32-arm64@npm:0.25.12"
-  conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
@@ -1186,24 +1018,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@esbuild/win32-ia32@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/win32-ia32@npm:0.25.12"
-  conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
 "@esbuild/win32-ia32@npm:0.27.3":
   version: 0.27.3
   resolution: "@esbuild/win32-ia32@npm:0.27.3"
   conditions: os=win32 & cpu=ia32
-  languageName: node
-  linkType: hard
-
-"@esbuild/win32-x64@npm:0.25.12":
-  version: 0.25.12
-  resolution: "@esbuild/win32-x64@npm:0.25.12"
-  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -1238,26 +1056,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-common-types@npm:6.7.2":
-  version: 6.7.2
-  resolution: "@fortawesome/fontawesome-common-types@npm:6.7.2"
-  checksum: 10c0/0785df560542d9c08a0ba07bb7a39902274a3cd65c018672eb2520a99efccce18bdb7f7f4b1c6089763bc5627bf0f0837c3af963a8427eaeb535bd57c820a723
-  languageName: node
-  linkType: hard
-
 "@fortawesome/fontawesome-common-types@npm:7.2.0":
   version: 7.2.0
   resolution: "@fortawesome/fontawesome-common-types@npm:7.2.0"
   checksum: 10c0/991ca1390c078d973e92034cf7dbae2fc3aa50cd7ff322b7b23e4c54ec84dae12979bada9a782bdaea11a1577ae74d802aa651c590f41d2e1b1126c17e6cd413
-  languageName: node
-  linkType: hard
-
-"@fortawesome/fontawesome-svg-core@npm:^6.0.0":
-  version: 6.7.2
-  resolution: "@fortawesome/fontawesome-svg-core@npm:6.7.2"
-  dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.7.2"
-  checksum: 10c0/9e4e2992b341d2d11cd6ab8cf001e2cb9be4266ce200b307d15c0618e7d2cf11c1c4c67a1f95f3cc70feed2380fa66672132c32078674d5f9cb2cb0b7703f3ac
   languageName: node
   linkType: hard
 
@@ -1270,33 +1072,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/free-solid-svg-icons@npm:^6.0.0":
-  version: 6.7.2
-  resolution: "@fortawesome/free-solid-svg-icons@npm:6.7.2"
-  dependencies:
-    "@fortawesome/fontawesome-common-types": "npm:6.7.2"
-  checksum: 10c0/e900f3bb7b7d821421f11439ff78cd2b3c98ca31e848e1afebf7caa578d29a31fb6cf8ef283d4df342de777126a71fcbb154dd395b9d9ab6914a40a86df81413
-  languageName: node
-  linkType: hard
-
 "@fortawesome/free-solid-svg-icons@npm:^7.2.0":
   version: 7.2.0
   resolution: "@fortawesome/free-solid-svg-icons@npm:7.2.0"
   dependencies:
     "@fortawesome/fontawesome-common-types": "npm:7.2.0"
   checksum: 10c0/922ffe0f53b3cebcf36a4a6872958e7d6a0fbaa5c5c73cddbdea9301181fe8625331a0bf8aa09ca54c4d284805473e38d0eb9f06da05546f1914cec2c062343f
-  languageName: node
-  linkType: hard
-
-"@fortawesome/react-fontawesome@npm:^0.2.0":
-  version: 0.2.6
-  resolution: "@fortawesome/react-fontawesome@npm:0.2.6"
-  dependencies:
-    prop-types: "npm:^15.8.1"
-  peerDependencies:
-    "@fortawesome/fontawesome-svg-core": ~1 || ~6 || ~7
-    react: ^16.3 || ^17.0.0 || ^18.0.0 || ^19.0.0
-  checksum: 10c0/d4b733ad211a6cf4354564124fd1119890d5497762d6eff39e4716e6ded709a3b8ec6064cc6ab423e12f0307ad159130e3341e5e46132ad1124a16b416b4a6c7
   languageName: node
   linkType: hard
 
@@ -2374,13 +2155,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rolldown/pluginutils@npm:1.0.0-beta.27":
-  version: 1.0.0-beta.27
-  resolution: "@rolldown/pluginutils@npm:1.0.0-beta.27"
-  checksum: 10c0/9658f235b345201d4f6bfb1f32da9754ca164f892d1cb68154fe5f53c1df42bd675ecd409836dff46884a7847d6c00bdc38af870f7c81e05bba5c2645eb4ab9c
-  languageName: node
-  linkType: hard
-
 "@rolldown/pluginutils@npm:1.0.0-rc.3":
   version: 1.0.0-rc.3
   resolution: "@rolldown/pluginutils@npm:1.0.0-rc.3"
@@ -2686,14 +2460,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@schematics/angular@npm:21.2.0":
-  version: 21.2.0
-  resolution: "@schematics/angular@npm:21.2.0"
+"@schematics/angular@npm:21.2.1":
+  version: 21.2.1
+  resolution: "@schematics/angular@npm:21.2.1"
   dependencies:
-    "@angular-devkit/core": "npm:21.2.0"
-    "@angular-devkit/schematics": "npm:21.2.0"
+    "@angular-devkit/core": "npm:21.2.1"
+    "@angular-devkit/schematics": "npm:21.2.1"
     jsonc-parser: "npm:3.3.1"
-  checksum: 10c0/063e243b73176cd8cfac119b4dbcd6331fe2f2da2a37d01206f555ca44631a8e22d609612b98f2dbf572bb7548787609e382e9be84f7a60334073e879ffa4c4e
+  checksum: 10c0/e9fb6d7b2dba1950008be3d6110be212f557a3c1eec4518ea9a91b9f14f9fec22b2c17b41f7aa9497ede070aa8a62923da0a2927e64751cdf5f5f4354ff57a89
   languageName: node
   linkType: hard
 
@@ -2926,7 +2700,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jsdom@npm:^28":
+"@types/jsdom@npm:^28.0.0":
   version: 28.0.0
   resolution: "@types/jsdom@npm:28.0.0"
   dependencies:
@@ -2954,7 +2728,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^19, @types/react-dom@npm:^19.0.0":
+"@types/react-dom@npm:^19.2.3":
   version: 19.2.3
   resolution: "@types/react-dom@npm:19.2.3"
   peerDependencies:
@@ -2963,7 +2737,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^19, @types/react@npm:^19.0.0":
+"@types/react@npm:^19.2.14":
   version: 19.2.14
   resolution: "@types/react@npm:19.2.14"
   dependencies:
@@ -2985,22 +2759,6 @@ __metadata:
   peerDependencies:
     vite: ^6.0.0 || ^7.0.0
   checksum: 10c0/fcbec6f089d3f16f3c2011a8d7cf41920a0b9a97907a36f1dc367527582f98e6e376fa29b1f4d93c265be765ccd90752bfe6558bfaf71cc4f171196dccd19b56
-  languageName: node
-  linkType: hard
-
-"@vitejs/plugin-react@npm:^4.3.0":
-  version: 4.7.0
-  resolution: "@vitejs/plugin-react@npm:4.7.0"
-  dependencies:
-    "@babel/core": "npm:^7.28.0"
-    "@babel/plugin-transform-react-jsx-self": "npm:^7.27.1"
-    "@babel/plugin-transform-react-jsx-source": "npm:^7.27.1"
-    "@rolldown/pluginutils": "npm:1.0.0-beta.27"
-    "@types/babel__core": "npm:^7.20.5"
-    react-refresh: "npm:^0.17.0"
-  peerDependencies:
-    vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
-  checksum: 10c0/692f23960972879485d647713663ec299c478222c96567d60285acf7c7dc5c178e71abfe9d2eefddef1eeb01514dacbc2ed68aad84628debf9c7116134734253
   languageName: node
   linkType: hard
 
@@ -3919,19 +3677,19 @@ __metadata:
   resolution: "demo-react@workspace:projects/demo-react"
   dependencies:
     "@aminekun90/react-toast": "workspace:*"
-    "@fortawesome/fontawesome-svg-core": "npm:^6.0.0"
-    "@fortawesome/free-solid-svg-icons": "npm:^6.0.0"
-    "@fortawesome/react-fontawesome": "npm:^0.2.0"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
+    "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
+    "@fortawesome/react-fontawesome": "npm:^3.2.0"
     "@types/prismjs": "npm:^1.26.6"
-    "@types/react": "npm:^19.0.0"
-    "@types/react-dom": "npm:^19.0.0"
-    "@vitejs/plugin-react": "npm:^4.3.0"
+    "@types/react": "npm:^19.2.14"
+    "@types/react-dom": "npm:^19.2.3"
+    "@vitejs/plugin-react": "npm:^5.1.4"
     prismjs: "npm:^1.30.0"
-    react: "npm:^19.0.0"
-    react-dom: "npm:^19.0.0"
-    sass-embedded: "npm:^1.97.3"
-    typescript: "npm:~5.7.0"
-    vite: "npm:^6.0.0"
+    react: "npm:^19.2.4"
+    react-dom: "npm:^19.2.4"
+    sass-embedded: "npm:^1.98.0"
+    typescript: "npm:~5.9.3"
+    vite: "npm:^7.3.1"
   languageName: unknown
   linkType: soft
 
@@ -4240,95 +3998,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.25.0":
-  version: 0.25.12
-  resolution: "esbuild@npm:0.25.12"
-  dependencies:
-    "@esbuild/aix-ppc64": "npm:0.25.12"
-    "@esbuild/android-arm": "npm:0.25.12"
-    "@esbuild/android-arm64": "npm:0.25.12"
-    "@esbuild/android-x64": "npm:0.25.12"
-    "@esbuild/darwin-arm64": "npm:0.25.12"
-    "@esbuild/darwin-x64": "npm:0.25.12"
-    "@esbuild/freebsd-arm64": "npm:0.25.12"
-    "@esbuild/freebsd-x64": "npm:0.25.12"
-    "@esbuild/linux-arm": "npm:0.25.12"
-    "@esbuild/linux-arm64": "npm:0.25.12"
-    "@esbuild/linux-ia32": "npm:0.25.12"
-    "@esbuild/linux-loong64": "npm:0.25.12"
-    "@esbuild/linux-mips64el": "npm:0.25.12"
-    "@esbuild/linux-ppc64": "npm:0.25.12"
-    "@esbuild/linux-riscv64": "npm:0.25.12"
-    "@esbuild/linux-s390x": "npm:0.25.12"
-    "@esbuild/linux-x64": "npm:0.25.12"
-    "@esbuild/netbsd-arm64": "npm:0.25.12"
-    "@esbuild/netbsd-x64": "npm:0.25.12"
-    "@esbuild/openbsd-arm64": "npm:0.25.12"
-    "@esbuild/openbsd-x64": "npm:0.25.12"
-    "@esbuild/openharmony-arm64": "npm:0.25.12"
-    "@esbuild/sunos-x64": "npm:0.25.12"
-    "@esbuild/win32-arm64": "npm:0.25.12"
-    "@esbuild/win32-ia32": "npm:0.25.12"
-    "@esbuild/win32-x64": "npm:0.25.12"
-  dependenciesMeta:
-    "@esbuild/aix-ppc64":
-      optional: true
-    "@esbuild/android-arm":
-      optional: true
-    "@esbuild/android-arm64":
-      optional: true
-    "@esbuild/android-x64":
-      optional: true
-    "@esbuild/darwin-arm64":
-      optional: true
-    "@esbuild/darwin-x64":
-      optional: true
-    "@esbuild/freebsd-arm64":
-      optional: true
-    "@esbuild/freebsd-x64":
-      optional: true
-    "@esbuild/linux-arm":
-      optional: true
-    "@esbuild/linux-arm64":
-      optional: true
-    "@esbuild/linux-ia32":
-      optional: true
-    "@esbuild/linux-loong64":
-      optional: true
-    "@esbuild/linux-mips64el":
-      optional: true
-    "@esbuild/linux-ppc64":
-      optional: true
-    "@esbuild/linux-riscv64":
-      optional: true
-    "@esbuild/linux-s390x":
-      optional: true
-    "@esbuild/linux-x64":
-      optional: true
-    "@esbuild/netbsd-arm64":
-      optional: true
-    "@esbuild/netbsd-x64":
-      optional: true
-    "@esbuild/openbsd-arm64":
-      optional: true
-    "@esbuild/openbsd-x64":
-      optional: true
-    "@esbuild/openharmony-arm64":
-      optional: true
-    "@esbuild/sunos-x64":
-      optional: true
-    "@esbuild/win32-arm64":
-      optional: true
-    "@esbuild/win32-ia32":
-      optional: true
-    "@esbuild/win32-x64":
-      optional: true
-  bin:
-    esbuild: bin/esbuild
-  checksum: 10c0/c205357531423220a9de8e1e6c6514242bc9b1666e762cd67ccdf8fdfdc3f1d0bd76f8d9383958b97ad4c953efdb7b6e8c1f9ca5951cd2b7c5235e8755b34a6b
-  languageName: node
-  linkType: hard
-
 "escalade@npm:^3.1.1, escalade@npm:^3.2.0":
   version: 3.2.0
   resolution: "escalade@npm:3.2.0"
@@ -4471,7 +4140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.4, fdir@npm:^6.5.0":
+"fdir@npm:^6.5.0":
   version: 6.5.0
   resolution: "fdir@npm:6.5.0"
   peerDependencies:
@@ -4829,7 +4498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"immutable@npm:^5.0.2":
+"immutable@npm:^5.0.2, immutable@npm:^5.1.5":
   version: 5.1.5
   resolution: "immutable@npm:5.1.5"
   checksum: 10c0/8017ece1578e3c5939ba3305176aee059def1b8a90c7fa2a347ef583ebbd38cbe77ce1bbd786a5fab57e2da00bbcb0493b92e4332cdc4e1fe5cfb09a4688df31
@@ -5025,14 +4694,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
+"js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
   checksum: 10c0/e248708d377aa058eacf2037b07ded847790e6de892bbad3dac0abba2e759cb9f121b00099a65195616badcb6eca8d14d975cb3e89eb1cfda644756402c8aeed
   languageName: node
   linkType: hard
 
-"jsdom@npm:^28.0.0, jsdom@npm:^28.1.0":
+"jsdom@npm:^28.1.0":
   version: 28.1.0
   resolution: "jsdom@npm:28.1.0"
   dependencies:
@@ -5265,17 +4934,6 @@ __metadata:
     strip-ansi: "npm:^7.1.0"
     wrap-ansi: "npm:^9.0.0"
   checksum: 10c0/4b350c0a83d7753fea34dcac6cd797d1dc9603291565de009baa4aa91c0447eab0d3815a05c8ec9ac04fdfffb43c82adcdb03ec1fceafd8518e1a8c1cff4ff89
-  languageName: node
-  linkType: hard
-
-"loose-envify@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "loose-envify@npm:1.4.0"
-  dependencies:
-    js-tokens: "npm:^3.0.0 || ^4.0.0"
-  bin:
-    loose-envify: cli.js
-  checksum: 10c0/655d110220983c1a4b9c0c679a2e8016d4b67f6e9c7b5435ff5979ecdb20d0813f4dec0a08674fcbdd4846a3f07edbb50a36811fd37930b94aaa0d9daceb017e
   languageName: node
   linkType: hard
 
@@ -5679,33 +5337,33 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ngx-toast-workspace@workspace:."
   dependencies:
-    "@angular/build": "npm:^21.2.0"
-    "@angular/cli": "npm:^21.2.0"
-    "@angular/common": "npm:^21.2.0"
-    "@angular/compiler": "npm:^21.2.0"
-    "@angular/compiler-cli": "npm:^21.2.0"
-    "@angular/core": "npm:^21.2.0"
-    "@angular/forms": "npm:^21.2.0"
-    "@angular/platform-browser": "npm:^21.2.0"
-    "@angular/router": "npm:^21.2.0"
+    "@angular/build": "npm:^21.2.1"
+    "@angular/cli": "npm:^21.2.1"
+    "@angular/common": "npm:^21.2.2"
+    "@angular/compiler": "npm:^21.2.2"
+    "@angular/compiler-cli": "npm:^21.2.2"
+    "@angular/core": "npm:^21.2.2"
+    "@angular/forms": "npm:^21.2.2"
+    "@angular/platform-browser": "npm:^21.2.2"
+    "@angular/router": "npm:^21.2.2"
     "@fortawesome/angular-fontawesome": "npm:^4.0.0"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@types/prismjs": "npm:^1.26.6"
-    "@types/react": "npm:^19.0.0"
-    "@types/react-dom": "npm:^19.0.0"
+    "@types/react": "npm:^19.2.14"
+    "@types/react-dom": "npm:^19.2.3"
     "@vitest/browser-playwright": "npm:^4.0.18"
-    jsdom: "npm:^28.0.0"
+    jsdom: "npm:^28.1.0"
     ng-packagr: "npm:^21.2.0"
     playwright: "npm:^1.58.2"
     prettier: "npm:^3.8.1"
     prismjs: "npm:^1.30.0"
-    rxjs: "npm:~7.8.0"
-    tslib: "npm:^2.3.0"
+    rxjs: "npm:~7.8.2"
+    tslib: "npm:^2.8.1"
     typescript: "npm:~5.9.3"
-    vite: "npm:^6.0.0"
-    vite-plugin-dts: "npm:^4.0.0"
-    vitest: "npm:^4.0.8"
+    vite: "npm:^7.3.1"
+    vite-plugin-dts: "npm:^4.5.4"
+    vitest: "npm:^4.0.18"
   languageName: unknown
   linkType: soft
 
@@ -5862,7 +5520,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"object-assign@npm:^4, object-assign@npm:^4.1.1":
+"object-assign@npm:^4":
   version: 4.1.1
   resolution: "object-assign@npm:4.1.1"
   checksum: 10c0/1f4df9945120325d041ccf7b86f31e8bcc14e73d29171e37a7903050e96b81323784ec59f93f102ec635bcf6fa8034ba3ea0a8c7e69fa202b87ae3b6cec5a414
@@ -6193,7 +5851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.47, postcss@npm:^8.4.49, postcss@npm:^8.5.3, postcss@npm:^8.5.6":
+"postcss@npm:^8.4.47, postcss@npm:^8.4.49, postcss@npm:^8.5.6":
   version: 8.5.8
   resolution: "postcss@npm:8.5.8"
   dependencies:
@@ -6245,17 +5903,6 @@ __metadata:
     err-code: "npm:^2.0.2"
     retry: "npm:^0.12.0"
   checksum: 10c0/9c7045a1a2928094b5b9b15336dcd2a7b1c052f674550df63cc3f36cd44028e5080448175b6f6ca32b642de81150f5e7b1a98b728f15cb069f2dd60ac2616b96
-  languageName: node
-  linkType: hard
-
-"prop-types@npm:^15.8.1":
-  version: 15.8.1
-  resolution: "prop-types@npm:15.8.1"
-  dependencies:
-    loose-envify: "npm:^1.4.0"
-    object-assign: "npm:^4.1.1"
-    react-is: "npm:^16.13.1"
-  checksum: 10c0/59ece7ca2fb9838031d73a48d4becb9a7cc1ed10e610517c7d8f19a1e02fa47f7c27d557d8a5702bec3cfeccddc853579832b43f449e54635803f277b1c78077
   languageName: node
   linkType: hard
 
@@ -6318,7 +5965,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.0.0, react-dom@npm:^19.2.4":
+"react-dom@npm:^19.2.4":
   version: 19.2.4
   resolution: "react-dom@npm:19.2.4"
   dependencies:
@@ -6329,24 +5976,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^16.13.1":
-  version: 16.13.1
-  resolution: "react-is@npm:16.13.1"
-  checksum: 10c0/33977da7a5f1a287936a0c85639fec6ca74f4f15ef1e59a6bc20338fc73dc69555381e211f7a3529b8150a1f71e4225525b41b60b52965bda53ce7d47377ada1
-  languageName: node
-  linkType: hard
-
 "react-is@npm:^17.0.1":
   version: 17.0.2
   resolution: "react-is@npm:17.0.2"
   checksum: 10c0/2bdb6b93fbb1820b024b496042cce405c57e2f85e777c9aabd55f9b26d145408f9f74f5934676ffdc46f3dcff656d78413a6e43968e7b3f92eea35b3052e9053
-  languageName: node
-  linkType: hard
-
-"react-refresh@npm:^0.17.0":
-  version: 0.17.0
-  resolution: "react-refresh@npm:0.17.0"
-  checksum: 10c0/002cba940384c9930008c0bce26cac97a9d5682bc623112c2268ba0c155127d9c178a9a5cc2212d560088d60dfd503edd808669a25f9b377f316a32361d0b23c
   languageName: node
   linkType: hard
 
@@ -6357,7 +5990,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react@npm:^19.0.0, react@npm:^19.2.4":
+"react@npm:^19.2.4":
   version: 19.2.4
   resolution: "react@npm:19.2.4"
   checksum: 10c0/cd2c9ff67a720799cc3b38a516009986f7fc4cb8d3e15716c6211cf098d1357ee3e348ab05ad0600042bbb0fd888530ba92e329198c92eafa0994f5213396596
@@ -6527,7 +6160,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^4.24.0, rollup@npm:^4.34.9, rollup@npm:^4.43.0":
+"rollup@npm:^4.24.0, rollup@npm:^4.43.0":
   version: 4.59.0
   resolution: "rollup@npm:4.59.0"
   dependencies:
@@ -6630,7 +6263,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.8.2, rxjs@npm:^7.4.0, rxjs@npm:^7.8.1, rxjs@npm:~7.8.0":
+"rxjs@npm:7.8.2, rxjs@npm:^7.4.0, rxjs@npm:^7.8.1, rxjs@npm:~7.8.2":
   version: 7.8.2
   resolution: "rxjs@npm:7.8.2"
   dependencies:
@@ -6646,162 +6279,162 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sass-embedded-all-unknown@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-all-unknown@npm:1.97.3"
+"sass-embedded-all-unknown@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-all-unknown@npm:1.98.0"
   dependencies:
-    sass: "npm:1.97.3"
+    sass: "npm:1.98.0"
   conditions: (!cpu=arm | !cpu=arm64 | !cpu=riscv64 | !cpu=x64)
   languageName: node
   linkType: hard
 
-"sass-embedded-android-arm64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-android-arm64@npm:1.97.3"
+"sass-embedded-android-arm64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-android-arm64@npm:1.98.0"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
-"sass-embedded-android-arm@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-android-arm@npm:1.97.3"
+"sass-embedded-android-arm@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-android-arm@npm:1.98.0"
   conditions: os=android & cpu=arm
   languageName: node
   linkType: hard
 
-"sass-embedded-android-riscv64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-android-riscv64@npm:1.97.3"
+"sass-embedded-android-riscv64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-android-riscv64@npm:1.98.0"
   conditions: os=android & cpu=riscv64
   languageName: node
   linkType: hard
 
-"sass-embedded-android-x64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-android-x64@npm:1.97.3"
+"sass-embedded-android-x64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-android-x64@npm:1.98.0"
   conditions: os=android & cpu=x64
   languageName: node
   linkType: hard
 
-"sass-embedded-darwin-arm64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-darwin-arm64@npm:1.97.3"
+"sass-embedded-darwin-arm64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-darwin-arm64@npm:1.98.0"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
-"sass-embedded-darwin-x64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-darwin-x64@npm:1.97.3"
+"sass-embedded-darwin-x64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-darwin-x64@npm:1.98.0"
   conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-arm64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-arm64@npm:1.97.3"
+"sass-embedded-linux-arm64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-arm64@npm:1.98.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-arm@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-arm@npm:1.97.3"
+"sass-embedded-linux-arm@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-arm@npm:1.98.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-musl-arm64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-musl-arm64@npm:1.97.3"
+"sass-embedded-linux-musl-arm64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-musl-arm64@npm:1.98.0"
   conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-musl-arm@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-musl-arm@npm:1.97.3"
+"sass-embedded-linux-musl-arm@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-musl-arm@npm:1.98.0"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-musl-riscv64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-musl-riscv64@npm:1.97.3"
+"sass-embedded-linux-musl-riscv64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-musl-riscv64@npm:1.98.0"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-musl-x64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-musl-x64@npm:1.97.3"
+"sass-embedded-linux-musl-x64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-musl-x64@npm:1.98.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-riscv64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-riscv64@npm:1.97.3"
+"sass-embedded-linux-riscv64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-riscv64@npm:1.98.0"
   conditions: os=linux & cpu=riscv64
   languageName: node
   linkType: hard
 
-"sass-embedded-linux-x64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-linux-x64@npm:1.97.3"
+"sass-embedded-linux-x64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-linux-x64@npm:1.98.0"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
-"sass-embedded-unknown-all@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-unknown-all@npm:1.97.3"
+"sass-embedded-unknown-all@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-unknown-all@npm:1.98.0"
   dependencies:
-    sass: "npm:1.97.3"
+    sass: "npm:1.98.0"
   conditions: (!os=android | !os=darwin | !os=linux | !os=win32)
   languageName: node
   linkType: hard
 
-"sass-embedded-win32-arm64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-win32-arm64@npm:1.97.3"
+"sass-embedded-win32-arm64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-win32-arm64@npm:1.98.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"sass-embedded-win32-x64@npm:1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded-win32-x64@npm:1.97.3"
+"sass-embedded-win32-x64@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded-win32-x64@npm:1.98.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"sass-embedded@npm:^1.97.3":
-  version: 1.97.3
-  resolution: "sass-embedded@npm:1.97.3"
+"sass-embedded@npm:^1.98.0":
+  version: 1.98.0
+  resolution: "sass-embedded@npm:1.98.0"
   dependencies:
     "@bufbuild/protobuf": "npm:^2.5.0"
     colorjs.io: "npm:^0.5.0"
-    immutable: "npm:^5.0.2"
+    immutable: "npm:^5.1.5"
     rxjs: "npm:^7.4.0"
-    sass-embedded-all-unknown: "npm:1.97.3"
-    sass-embedded-android-arm: "npm:1.97.3"
-    sass-embedded-android-arm64: "npm:1.97.3"
-    sass-embedded-android-riscv64: "npm:1.97.3"
-    sass-embedded-android-x64: "npm:1.97.3"
-    sass-embedded-darwin-arm64: "npm:1.97.3"
-    sass-embedded-darwin-x64: "npm:1.97.3"
-    sass-embedded-linux-arm: "npm:1.97.3"
-    sass-embedded-linux-arm64: "npm:1.97.3"
-    sass-embedded-linux-musl-arm: "npm:1.97.3"
-    sass-embedded-linux-musl-arm64: "npm:1.97.3"
-    sass-embedded-linux-musl-riscv64: "npm:1.97.3"
-    sass-embedded-linux-musl-x64: "npm:1.97.3"
-    sass-embedded-linux-riscv64: "npm:1.97.3"
-    sass-embedded-linux-x64: "npm:1.97.3"
-    sass-embedded-unknown-all: "npm:1.97.3"
-    sass-embedded-win32-arm64: "npm:1.97.3"
-    sass-embedded-win32-x64: "npm:1.97.3"
+    sass-embedded-all-unknown: "npm:1.98.0"
+    sass-embedded-android-arm: "npm:1.98.0"
+    sass-embedded-android-arm64: "npm:1.98.0"
+    sass-embedded-android-riscv64: "npm:1.98.0"
+    sass-embedded-android-x64: "npm:1.98.0"
+    sass-embedded-darwin-arm64: "npm:1.98.0"
+    sass-embedded-darwin-x64: "npm:1.98.0"
+    sass-embedded-linux-arm: "npm:1.98.0"
+    sass-embedded-linux-arm64: "npm:1.98.0"
+    sass-embedded-linux-musl-arm: "npm:1.98.0"
+    sass-embedded-linux-musl-arm64: "npm:1.98.0"
+    sass-embedded-linux-musl-riscv64: "npm:1.98.0"
+    sass-embedded-linux-musl-x64: "npm:1.98.0"
+    sass-embedded-linux-riscv64: "npm:1.98.0"
+    sass-embedded-linux-x64: "npm:1.98.0"
+    sass-embedded-unknown-all: "npm:1.98.0"
+    sass-embedded-win32-arm64: "npm:1.98.0"
+    sass-embedded-win32-x64: "npm:1.98.0"
     supports-color: "npm:^8.1.1"
     sync-child-process: "npm:^1.0.2"
     varint: "npm:^6.0.0"
@@ -6844,7 +6477,7 @@ __metadata:
       optional: true
   bin:
     sass: dist/bin/sass.js
-  checksum: 10c0/fa77ece156f7eecfbefee6ece9c614464fc5231611ccdaf89f03a72357ea961dd16ace6d519c44293689cfce8701b4309ff13ad7cbb973e1dc48aa1534b3241a
+  checksum: 10c0/c6f337002d5d96bd3e7192bcaec4b0e0516bd2ef232c4f851fd2a1f77234e3b8cc917a2b435eeaa797919a6e42c79a5a0191e4f2d93cd899887fa2d397b86531
   languageName: node
   linkType: hard
 
@@ -6862,6 +6495,23 @@ __metadata:
   bin:
     sass: sass.js
   checksum: 10c0/67f6b5d220f20c1c23a8b16dda5fd1c5d119ad5caf8195b185d553b5b239fb188a3787f04fc00171c62515f2c4e5e0eb5ad4992a80f8543428556883c1240ba3
+  languageName: node
+  linkType: hard
+
+"sass@npm:1.98.0":
+  version: 1.98.0
+  resolution: "sass@npm:1.98.0"
+  dependencies:
+    "@parcel/watcher": "npm:^2.4.1"
+    chokidar: "npm:^4.0.0"
+    immutable: "npm:^5.1.5"
+    source-map-js: "npm:>=0.6.2 <2.0.0"
+  dependenciesMeta:
+    "@parcel/watcher":
+      optional: true
+  bin:
+    sass: sass.js
+  checksum: 10c0/9e91daa20f970fefb364ac31289f070636da7aa7eaeb43e371ea98fa98085a6dbc2d3d058504226a02d07717faf0a4ce8d41b579ecb428c4a9d96b4dc1944a95
   languageName: node
   linkType: hard
 
@@ -7353,7 +7003,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:0.2.15, tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.13, tinyglobby@npm:^0.2.15":
+"tinyglobby@npm:0.2.15, tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.15":
   version: 0.2.15
   resolution: "tinyglobby@npm:0.2.15"
   dependencies:
@@ -7469,16 +7119,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:~5.7.0":
-  version: 5.7.3
-  resolution: "typescript@npm:5.7.3"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/b7580d716cf1824736cc6e628ab4cd8b51877408ba2be0869d2866da35ef8366dd6ae9eb9d0851470a39be17cbd61df1126f9e211d8799d764ea7431d5435afa
-  languageName: node
-  linkType: hard
-
 "typescript@patch:typescript@npm%3A5.8.2#optional!builtin<compat/typescript>":
   version: 5.8.2
   resolution: "typescript@patch:typescript@npm%3A5.8.2#optional!builtin<compat/typescript>::version=5.8.2&hash=5786d5"
@@ -7496,16 +7136,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/ad09fdf7a756814dce65bc60c1657b40d44451346858eea230e10f2e95a289d9183b6e32e5c11e95acc0ccc214b4f36289dcad4bf1886b0adb84d711d336a430
-  languageName: node
-  linkType: hard
-
-"typescript@patch:typescript@npm%3A~5.7.0#optional!builtin<compat/typescript>":
-  version: 5.7.3
-  resolution: "typescript@patch:typescript@npm%3A5.7.3#optional!builtin<compat/typescript>::version=5.7.3&hash=5786d5"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: 10c0/6fd7e0ed3bf23a81246878c613423730c40e8bdbfec4c6e4d7bf1b847cbb39076e56ad5f50aa9d7ebd89877999abaee216002d3f2818885e41c907caaa192cc4
   languageName: node
   linkType: hard
 
@@ -7604,7 +7234,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-plugin-dts@npm:^4.0.0, vite-plugin-dts@npm:^4.5.4":
+"vite-plugin-dts@npm:^4.5.4":
   version: 4.5.4
   resolution: "vite-plugin-dts@npm:4.5.4"
   dependencies:
@@ -7682,62 +7312,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^6.0.0":
-  version: 6.4.1
-  resolution: "vite@npm:6.4.1"
-  dependencies:
-    esbuild: "npm:^0.25.0"
-    fdir: "npm:^6.4.4"
-    fsevents: "npm:~2.3.3"
-    picomatch: "npm:^4.0.2"
-    postcss: "npm:^8.5.3"
-    rollup: "npm:^4.34.9"
-    tinyglobby: "npm:^0.2.13"
-  peerDependencies:
-    "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
-    jiti: ">=1.21.0"
-    less: "*"
-    lightningcss: ^1.21.0
-    sass: "*"
-    sass-embedded: "*"
-    stylus: "*"
-    sugarss: "*"
-    terser: ^5.16.0
-    tsx: ^4.8.1
-    yaml: ^2.4.2
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  peerDependenciesMeta:
-    "@types/node":
-      optional: true
-    jiti:
-      optional: true
-    less:
-      optional: true
-    lightningcss:
-      optional: true
-    sass:
-      optional: true
-    sass-embedded:
-      optional: true
-    stylus:
-      optional: true
-    sugarss:
-      optional: true
-    terser:
-      optional: true
-    tsx:
-      optional: true
-    yaml:
-      optional: true
-  bin:
-    vite: bin/vite.js
-  checksum: 10c0/77bb4c5b10f2a185e7859cc9a81c789021bc18009b02900347d1583b453b58e4b19ff07a5e5a5b522b68fc88728460bb45a63b104d969e8c6a6152aea3b849f7
-  languageName: node
-  linkType: hard
-
-"vitest@npm:^4.0.18, vitest@npm:^4.0.8":
+"vitest@npm:^4.0.18":
   version: 4.0.18
   resolution: "vitest@npm:4.0.18"
   dependencies:
