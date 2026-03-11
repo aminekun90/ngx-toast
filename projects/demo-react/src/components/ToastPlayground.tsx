@@ -9,7 +9,7 @@ import './ToastPlayground.scss';
 
 export function ToastPlayground() {
     const { show } = useToast();
-    
+
     // Builder States
     const [toastTitle, setToastTitle] = useState('Custom Message');
     const [toastMessage, setToastMessage] = useState('This is a custom Toast using React!');
@@ -38,25 +38,31 @@ root.render(
         const titleLine = toastTitle ? `\n      title: '${toastTitle}',` : '';
         const messageLine = toastMessage ? `\n      message: '${toastMessage}',` : '';
 
-        return `import { useToast } from '@aminekun90/react-toast';
+        return `
+import { useToast, ToastContainer } from '@aminekun90/react-toast';
 
 export function MyComponent() {
-  const { show } = useToast();
+const { show } = useToast();
 
-  const handleAction = () => {
+const handleAction = () => {
     show({
-      type: '${toastType}',${titleLine}${messageLine}
-      position: '${toastPosition}',
-      duration: ${toastDuration},
-      progressBar: ${toastProgressBar}
+    type: '${toastType}',${titleLine}${messageLine}
+    position: '${toastPosition}',
+    duration: ${toastDuration},
+    progressBar: ${toastProgressBar}
     });
-  };
+};
 
-  return <button onClick={handleAction}>Show Toast</button>;
+return <>
+    <ToastContainer />
+    <button onClick={handleAction}>Show Toast</button>
+</>;
 }`;
     }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar]);
 
-    const htmlCode = `<button onClick={handleAction}>\n  Show Toast\n</button>`;
+    const htmlCode = `
+<ToastContainer />
+<button onClick={handleAction}>\n  Show Toast\n</button>`;
 
     // Syntax Highlighting
     const highlightedSetup = useMemo(() => Prism.highlight(setupCode, Prism.languages.typescript, 'typescript'), [setupCode]);
@@ -94,7 +100,7 @@ export function MyComponent() {
         <div className="playground-card">
             <h2>⚙️ Toast Builder (React)</h2>
             <div className="playground-layout">
-                
+
                 {/* Left: Form Section */}
                 <div className="form-section">
                     <div className="form-grid">
@@ -170,7 +176,7 @@ export function MyComponent() {
 
                 {/* Right: Code Preview Section */}
                 <div className="code-preview-section">
-                    
+
                     {/* Step 1: Mandatory Setup */}
                     <div className="setup-block">
                         <h3>1️⃣ Setup (main.tsx)</h3>
@@ -205,7 +211,7 @@ export function MyComponent() {
                                 <code dangerouslySetInnerHTML={{ __html: highlightedTs }}></code>
                             </pre>
                         </div>
-                        
+
                         <h3>HTML</h3>
                         <div className="code-block-wrapper">
                             <button
