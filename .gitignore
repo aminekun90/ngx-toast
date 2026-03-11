@@ -46,3 +46,5 @@ Thumbs.db
 projects/react-toast/dist
 projects/react-toast/node_modules
 projects/demo-react/node_modules
+
+*.tgz

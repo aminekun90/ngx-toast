@@ -1,6 +1,6 @@
 {
   "name": "ngx-toast-workspace",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "author": "aminekun90",
   "packageManager": "yarn@4.12.0",
   "funding": "https://github.com/sponsors/aminekun90",
@@ -52,6 +52,7 @@
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vite-plugin-static-copy": "^3.2.0",
     "vitest": "^4.0.18"
   },

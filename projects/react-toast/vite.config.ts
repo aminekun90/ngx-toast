@@ -4,6 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, UserConfig } from 'vite';
 import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { InlineConfig } from 'vitest/node';
 
@@ -11,13 +12,13 @@ interface VitestConfigExport extends UserConfig {
     test?: InlineConfig;
 }
 
-// Simulation de __dirname pour le mode ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 export default defineConfig({
     plugins: [
         react(),
+        libInjectCss(), // <--- Injection auto du CSS dans le JS
         dts({
             insertTypesEntry: true,
             include: ['src'],
@@ -42,12 +43,7 @@ export default defineConfig({
             formats: ['es', 'umd']
         },
         rollupOptions: {
-            // FontAwesome n'est pas ici, il sera donc inclus dans le bundle
-            external: [
-                'react',
-                'react-dom',
-                'react/jsx-runtime'
-            ],
+            external: ['react', 'react-dom', 'react/jsx-runtime'],
             output: {
                 globals: {
                     react: 'React',
@@ -61,13 +57,6 @@ export default defineConfig({
         globals: true,
         environment: 'jsdom',
         setupFiles: [resolve(__dirname, './src/test/setup.ts')],
-        include: ['src/**/*.{test,spec}.{ts,tsx}'],
-        deps: {
-            optimizer: {
-                web: {
-                    include: ['@fortawesome/react-fontawesome']
-                }
-            }
-        }
+        include: ['src/**/*.{test,spec}.{ts,tsx}']
     }
 } as VitestConfigExport);
