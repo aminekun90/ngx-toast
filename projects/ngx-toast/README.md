@@ -1,8 +1,8 @@
 # ngx-toast 🍞
 
-A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 21+.
+A lightweight, high-performance, and **Zoneless-ready** toast notification library for Angular 20+.
 
-[![Angular Version](https://img.shields.io/badge/angular-%3E%3D21.2.0-red.svg)](https://angular.dev/)
+[![Angular Version](https://img.shields.io/badge/angular-%3E%3D20.3.13-red.svg)](https://angular.dev/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/aminekun90/ngx-toast/graphs/commit-activity)
 [![version number](https://img.shields.io/npm/v/ngx-toast?color=green&label=version)](https://github.com/aminekun90/ngx-toast/releases)
 [![Actions Status](https://github.com/aminekun90/ngx-toast/workflows/Test/badge.svg)](https://github.com/aminekun90/ngx-toast/actions)
@@ -11,13 +11,13 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 [![Socket Badge](https://socket.dev/api/badge/npm/package/@aminekun90/ngx-toast)](https://socket.dev/npm/package/@aminekun90/ngx-toast)
 [![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)](https://www.npmjs.com/package/@aminekun90/ngx-toast)
 
-## Demo app
+## Demo app and usage
 
 [View Demo](https://aminekun90.github.io/ngx-toast/)
 
 ## Key Features
 
-* ⚡ **Angular 21+ Optimized**: Fully supports `provideZonelessChangeDetection()`.
+* ⚡ **Angular 20+ Optimized**: Fully supports `provideZonelessChangeDetection()`.
 * 📡 **Signal-based**: Built with Angular Signals for reactive and efficient state management.
 * 🎨 **FontAwesome Integration**: Built-in support for professional iconography.
 * 🛠 **Customizable**: Easy control over duration, progress bars, and screen positions.

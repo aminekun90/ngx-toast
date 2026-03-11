@@ -46,7 +46,7 @@ import { ToastProvider } from '@aminekun90/react-toast';
 
 export function App() {
   return (
-    <ToastProvider>
+    <ToastProvider> <!-- Mandatory -->
       <MyMainComponent />
     </ToastProvider>
   );
