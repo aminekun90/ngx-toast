@@ -1,6 +1,4 @@
-import {
-    faCheckCircle, faExclamationTriangle, faInfoCircle, faTimesCircle
-} from '@fortawesome/free-solid-svg-icons';
+import * as icons from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo } from 'react';
 import { useToast } from './ToastContext';
@@ -8,18 +6,17 @@ import { Toast } from './types';
 
 // IMPORTANT: Importe le CSS ici pour qu'il soit inclus dans le build
 import './toast.styles.scss';
-
 const ToastItem: React.FC<{ toast: Toast }> = ({ toast }) => {
     const { remove } = useToast();
-
     const icon = useMemo(() => {
+        if (toast.icon) return toast.icon;
         switch (toast.type) {
-            case 'success': return faCheckCircle;
-            case 'error': return faTimesCircle;
-            case 'warning': return faExclamationTriangle;
-            default: return faInfoCircle;
+            case 'success': return icons.faCheckCircle;
+            case 'error': return icons.faTimesCircle;
+            case 'warning': return icons.faExclamationTriangle;
+            default: return icons.faInfoCircle;
         }
-    }, [toast.type]);
+    }, [toast.type,toast.icon]);
 
     return (
 

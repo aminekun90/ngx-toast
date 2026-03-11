@@ -31,6 +31,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       progressBar: config.progressBar ?? false,
       progressAnimation: config.progressAnimation || "increasing",
       toastClass: config.toastClass || "",
+      icon: config.icon
     };
     setToasts((prev) => [...prev, newToast]);
     if (duration) setTimeout(() => remove(id), duration);

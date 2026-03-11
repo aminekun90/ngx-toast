@@ -28,6 +28,9 @@ export class ToastComponent {
   // 5. Mettre à jour le signal "icon"
   // Il renvoie maintenant un tableau [prefix, iconName]
   icon = computed((): [IconPrefix, IconName] => {
+    if (this.toast.icon) {
+      return this.toast.icon;
+    }
     switch (this.toast.type) {
       case "success":
         return ["fas", "check-circle"];

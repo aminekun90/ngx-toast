@@ -18,7 +18,7 @@ const __dirname = dirname(__filename);
 export default defineConfig({
     plugins: [
         react(),
-        libInjectCss(), // <--- Injection auto du CSS dans le JS
+        libInjectCss(),
         dts({
             insertTypesEntry: true,
             include: ['src'],
@@ -30,7 +30,6 @@ export default defineConfig({
                 { src: 'README.md', dest: '.' },
                 { src: 'LICENSE', dest: '.' },
                 { src: 'package.json', dest: '.' },
-                { src: 'docs/*', dest: 'docs' }
             ]
         })
     ],

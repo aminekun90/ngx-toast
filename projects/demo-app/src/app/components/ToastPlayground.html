@@ -1,6 +1,7 @@
 <div class="playground-card">
-    <h2>⚙️ Toast Builder</h2>
+    <h2>⚙️ Toast Builder (Angular)</h2>
     <div class="playground-layout">
+        
         <div class="form-section">
             <div class="form-grid">
                 <div class="form-group">
@@ -20,6 +21,21 @@
                         <option value="warning">Warning</option>
                     </select>
                 </div>
+                
+                <div class="form-group">
+                    <label for="icon">Custom Icon (FontAwesome)</label>
+                    <select id="icon" [(ngModel)]="selectedIcon" class="form-control">
+                        <option value="none">None</option>
+                        <option value="rocket">Rocket</option>
+                        <option value="bell">Bell</option>
+                        <option value="heart">Heart</option>
+                        <option value="star">Star</option>
+                        <option value="envelope">Envelope</option>
+                        <option value="bomb">Bomb</option>
+                        <option value="user">User</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="position">Position</label>
                     <select id="position" [(ngModel)]="toastPosition" class="form-control">
@@ -46,21 +62,40 @@
         </div>
 
         <div class="code-preview-section">
-            <h3>TypeScript</h3>
-            <div class="code-block-wrapper">
-                <button class="btn-copy" (click)="copyCode(tsCode(), 'ts')" [class.copied]="copiedTs()">
-                    {{ copiedTs() ? 'Copied ! ✅' : 'Copy' }}
-                </button>
-                <pre class="language-typescript"><code [innerHTML]="highlightedTsCode()"></code></pre>
+            
+            <div class="setup-block">
+                <h3>1️⃣ Setup (app.config.ts)</h3>
+                <p class="instruction-text">Register providers in your application config :</p>
+                <div class="code-block-wrapper">
+                    <button class="btn-copy" (click)="copyCode(setupCode(), 'setup')" [class.copied]="copiedSetup()">
+                        {{ copiedSetup() ? 'Copied ! ✅' : 'Copy' }}
+                    </button>
+                    <pre class="language-typescript"><code [innerHTML]="highlightedSetupCode()"></code></pre>
+                </div>
             </div>
 
-            <h3>HTML</h3>
-            <div class="code-block-wrapper">
-                <button class="btn-copy" (click)="copyCode(htmlCode(), 'html')" [class.copied]="copiedHtml()">
-                    {{ copiedHtml() ? 'Copied ! ✅' : 'Copy' }}
-                </button>
-                <pre class="language-markup"><code [innerHTML]="highlightedHtmlCode()"></code></pre>
+            <div class="divider"></div>
+
+            <div class="usage-block">
+                <h3>2️⃣ Usage (Component)</h3>
+                <p class="instruction-text">Inject the service and use it in your component (make sure you have fontawesome installed if you want custom icons):</p>
+                
+                <div class="code-block-wrapper">
+                    <button class="btn-copy" (click)="copyCode(tsCode(), 'ts')" [class.copied]="copiedTs()">
+                        {{ copiedTs() ? 'Copied ! ✅' : 'Copy' }}
+                    </button>
+                    <pre class="language-typescript"><code [innerHTML]="highlightedTsCode()"></code></pre>
+                </div>
+
+                <h3>HTML</h3>
+                <div class="code-block-wrapper">
+                    <button class="btn-copy" (click)="copyCode(htmlCode(), 'html')" [class.copied]="copiedHtml()">
+                        {{ copiedHtml() ? 'Copied ! ✅' : 'Copy' }}
+                    </button>
+                    <pre class="language-markup"><code [innerHTML]="highlightedHtmlCode()"></code></pre>
+                </div>
             </div>
+
         </div>
     </div>
 </div>

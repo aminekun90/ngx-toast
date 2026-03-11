@@ -1,4 +1,5 @@
 import { inject, Injectable, signal } from "@angular/core";
+import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { NGX_TOAST_VERSION } from "../version";
 
 // 1. Définir les types (extensibles selon vos besoins)
@@ -21,6 +22,7 @@ export interface ToastConfig {
   progressBar?: boolean; 
   progressAnimation?: "increasing" | "decreasing"; 
   toastClass?: string;
+  icon?: [IconPrefix, IconName] ;
 }
 
 
@@ -35,6 +37,7 @@ export interface Toast {
   progressBar: boolean; 
   progressAnimation: "increasing" | "decreasing"; 
   toastClass: string;
+  icon?: [IconPrefix, IconName] ;
 }
 
 @Injectable({
@@ -63,6 +66,7 @@ export class ToastService {
       progressBar: config.progressBar ?? false,
       progressAnimation: config.progressAnimation || "increasing",
       toastClass: config.toastClass || "",
+      icon: config.icon
     };
 
     // Ajoute le toast au signal

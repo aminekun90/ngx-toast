@@ -1,16 +1,13 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { ToastPosition, ToastService } from 'ngx-toast';
 
-
-
-// --- Imports PrismJS pour la coloration syntaxique ---
+// --- PrismJS Imports ---
 import Prism from 'prismjs';
-import 'prismjs/components/prism-markup'; // Support du HTML (markup)
-import 'prismjs/components/prism-typescript'; // Support du TypeScript
+import 'prismjs/components/prism-markup';
+import 'prismjs/components/prism-typescript';
 
 @Component({
   selector: 'app-toast-playground',
@@ -23,70 +20,88 @@ export class ToastPlayground {
   private readonly toastService = inject(ToastService);
   private readonly sanitizer = inject(DomSanitizer);
 
-  // --- PLAYGROUND STATE (Signals) ---
+  // --- PLAYGROUND STATE ---
   toastTitle = signal('Custom Message');
-  toastMessage = signal('This is a custom Toast using Angular Signals !');
+  toastMessage = signal('This is a custom Toast using Angular Signals!');
   toastType = signal<'success' | 'error' | 'warning' | 'info'>('success');
   toastPosition = signal<ToastPosition>('top-right');
   toastDuration = signal(3000);
   toastProgressBar = signal(true);
+  selectedIcon = signal<IconName | 'none'>('rocket');
 
-  // --- COPIE STATE ---
+  // --- COPY STATE --'
+  copiedSetup = signal(false);
   copiedTs = signal(false);
   copiedHtml = signal(false);
 
-  // --- CODE GÉNÉRÉ DYNAMIQUEMENT (Texte brut pour la copie) ---
-  tsCode = computed(() => {
-    const type = this.toastType();
-    const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
-    const message = this.toastMessage() ? `\n      message: '${this.toastMessage()}',` : '';
-    const position = `\n      position: '${this.toastPosition()}',`;
-    const duration = this.toastDuration() === 5000 ? '' : `\n      duration: ${this.toastDuration()},`;
-    const progressBar = this.toastProgressBar() ? `\n      progressBar: true` : `\n      progressBar: false`;
+  // --- 1. SETUP CODE (app.config.ts) ---
+  setupCode = computed(() => {
+    return `import { ApplicationConfig } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideAnimations(), // Required for toast animations
+  ]
+};`;
+  });
 
-    return `import { Component, inject } from '@angular/core';
+  // --- 2. USAGE CODE (component.ts) ---
+  tsCode = computed(() => {
+  const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
+  const message = this.toastMessage() ? `\n      message: '${this.toastMessage()}',` : '';
+  
+  // Prepare the icon line as a string for the code preview
+  const iconLine = this.selectedIcon() === 'none' 
+    ? '' 
+    : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
+
+  return `import { Component, inject } from '@angular/core';
 import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
 
-
 @Component({
-  // your Config ...
-  imports: [
-  // your Imports ...
-  ToastContainerComponent],
+  selector: 'app-example',
+  standalone: true,
+  imports: [ToastContainerComponent],
+  template: \`
+    <ngx-toast></ngx-toast>
+    <button (click)="show()">Show Toast</button>
+  \`
 })
 export class MyComponent {
   private readonly toastService = inject(ToastService);
 
-  showCustomToast() {
+  show() {
     this.toastService.show({
-      type: '${type}',${title}${message}${position}${duration}${progressBar}
+      type: '${this.toastType()}',${title}${message}${iconLine}
+      position: '${this.toastPosition()}',
+      duration: ${this.toastDuration()},
+      progressBar: ${this.toastProgressBar()}
     });
   }
 }`;
-  });
+});
 
   htmlCode = computed(() => {
-    return `
-    <ngx-toast></ngx-toast>
-    <button (click)="showCustomToast()">
-      Show Toast
-    </button>
-`;
+    return `<ngx-toast></ngx-toast>\n<button (click)="show()">Show Toast</button>`;
   });
 
-  // --- 🎨 CODE COLORISÉ DYNAMIQUEMENT POUR L'AFFICHAGE ---
+  // --- 🎨 HIGHLIGHTED CODE FOR DISPLAY ---
+  highlightedSetupCode = computed<SafeHtml>(() => {
+    return this.highlight(this.setupCode(), 'typescript');
+  });
+
   highlightedTsCode = computed<SafeHtml>(() => {
-    const raw = this.tsCode();
-    const highlighted = Prism.highlight(raw, Prism.languages['typescript'], 'typescript');
-    // On bypass la sécurité pour garder les classes CSS de Prism (<span class="token keyword">...)
-    return this.sanitizer.bypassSecurityTrustHtml(highlighted); 
+    return this.highlight(this.tsCode(), 'typescript');
   });
 
   highlightedHtmlCode = computed<SafeHtml>(() => {
-    const raw = this.htmlCode();
-    const highlighted = Prism.highlight(raw, Prism.languages['markup'], 'html');
-    return this.sanitizer.bypassSecurityTrustHtml(highlighted);
+    return this.highlight(this.htmlCode(), 'markup');
   });
+
+  private highlight(code: string, lang: string): SafeHtml {
+    const highlighted = Prism.highlight(code, Prism.languages[lang], lang);
+    return this.sanitizer.bypassSecurityTrustHtml(highlighted);
+  }
 
   // --- ACTIONS ---
   showCustomToast() {
@@ -96,13 +111,17 @@ export class MyComponent {
       message: this.toastMessage(),
       position: this.toastPosition(),
       duration: this.toastDuration(),
-      progressBar: this.toastProgressBar()
+      progressBar: this.toastProgressBar(),
+      icon: this.selectedIcon() === 'none' ? undefined: ['fas', this.selectedIcon() as IconName]
     });
   }
 
-  copyCode(code: string, type: 'ts' | 'html') {
+  copyCode(code: string, type: 'setup' | 'ts' | 'html') {
     navigator.clipboard.writeText(code).then(() => {
-      if (type === 'ts') {
+      if (type === 'setup') {
+        this.copiedSetup.set(true);
+        setTimeout(() => this.copiedSetup.set(false), 2000);
+      } else if (type === 'ts') {
         this.copiedTs.set(true);
         setTimeout(() => this.copiedTs.set(false), 2000);
       } else {
