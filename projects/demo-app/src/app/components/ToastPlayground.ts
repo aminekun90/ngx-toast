@@ -45,10 +45,14 @@ export class ToastPlayground {
     const progressBar = this.toastProgressBar() ? `\n      progressBar: true` : `\n      progressBar: false`;
 
     return `import { Component, inject } from '@angular/core';
-import { ToastService } from '@aminekun90/ngx-toast';
+import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
+
 
 @Component({
   // your Config ...
+  imports: [
+  // your Imports ...
+  ToastContainerComponent],
 })
 export class MyComponent {
   private readonly toastService = inject(ToastService);
@@ -62,9 +66,12 @@ export class MyComponent {
   });
 
   htmlCode = computed(() => {
-    return `<button (click)="showCustomToast()">
-  Show Toast
-</button>`;
+    return `
+    <ngx-toast></ngx-toast>
+    <button (click)="showCustomToast()">
+      Show Toast
+    </button>
+`;
   });
 
   // --- 🎨 CODE COLORISÉ DYNAMIQUEMENT POUR L'AFFICHAGE ---
