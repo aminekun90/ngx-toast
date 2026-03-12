@@ -29,7 +29,7 @@ export class ToastPlayground {
   toastProgressBar = signal(true);
   selectedIcon = signal<IconName | 'none'>('rocket');
 
-  // --- COPY STATE --'
+  // --- COPY STATE ---
   copiedSetup = signal(false);
   copiedTs = signal(false);
   copiedHtml = signal(false);
@@ -38,24 +38,24 @@ export class ToastPlayground {
   setupCode = computed(() => {
     return `import { ApplicationConfig } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToast } from '@aminekun90/ngx-toast';
+
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAnimations(), // Required for toast animations
+    provideAnimations(), // Required for animations
+    provideToast()       // Initialize the service
   ]
 };`;
   });
 
   // --- 2. USAGE CODE (component.ts) ---
   tsCode = computed(() => {
-  const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
-  const message = this.toastMessage() ? `\n      message: '${this.toastMessage()}',` : '';
-  
-  // Prepare the icon line as a string for the code preview
-  const iconLine = this.selectedIcon() === 'none' 
-    ? '' 
-    : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
+    const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
+    const iconLine = this.selectedIcon() === 'none' 
+      ? '' 
+      : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
 
-  return `import { Component, inject } from '@angular/core';
+    return `import { Component, inject } from '@angular/core';
 import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
 
 @Component({
@@ -64,39 +64,33 @@ import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
   imports: [ToastContainerComponent],
   template: \`
     <ngx-toast></ngx-toast>
-    <button (click)="show()">Show Toast</button>
+    <button (click)="load()">Load Data</button>
   \`
 })
 export class MyComponent {
   private readonly toastService = inject(ToastService);
 
-  show() {
-    this.toastService.show({
-      type: '${this.toastType()}',${title}${message}${iconLine}
-      position: '${this.toastPosition()}',
-      duration: ${this.toastDuration()},
-      progressBar: ${this.toastProgressBar()}
-    });
+  // Example using Promise
+  load() {
+    const myPromise = new Promise((resolve) => setTimeout(() => resolve('Done!'), 2000));
+
+    this.toastService.promise(myPromise, {
+      loading: 'Fetching data...',
+      success: (data) => \`Successfully \${data}\`,
+      error: 'Failed to load'
+    }, { position: '${this.toastPosition()}' });
   }
 }`;
-});
+  });
 
   htmlCode = computed(() => {
     return `<ngx-toast></ngx-toast>\n<button (click)="show()">Show Toast</button>`;
   });
 
-  // --- 🎨 HIGHLIGHTED CODE FOR DISPLAY ---
-  highlightedSetupCode = computed<SafeHtml>(() => {
-    return this.highlight(this.setupCode(), 'typescript');
-  });
-
-  highlightedTsCode = computed<SafeHtml>(() => {
-    return this.highlight(this.tsCode(), 'typescript');
-  });
-
-  highlightedHtmlCode = computed<SafeHtml>(() => {
-    return this.highlight(this.htmlCode(), 'markup');
-  });
+  // --- 🎨 HIGHLIGHTED CODE ---
+  highlightedSetupCode = computed<SafeHtml>(() => this.highlight(this.setupCode(), 'typescript'));
+  highlightedTsCode = computed<SafeHtml>(() => this.highlight(this.tsCode(), 'typescript'));
+  highlightedHtmlCode = computed<SafeHtml>(() => this.highlight(this.htmlCode(), 'markup'));
 
   private highlight(code: string, lang: string): SafeHtml {
     const highlighted = Prism.highlight(code, Prism.languages[lang], lang);
@@ -112,22 +106,38 @@ export class MyComponent {
       position: this.toastPosition(),
       duration: this.toastDuration(),
       progressBar: this.toastProgressBar(),
-      icon: this.selectedIcon() === 'none' ? undefined: ['fas', this.selectedIcon() as IconName]
+      icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName]
+    });
+  }
+
+  testPromise() {
+    const myPromise = new Promise<string>((resolve, reject) => {
+      setTimeout(() => {
+        Math.random() > 34 ? resolve("API Success") : reject(new Error("Network Error"));
+      }, 2000);
+    });
+
+    this.toastService.promise(myPromise, {
+      loading: 'Loading from server...',
+      success: (data:string) => `Loaded: ${data}`,
+      error: (err:Error) => `Error: ${err.message}`
+    }, { 
+      duration: this.toastDuration(),
+      icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName],
+      position: this.toastPosition(),
+      progressBar: this.toastProgressBar(),
+      title: this.toastTitle(),
+      message: this.toastMessage(),
+      type: this.toastType(),
     });
   }
 
   copyCode(code: string, type: 'setup' | 'ts' | 'html') {
     navigator.clipboard.writeText(code).then(() => {
-      if (type === 'setup') {
-        this.copiedSetup.set(true);
-        setTimeout(() => this.copiedSetup.set(false), 2000);
-      } else if (type === 'ts') {
-        this.copiedTs.set(true);
-        setTimeout(() => this.copiedTs.set(false), 2000);
-      } else {
-        this.copiedHtml.set(true);
-        setTimeout(() => this.copiedHtml.set(false), 2000);
-      }
+      const isTs = type === 'ts'?this.copiedTs:this.copiedHtml;
+      const state = type === 'setup' ? this.copiedSetup : isTs;
+      state.set(true);
+      setTimeout(() => state.set(false), 2000);
     });
   }
 }

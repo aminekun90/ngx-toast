@@ -1,41 +1,42 @@
-// projects/ngx-toast/src/lib/toast.component.ts
-
 import { CommonModule } from "@angular/common";
-import { Component, Input, computed, inject } from "@angular/core";
-
-export * from "./services/Toast.service";
-
+import { Component, computed, inject, input } from "@angular/core"; // 1. Utilise 'input'
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { Toast, ToastService } from "./services/Toast.service";
 
 @Component({
-  selector: "app-toast", // Optionnel: changer le préfixe en 'lib' ou 'ngx'
+  selector: "app-toast",
   standalone: true,
   imports: [CommonModule, FaIconComponent],
-  templateUrl: "./ngx-toast.html", // C'est mieux de séparer pour une lib
+  templateUrl: "./ngx-toast.html",
   styleUrls: ["./ngx-toast.scss"],
 })
 export class ToastComponent {
-  @Input({ required: true }) toast!: Toast;
+  // 2. Déclare l'input comme un signal. 
+  // Cela permet aux 'computed' de réagir aux changements de l'objet toast.
+  toast = input.required<Toast>();
+  
   private readonly toastService: ToastService = inject(ToastService);
-  constructor() { }
 
+  // 3. Accède à la valeur du signal avec des parenthèses : this.toast()
   toastClasses = computed(() => {
-    return `toast-${this.toast.type}`;
+    return `toast-${this.toast().type}`;
   });
 
-  // 5. Mettre à jour le signal "icon"
-  // Il renvoie maintenant un tableau [prefix, iconName]
   icon = computed((): [IconPrefix, IconName] => {
-    if (this.toast.icon) {
-      return this.toast.icon;
+    const currentToast = this.toast();
+
+    if (currentToast.icon) {
+      return currentToast.icon;
     }
-    switch (this.toast.type) {
+    
+    switch (currentToast.type) {
+      case "loading":
+        return ["fas", "spinner"];
       case "success":
         return ["fas", "check-circle"];
       case "error":
-        return ["fas", "times-circle"]; // 'fas' ou 'far' selon votre préférence
+        return ["fas", "times-circle"];
       case "warning":
         return ["fas", "exclamation-triangle"];
       case "info":
@@ -45,17 +46,10 @@ export class ToastComponent {
   });
 
   onClose() {
-    this.toastService.remove(this.toast.id);
+    this.toastService.remove(this.toast().id);
   }
-  onKeyPressHandler(_event: Event) {
-    this.onClose();
-  }
-  onKeyDownHandler(_event: Event) {
-    this.onClose();
 
-  }
-  onKeyUpHandler(_event: Event) {
-    this.onClose();
-
-  }
+  onKeyPressHandler(_event: Event) { this.onClose(); }
+  onKeyDownHandler(_event: Event) { this.onClose(); }
+  onKeyUpHandler(_event: Event) { this.onClose(); }
 }

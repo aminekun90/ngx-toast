@@ -8,7 +8,6 @@ import 'prismjs/components/prism-typescript';
 import { useMemo, useState } from 'react';
 import './ToastPlayground.scss';
 
-// Map icons to names for the select and code generation
 const ICON_MAP = {
     'undefined': undefined,
     'faUser': faUser,
@@ -22,9 +21,9 @@ const ICON_MAP = {
 type IconName = keyof typeof ICON_MAP;
 
 export function ToastPlayground() {
-    const { show } = useToast();
+    // On récupère 'show' et 'promise' depuis le hook
+    const { show, promise } = useToast();
 
-    // Builder States
     const [toastTitle, setToastTitle] = useState('Custom Message');
     const [toastMessage, setToastMessage] = useState('This is a custom Toast using React!');
     const [toastType, setToastType] = useState<ToastType>('success');
@@ -33,14 +32,12 @@ export function ToastPlayground() {
     const [toastProgressBar, setToastProgressBar] = useState(true);
     const [selectedIconName, setSelectedIconName] = useState<IconName>('faUser');
 
-    // Copy Button States
     const [copiedSetup, setCopiedSetup] = useState(false);
     const [copiedTs, setCopiedTs] = useState(false);
     const [copiedHtml, setCopiedHtml] = useState(false);
 
     const setupCode = `import { ToastProvider } from '@aminekun90/react-toast';
 
-// In your main.tsx or App.tsx
 root.render(
   <ToastProvider>
     <App />
@@ -48,32 +45,39 @@ root.render(
 );`;
 
     const tsCode = useMemo(() => {
-        const titleLine = toastTitle ? `\n      title: '${toastTitle}',` : '';
-        const messageLine = toastMessage ? `\n      message: '${toastMessage}',` : '';
-
         return `import { useToast } from '@aminekun90/react-toast';
 import { ${selectedIconName} } from '@fortawesome/free-solid-svg-icons';
 
 export function MyComponent() {
-  const { show } = useToast();
+  const { show, promise } = useToast();
 
+  // Basic usage
   const handleAction = () => {
     show({
-      type: '${toastType}',${titleLine}${messageLine}
+      type: '${toastType}',
+      message: '${toastMessage}',
       position: '${toastPosition}',
       duration: ${toastDuration},
-      progressBar: ${toastProgressBar},\n\t ${ICON_MAP[selectedIconName]? `icon: ${selectedIconName},` : ''}
+      ${ICON_MAP[selectedIconName] ? `icon: ${selectedIconName},` : ''}
     });
   };
 
-return <>
-    <ToastContainer />
-    <button onClick={handleAction}>Show Toast</button>
-</>;
-}`;
-    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, selectedIconName]);
+  // Promise usage
+  const handlePromise = () => {
+    const myPromise = new Promise((resolve) => setTimeout(() => resolve('Success!'), 2000));
 
-    const htmlCode = `<button onClick={handleAction}>\n  Show Toast\n</button>`;
+    promise(myPromise, {
+      loading: 'Loading data...',
+      success: (data) => \`Data loaded: \${data}\`,
+      error: 'Error while loading',
+    }, { position: '${toastPosition}' });
+  };
+
+  return <button onClick={handlePromise}>Launch Promise</button>;
+}`;
+    }, [toastMessage, toastType, toastPosition, toastDuration, selectedIconName]);
+
+    const htmlCode = `<button onClick={handleAction}>Show Toast</button>`;
 
     const highlightedSetup = useMemo(() => Prism.highlight(setupCode, Prism.languages.typescript, 'typescript'), [setupCode]);
     const highlightedTs = useMemo(() => Prism.highlight(tsCode, Prism.languages.typescript, 'typescript'), [tsCode]);
@@ -88,6 +92,25 @@ return <>
             duration: toastDuration,
             progressBar: toastProgressBar,
             icon: ICON_MAP[selectedIconName]
+        });
+    };
+
+    // Nouvelle fonction pour tester la promise
+    const handlePromiseTest = () => {
+        const myPromise = new Promise<string>((resolve, reject) => {
+            setTimeout(() => {
+                // Simulation aléatoire de succès ou d'erreur
+                Math.random() > 0.3 ? resolve("API Data") : reject(new Error("Server Error"));
+            }, 2000);
+        });
+
+        promise(myPromise, {
+            loading: 'Fetching data...',
+            success: (data: string) => `Loaded: ${data}`,
+            error: (err: Error) => `Failed: ${err.message}`,
+        }, { 
+            position: toastPosition,
+            progressBar: true 
         });
     };
 
@@ -152,13 +175,16 @@ return <>
                             </label>
                         </div>
                     </div>
-                    <button className="btn-launch" onClick={handleTest}>🚀 Try me!</button>
+                    
+                    <div className="actions-group" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
+                        <button className="btn-launch" onClick={handleTest} style={{ flex: 1 }}>🚀 Standard Toast</button>
+                        <button className="btn-launch" onClick={handlePromiseTest} style={{ flex: 1, backgroundColor: '#6366f1' }}>⏳ Test Promise</button>
+                    </div>
                 </div>
 
                 <div className="code-preview-section">
                     <div className="setup-block">
                         <h3>1️⃣ Setup (main.tsx)</h3>
-                        <p className="instruction-text">Wrap your application to enable toast notifications:</p>
                         <div className="code-block-wrapper">
                             <button className={`btn-copy ${copiedSetup ? 'copied' : ''}`} onClick={() => copyToClipboard(setupCode, 'setup')}>
                                 {copiedSetup ? 'Copied! ✅' : 'Copy'}
@@ -171,20 +197,11 @@ return <>
 
                     <div className="usage-block">
                         <h3>2️⃣ Usage (Component)</h3>
-                        <p className="instruction-text">Use the hook to trigger a notification (make sure you have fontawesome installed if you want custom icons):</p>
                         <div className="code-block-wrapper">
                             <button className={`btn-copy ${copiedTs ? 'copied' : ''}`} onClick={() => copyToClipboard(tsCode, 'ts')}>
                                 {copiedTs ? 'Copied! ✅' : 'Copy'}
                             </button>
                             <pre className="language-typescript"><code dangerouslySetInnerHTML={{ __html: highlightedTs }}></code></pre>
-                        </div>
-
-                        <h3>HTML</h3>
-                        <div className="code-block-wrapper">
-                            <button className={`btn-copy ${copiedHtml ? 'copied' : ''}`} onClick={() => copyToClipboard(htmlCode, 'html')}>
-                                {copiedHtml ? 'Copied! ✅' : 'Copy'}
-                            </button>
-                            <pre className="language-markup"><code dangerouslySetInnerHTML={{ __html: highlightedHtml }}></code></pre>
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 export type ToastPosition = "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center" | "bottom-center";
-export type ToastType = "success" | "error" | "warning" | "info";
+export type ToastType = "success" | "error" | "warning" | "info" | "loading";
 
 export interface ToastConfig {
+  id?: number;
   message: string;
   title?: string;
   type?: ToastType;

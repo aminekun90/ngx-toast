@@ -58,14 +58,16 @@
                     </label>
                 </div>
             </div>
-            <button class="btn-launch" (click)="showCustomToast()">🚀 Try me!</button>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button class="btn-launch" style="flex: 1;" (click)="showCustomToast()">🚀 Try me!</button>
+                <button class="btn-launch" style="flex: 1; background-color: #6366f1;" (click)="testPromise()">⏳ Promise</button>
+            </div>
         </div>
 
         <div class="code-preview-section">
-            
             <div class="setup-block">
                 <h3>1️⃣ Setup (app.config.ts)</h3>
-                <p class="instruction-text">Register providers in your application config :</p>
                 <div class="code-block-wrapper">
                     <button class="btn-copy" (click)="copyCode(setupCode(), 'setup')" [class.copied]="copiedSetup()">
                         {{ copiedSetup() ? 'Copied ! ✅' : 'Copy' }}
@@ -78,8 +80,6 @@
 
             <div class="usage-block">
                 <h3>2️⃣ Usage (Component)</h3>
-                <p class="instruction-text">Inject the service and use it in your component (make sure you have fontawesome installed if you want custom icons):</p>
-                
                 <div class="code-block-wrapper">
                     <button class="btn-copy" (click)="copyCode(tsCode(), 'ts')" [class.copied]="copiedTs()">
                         {{ copiedTs() ? 'Copied ! ✅' : 'Copy' }}
@@ -95,7 +95,6 @@
                     <pre class="language-markup"><code [innerHTML]="highlightedHtmlCode()"></code></pre>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

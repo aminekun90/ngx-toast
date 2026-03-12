@@ -7,6 +7,8 @@ interface ToastContextType {
   error: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
   warning: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
   info: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
+  loading: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
+  promise: <T>(promise: Promise<T>, msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: any) => string) }, config?: Partial<ToastConfig>) => Promise<T>;
   toasts: Toast[];
   remove: (id: number) => void;
   version: string;

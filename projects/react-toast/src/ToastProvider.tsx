@@ -17,9 +17,10 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTimeout(() => destroy(id), ANIMATION_DURATION);
   }, [destroy]);
 
-  const show = useCallback((config: ToastConfig) => {
-    const id = idCounter.current++;
+  const show = useCallback((config: ToastConfig ) => {
+    const id = config.id ?? idCounter.current++;
     const duration = config.duration === 0 ? undefined : config.duration || 5000;
+    
     const newToast: Toast = {
       id,
       message: config.message,
@@ -33,14 +34,41 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       toastClass: config.toastClass || "",
       icon: config.icon
     };
-    setToasts((prev) => [...prev, newToast]);
+
+    setToasts((prev) => {
+      const exists = prev.find(t => t.id === id);
+      if (exists) return prev.map(t => t.id === id ? newToast : t);
+      return [...prev, newToast];
+    });
+
     if (duration) setTimeout(() => remove(id), duration);
+    return id;
   }, [remove]);
 
+  const loading = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "loading", duration: 0 });
   const success = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "success" });
   const error = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "error" });
   const warning = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "warning" });
   const info = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "info" });
+
+  const promise = useCallback(<T,>(
+    promise: Promise<T> | (() => Promise<T>),
+    msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: any) => string) },
+    config = {}
+  ) => {
+    const id = loading(msgs.loading, undefined, config);
+    const p = typeof promise === 'function' ? promise() : promise;
+
+    p.then((data) => {
+      const msg = typeof msgs.success === 'function' ? msgs.success(data) : msgs.success;
+      success(msg, undefined, { ...config, id });
+    }).catch((err) => {
+      const msg = typeof msgs.error === 'function' ? msgs.error(err) : msgs.error;
+      error(msg, undefined, { ...config, id });
+    });
+
+    return p;
+  }, [show]);
 
   return (
   <ToastContext.Provider value={useMemo(() => ({
@@ -49,10 +77,12 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     error,
     warning,
     info,
+    loading,
     toasts,
     remove,
-    version
-  }), [show, success, error, warning, info, toasts, remove, version])}>
+    version,
+    promise
+  }), [show, success, error, warning, info, toasts, remove, version, promise, loading])}>
     {children}
   </ToastContext.Provider>
 );

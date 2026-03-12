@@ -4,12 +4,10 @@
 $animation-duration: 500ms;
 
 // -- Colors by toast type --
-$toast-types: (
-    'success': (bg: #e6f7ed, border: #52c41a),
-    'error':   (bg: #fff1f0, border: #f5222d),
+$toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
+    'error': (bg: #fff1f0, border: #f5222d),
     'warning': (bg: #fffbe6, border: #faad14),
-    'info':    (bg: #e6f7ff, border: #1890ff)
-);
+    'info': (bg: #e6f7ff, border: #1890ff));
 
 /* 1. THE CONTAINER (Positions) */
 .toast-container {
@@ -21,7 +19,7 @@ $toast-types: (
     font-family: Arial, Helvetica, sans-serif;
     pointer-events: none; // Allows clicking on elements beneath the container
 
-    & > * {
+    &>* {
         pointer-events: all; // Re-enables clicking on the toast itself
     }
 
@@ -34,10 +32,12 @@ $toast-types: (
         top: 20px;
         right: 20px;
         align-items: flex-end;
+
         // Uses default toast-item animation
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-right $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-right $animation-duration ease-in forwards;
             }
@@ -48,10 +48,11 @@ $toast-types: (
         top: 20px;
         left: 20px;
         align-items: flex-start;
-        
+
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-left $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-left $animation-duration ease-in forwards;
             }
@@ -62,9 +63,11 @@ $toast-types: (
         bottom: 20px;
         right: 20px;
         align-items: flex-end;
+
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-left $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-left $animation-duration ease-in forwards;
             }
@@ -79,6 +82,7 @@ $toast-types: (
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-left $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-left $animation-duration ease-in forwards;
             }
@@ -94,6 +98,7 @@ $toast-types: (
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-down $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-up $animation-duration ease-in forwards;
             }
@@ -109,6 +114,7 @@ $toast-types: (
         .toast-item {
             // CORRECTION : Utilisation du shorthand complet
             animation: fade-in-up $animation-duration ease-out forwards;
+
             &.closing {
                 animation: fade-out-down $animation-duration ease-in forwards;
             }
@@ -137,6 +143,22 @@ $toast-types: (
         margin-right: 12px;
         display: flex;
         align-items: center;
+        justify-content: center;
+
+        // État initial (caché)
+        opacity: 0;
+        transform: scale(0.3) rotate(-25deg);
+
+        // Animation d'entrée par défaut
+        animation: icon-pop 0.45s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+        &.spinning {
+            // Pour le loader, on enlève le délai pour que ça tourne direct
+            // et on combine le pop + le spin
+            animation:
+                icon-pop 0.45s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                spin 1s linear infinite;
+        }
     }
 
     .toast-content {
@@ -171,7 +193,8 @@ $toast-types: (
     }
 
     // Dynamic color generation (Background, border, and progress bar)
-    @each $type, $colors in $toast-types {
+    @each $type,
+    $colors in $toast-types {
         &.toast-#{$type} {
             background: map.get($colors, bg);
             border-left: 5px solid map.get($colors, border);
@@ -208,55 +231,179 @@ $toast-types: (
 
 // Right (In: right -> center | Out: center -> right)
 @keyframes fade-in-right {
-    from { opacity: 0; transform: translateX(100%); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fade-out-right {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(100%); }
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
 }
 
 // Left (In: left -> center | Out: center -> left)
 @keyframes fade-in-left {
-    from { opacity: 0; transform: translateX(-100%); }
-    to { opacity: 1; transform: translateX(0); }
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes fade-out-left {
-    from { opacity: 1; transform: translateX(0); }
-    to { opacity: 0; transform: translateX(-100%); }
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
 }
 
 // Top / Top Center (In: top -> down | Out: down -> top)
 @keyframes fade-in-down {
-    from { opacity: 0; transform: translateY(-100%); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fade-out-up {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(-100%); }
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
 }
 
 // Bottom / Bottom Center (In: bottom -> up | Out: up -> bottom)
 @keyframes fade-in-up {
-    from { opacity: 0; transform: translateY(100%); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fade-out-down {
-    from { opacity: 1; transform: translateY(0); }
-    to { opacity: 0; transform: translateY(100%); }
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100%);
+    }
 }
 
 /* 5. PROGRESS BAR ANIMATIONS */
 @keyframes fill-up {
-    from { width: 0%; }
-    to { width: 100%; }
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
+    }
 }
 
 @keyframes fill-down {
-    from { width: 100%; }
-    to { width: 0%; }
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+@keyframes circle-animation {
+    from {
+        transform: scale(0) rotate(45deg);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1) rotate(45deg);
+        opacity: 1;
+    }
+}
+
+@keyframes checkmarks-animation {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    40% {
+        height: 0;
+        width: 6px;
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+        height: 10px;
+    }
+}
+
+@keyframes icon-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) rotate(-25deg);
+    }
+
+    70% {
+        // Le scale dépasse 1.1 pour l'effet de rebond (elastic)
+        transform: scale(1.15) rotate(5deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

@@ -1,8 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { Component, computed, inject, ViewEncapsulation } from "@angular/core";
+import { ToastPosition, ToastService } from "ngx-toast";
+import { ToastComponent } from "./ngx-toast";
 
 // --- Remplacer par vos imports locaux dans votre projet ---
-import { ToastComponent, ToastPosition, ToastService } from "./ngx-toast";
+
 export * from "./services/Toast.service";
 
 
@@ -20,8 +22,6 @@ export * from "./services/Toast.service";
     }
   `,
   styleUrls: ["./ngx-toast.scss"],
-  // 🔥 LA CORRECTION EST ICI 🔥
-  // Désactive l'encapsulation pour permettre au SCSS d'animer le .toast-item dans <app-toast>
   encapsulation: ViewEncapsulation.None
 })
 export class ToastContainerComponent {

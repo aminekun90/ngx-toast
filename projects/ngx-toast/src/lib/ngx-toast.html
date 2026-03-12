@@ -1,7 +1,7 @@
 <div
   class="toast-item"
-  [ngClass]="[toastClasses(), toast.toastClass]"
-  [class.closing]="toast.closing"
+  [ngClass]="[toastClasses(), toast().toastClass]"
+  [class.closing]="toast().closing"
   (click)="onClose()"
   (onKeyPress)="onKeyPressHandler($event)"
   (onKeyDown)="onKeyDownHandler($event)"
@@ -10,23 +10,33 @@
   (keydown)="onKeyDownHandler($event)"
   (keyup)="onKeyUpHandler($event)"
 >
-  <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
-
-  <div class="toast-content">
-    @if (toast.title) {
-      <div class="toast-title">{{ toast.title }}</div>
+  <div class="toast-icon-wrapper">
+    @if (toast().type === 'loading') {
+      <fa-icon [icon]="icon()" class="toast-icon spinning"></fa-icon>
+    } @else if (toast().type === 'success') {
+      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
+    } @else if (toast().type === 'error') {
+      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
+    } @else {
+      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
     }
-    <div class="toast-message">{{ toast.message }}</div>
   </div>
 
-  <button class="toast-close" (click)="onClose()">&times;</button>
+  <div class="toast-content">
+    @if (toast().title) {
+      <div class="toast-title">{{ toast().title }}</div>
+    }
+    <div class="toast-message">{{ toast().message }}</div>
+  </div>
 
-  @if (toast.progressBar && toast.duration) {
+  <button class="toast-close" (click)="onClose(); $event.stopPropagation()">&times;</button>
+
+  @if (toast().progressBar && toast().duration) {
     <div
       class="toast-progress-bar"
-      [class.increasing]="toast.progressAnimation === 'increasing'"
-      [class.decreasing]="toast.progressAnimation === 'decreasing'"
-      [style.animationDuration]="toast.duration + 'ms'"
+      [class.increasing]="toast().progressAnimation === 'increasing'"
+      [class.decreasing]="toast().progressAnimation === 'decreasing'"
+      [style.animationDuration]="toast().duration + 'ms'"
     ></div>
   }
 </div>

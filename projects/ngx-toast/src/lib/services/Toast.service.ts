@@ -10,19 +10,20 @@ export type ToastPosition =
   | "bottom-left"
   | "top-center"
   | "bottom-center";
-  
-export type ToastType = "success" | "error" | "warning" | "info";
+
+export type ToastType = "success" | "error" | "warning" | "info" | "loading";
 
 export interface ToastConfig {
+  id?: number;
   message: string;
   title?: string;
   type?: ToastType;
   duration?: number; // en ms
   position?: ToastPosition;
-  progressBar?: boolean; 
-  progressAnimation?: "increasing" | "decreasing"; 
+  progressBar?: boolean;
+  progressAnimation?: "increasing" | "decreasing";
   toastClass?: string;
-  icon?: [IconPrefix, IconName] ;
+  icon?: [IconPrefix, IconName];
 }
 
 
@@ -33,11 +34,11 @@ export interface Toast {
   type: ToastType;
   position: ToastPosition;
   duration?: number;
-  closing: boolean; 
-  progressBar: boolean; 
-  progressAnimation: "increasing" | "decreasing"; 
+  closing: boolean;
+  progressBar: boolean;
+  progressAnimation: "increasing" | "decreasing";
   toastClass: string;
-  icon?: [IconPrefix, IconName] ;
+  icon?: [IconPrefix, IconName];
 }
 
 @Injectable({
@@ -55,31 +56,79 @@ export class ToastService {
    * Affiche un nouveau toast.
    */
   show(config: ToastConfig) {
+    const id = config.id ?? this.currentId++;
+    const duration = config.duration === 0 ? undefined : config.duration || 5000;
+    //debugger;
+    // Logique d'icône par défaut si config.icon n'est pas défini
+    let finalIcon = config.icon;
+    if (!finalIcon) {
+      switch (config.type) {
+        case 'success': finalIcon = ['fas', 'check-circle']; break;
+        case 'error': finalIcon = ['fas', 'times-circle']; break;
+        case 'warning': finalIcon = ['fas', 'exclamation-triangle']; break;
+        case 'info': finalIcon = ['fas', 'info-circle']; break;
+        case 'loading': finalIcon = ['fas', 'spinner']; break;
+      }
+    }
+
     const newToast: Toast = {
-      id: this.currentId++,
+      id,
       message: config.message,
       title: config.title,
       type: config.type || "info",
       position: config.position || "bottom-right",
-      duration: config.duration === 0 ? undefined : config.duration || 5000,
+      duration,
       closing: false,
       progressBar: config.progressBar ?? false,
       progressAnimation: config.progressAnimation || "increasing",
       toastClass: config.toastClass || "",
-      icon: config.icon
+      icon: finalIcon // On utilise l'icône calculée
     };
+    console.log('Tentative d\'update pour ID:', id);
+    console.log('Toasts actuels:', this.toasts());
+    this.toasts.update((current) => {
+      const index = current.findIndex(t => t.id === id);
+      if (index !== -1) {
+        const updatedToasts = [...current];
+        // Création d'un NOUVEL objet Toast pour forcer la détection
+        updatedToasts[index] = { ...newToast, closing: false };
+        return updatedToasts;
+      }
+      return [...current, newToast];
+    });
 
-    // Ajoute le toast au signal
-    this.toasts.update((currentToasts) => [...currentToasts, newToast]);
-
-    // Déclenche la fermeture automatique (si une durée est définie)
-    if (newToast.duration) {
-      setTimeout(() => {
-        this.remove(newToast.id);
-      }, newToast.duration);
+    if (duration) {
+      setTimeout(() => this.remove(id), duration);
     }
+    return id;
   }
 
+  loading(message: string, title?: string, config: Partial<ToastConfig> = {}) {
+    const id = this.currentId; // On ne fait pas ++ ici car show() le fera
+    this.show({ ...config, message, title, type: "loading", duration: 0, icon: ["fas", "spinner"] });
+    return id;
+  }
+
+  promise<T>(
+    promise: Promise<T> | (() => Promise<T>),
+    msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: any) => string) },
+    config: Partial<ToastConfig> = {}
+  ) {
+    const id = this.loading(msgs.loading, config.title, config);
+    const p = typeof promise === 'function' ? promise() : promise;
+
+    p.then((data) => {
+      const message = typeof msgs.success === 'function' ? msgs.success(data) : msgs.success;
+      console.log("The config", config);
+      this.success(message, config.title, { ...config, id });
+    }).catch((err) => {
+      console.log("The config", config);
+      const message = typeof msgs.error === 'function' ? msgs.error(err) : msgs.error;
+      this.error(message, undefined, { ...config, id });
+    });
+
+    return p;
+  }
   /**
    * Étape 1 de la fermeture : lance l'animation de sortie
    */

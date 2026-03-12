@@ -14,9 +14,10 @@ const ToastItem: React.FC<{ toast: Toast }> = ({ toast }) => {
             case 'success': return icons.faCheckCircle;
             case 'error': return icons.faTimesCircle;
             case 'warning': return icons.faExclamationTriangle;
+            case 'loading': return icons.faSpinner;
             default: return icons.faInfoCircle;
         }
-    }, [toast.type,toast.icon]);
+    }, [toast.type, toast.icon]);
 
     return (
 
@@ -25,7 +26,11 @@ const ToastItem: React.FC<{ toast: Toast }> = ({ toast }) => {
             className={`toast-item toast-${toast.type} ${toast.closing ? 'closing' : ''} ${toast.toastClass}`}
             onClick={() => remove(toast.id)}
         >
-            <div className="toast-icon">
+            <div
+                // La key changeante force React à détruire et recréer le DOM de l'icône
+                key={`${toast.id}-${toast.type}`}
+                className={`toast-icon ${toast.type === 'loading' ? 'spinning' : ''}`}
+            >
                 <FontAwesomeIcon icon={icon} />
             </div>
 
