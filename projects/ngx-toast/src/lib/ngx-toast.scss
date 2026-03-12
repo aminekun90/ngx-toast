@@ -2,6 +2,7 @@
 
 // -- Configuration --
 $animation-duration: 500ms;
+$animation-out-duration: 250ms;
 
 // -- Colors by toast type --
 $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
@@ -39,7 +40,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-right $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-right $animation-duration ease-in forwards;
+                animation: fade-out-right $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -54,7 +55,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-left $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-left $animation-duration ease-in forwards;
+                animation: fade-out-left $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -69,7 +70,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-left $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-left $animation-duration ease-in forwards;
+                animation: fade-out-left $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -84,7 +85,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-left $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-left $animation-duration ease-in forwards;
+                animation: fade-out-left $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -100,7 +101,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-down $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-up $animation-duration ease-in forwards;
+                animation: fade-out-up $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -116,7 +117,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
             animation: fade-in-up $animation-duration ease-out forwards;
 
             &.closing {
-                animation: fade-out-down $animation-duration ease-in forwards;
+                animation: fade-out-down $animation-out-duration ease-in forwards;
             }
         }
     }
@@ -138,6 +139,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
     max-width: 90vw;
     overflow: hidden;
     opacity: 1;
+
     .toast-icon {
         font-size: 20px;
         margin-right: 12px;
@@ -349,6 +351,7 @@ $toast-types: ('success': (bg: #e6f7ed, border: #52c41a),
         width: 0%;
     }
 }
+
 
 @keyframes circle-animation {
     from {

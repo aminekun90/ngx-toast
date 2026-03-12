@@ -56,6 +56,9 @@ export class ToastService {
    * Affiche un nouveau toast.
    */
   show(config: ToastConfig) {
+    if(this.toasts().length ===0) {
+      this.currentId = 0;
+    }
     const id = config.id ?? this.currentId++;
     const duration = config.duration === 0 ? undefined : config.duration || 5000;
     //debugger;
@@ -84,8 +87,6 @@ export class ToastService {
       toastClass: config.toastClass || "",
       icon: finalIcon // On utilise l'icône calculée
     };
-    console.log('Tentative d\'update pour ID:', id);
-    console.log('Toasts actuels:', this.toasts());
     this.toasts.update((current) => {
       const index = current.findIndex(t => t.id === id);
       if (index !== -1) {
@@ -119,10 +120,8 @@ export class ToastService {
 
     p.then((data) => {
       const message = typeof msgs.success === 'function' ? msgs.success(data) : msgs.success;
-      console.log("The config", config);
       this.success(message, config.title, { ...config, id });
     }).catch((err) => {
-      console.log("The config", config);
       const message = typeof msgs.error === 'function' ? msgs.error(err) : msgs.error;
       this.error(message, undefined, { ...config, id });
     });
