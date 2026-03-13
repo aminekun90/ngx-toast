@@ -2,7 +2,7 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { ToastPosition, ToastService } from 'ngx-toast';
+import { Toast, ToastPosition, ToastService } from 'ngx-toast';
 
 // --- PrismJS Imports ---
 import Prism from 'prismjs';
@@ -28,6 +28,7 @@ export class ToastPlayground {
   toastDuration = signal(3000);
   toastProgressBar = signal(true);
   selectedIcon = signal<IconName | 'none'>('rocket');
+  toastProgressAnimation = signal<Toast['progressAnimation']>('increasing');
 
   // --- COPY STATE ---
   copiedSetup = signal(false);
@@ -106,6 +107,7 @@ export class MyComponent {
       position: this.toastPosition(),
       duration: this.toastDuration(),
       progressBar: this.toastProgressBar(),
+      progressAnimation: this.toastProgressAnimation(),
       icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName]
     });
   }

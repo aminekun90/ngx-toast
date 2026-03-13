@@ -47,9 +47,17 @@
                         <option value="bottom-center">Bottom Center</option>
                     </select>
                 </div>
+               
                 <div class="form-group">
                     <label for="duration">Duration (ms)</label>
                     <input id="duration" type="number" [(ngModel)]="toastDuration" class="form-control" step="1000">
+                </div>
+                 <div class="form-group">
+                    <label for="progressAnimation">Progress Animation</label>
+                    <select id="progressAnimation" [(ngModel)]="toastProgressAnimation" class="form-control">
+                        <option value="increasing">Increasing</option>
+                        <option value="decreasing">Decreasing</option>
+                    </select>
                 </div>
                 <div class="form-group checkbox-group">
                     <label class="checkbox-label">

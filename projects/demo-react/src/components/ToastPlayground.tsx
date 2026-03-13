@@ -1,4 +1,4 @@
-import { ToastPosition, ToastType, useToast } from '@aminekun90/react-toast';
+import { Toast, ToastPosition, ToastType, useToast } from '@aminekun90/react-toast';
 import { faBell, faBomb, faEnvelope, faHeart, faStar, faUser } from '@fortawesome/free-solid-svg-icons';
 import Prism from 'prismjs';
 import 'prismjs/components/prism-clike';
@@ -30,6 +30,7 @@ export function ToastPlayground() {
     const [toastPosition, setToastPosition] = useState<ToastPosition>('top-right');
     const [toastDuration, setToastDuration] = useState(3000);
     const [toastProgressBar, setToastProgressBar] = useState(true);
+    const [toastProgressAnimation, setToastProgressAnimation] = useState<Toast['progressAnimation']>('increasing');
     const [selectedIconName, setSelectedIconName] = useState<IconName>('faUser');
 
     const [copiedSetup, setCopiedSetup] = useState(false);
@@ -58,6 +59,8 @@ export function MyComponent() {
       message: '${toastMessage}',
       position: '${toastPosition}',
       duration: ${toastDuration},
+      progressBar: ${toastProgressBar},
+      progressAnimation: '${toastProgressAnimation}',
       ${ICON_MAP[selectedIconName] ? `icon: ${selectedIconName},` : ''}
     });
   };
@@ -91,6 +94,7 @@ export function MyComponent() {
             position: toastPosition,
             duration: toastDuration,
             progressBar: toastProgressBar,
+            progressAnimation: toastProgressAnimation,
             icon: ICON_MAP[selectedIconName]
         });
     };
@@ -108,9 +112,9 @@ export function MyComponent() {
             loading: 'Fetching data...',
             success: (data: string) => `Loaded: ${data}`,
             error: (err: Error) => `Failed: ${err.message}`,
-        }, { 
+        }, {
             position: toastPosition,
-            progressBar: true 
+            progressBar: true
         });
     };
 
@@ -168,6 +172,13 @@ export function MyComponent() {
                             <label htmlFor="duration">Duration (ms)</label>
                             <input id="duration" type="number" value={toastDuration} onChange={(e) => setToastDuration(Number(e.target.value))} className="form-control" />
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="progressAnimation">Progress Animation</label>
+                            <select id="progressAnimation" value={toastProgressAnimation} onChange={(e) => setToastProgressAnimation(e.target.value as Toast['progressAnimation'])} className="form-control">
+                                <option value="increasing">Increasing</option>
+                                <option value="decreasing">Decreasing</option>
+                            </select>
+                        </div>
                         <div className="form-group checkbox-group">
                             <label className="checkbox-label">
                                 <input type="checkbox" checked={toastProgressBar} onChange={(e) => setToastProgressBar(e.target.checked)} />
@@ -175,7 +186,7 @@ export function MyComponent() {
                             </label>
                         </div>
                     </div>
-                    
+
                     <div className="actions-group" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
                         <button className="btn-launch" onClick={handleTest} style={{ flex: 1 }}>🚀 Standard Toast</button>
                         <button className="btn-launch" onClick={handlePromiseTest} style={{ flex: 1, backgroundColor: '#6366f1' }}>⏳ Test Promise</button>
