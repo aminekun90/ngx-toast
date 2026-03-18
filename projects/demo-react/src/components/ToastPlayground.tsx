@@ -8,6 +8,7 @@ import 'prismjs/components/prism-typescript';
 import { useMemo, useState } from 'react';
 import './ToastPlayground.scss';
 
+// Map icons to names for the select and code generation
 const ICON_MAP = {
     'undefined': undefined,
     'faUser': faUser,
@@ -21,9 +22,9 @@ const ICON_MAP = {
 type IconName = keyof typeof ICON_MAP;
 
 export function ToastPlayground() {
-    // On récupère 'show' et 'promise' depuis le hook
     const { show, promise } = useToast();
 
+    // Builder States
     const [toastTitle, setToastTitle] = useState('Custom Message');
     const [toastMessage, setToastMessage] = useState('This is a custom Toast using React!');
     const [toastType, setToastType] = useState<ToastType>('success');
@@ -33,6 +34,7 @@ export function ToastPlayground() {
     const [toastProgressAnimation, setToastProgressAnimation] = useState<Toast['progressAnimation']>('increasing');
     const [selectedIconName, setSelectedIconName] = useState<IconName>('faUser');
 
+    // Copy Button States
     const [copiedSetup, setCopiedSetup] = useState(false);
     const [copiedTs, setCopiedTs] = useState(false);
     const [copiedHtml, setCopiedHtml] = useState(false);
@@ -46,26 +48,26 @@ root.render(
 );`;
 
     const tsCode = useMemo(() => {
+        const titleLine = toastTitle ? `\n      title: '${toastTitle}',` : '';
+        const iconLine = ICON_MAP[selectedIconName] ? `\n      icon: ${selectedIconName},` : '';
+
         return `import { useToast } from '@aminekun90/react-toast';
 import { ${selectedIconName} } from '@fortawesome/free-solid-svg-icons';
 
 export function MyComponent() {
   const { show, promise } = useToast();
 
-  // Basic usage
   const handleAction = () => {
     show({
-      type: '${toastType}',
+      type: '${toastType}',${titleLine}
       message: '${toastMessage}',
       position: '${toastPosition}',
       duration: ${toastDuration},
       progressBar: ${toastProgressBar},
-      progressAnimation: '${toastProgressAnimation}',
-      ${ICON_MAP[selectedIconName] ? `icon: ${selectedIconName},` : ''}
+      progressAnimation: '${toastProgressAnimation}',${iconLine}
     });
   };
 
-  // Promise usage
   const handlePromise = () => {
     const myPromise = new Promise((resolve) => setTimeout(() => resolve('Success!'), 2000));
 
@@ -76,11 +78,11 @@ export function MyComponent() {
     }, { position: '${toastPosition}' });
   };
 
-  return <button onClick={handlePromise}>Launch Promise</button>;
+  return <button onClick={handleAction}>Show Toast</button>;
 }`;
-    }, [toastMessage, toastType, toastPosition, toastDuration, selectedIconName]);
+    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, toastProgressAnimation, selectedIconName]);
 
-    const htmlCode = `<button onClick={handleAction}>Show Toast</button>`;
+    const htmlCode = `<button onClick={handleAction}>\n  Show Toast\n</button>`;
 
     const highlightedSetup = useMemo(() => Prism.highlight(setupCode, Prism.languages.typescript, 'typescript'), [setupCode]);
     const highlightedTs = useMemo(() => Prism.highlight(tsCode, Prism.languages.typescript, 'typescript'), [tsCode]);
@@ -99,11 +101,9 @@ export function MyComponent() {
         });
     };
 
-    // Nouvelle fonction pour tester la promise
     const handlePromiseTest = () => {
         const myPromise = new Promise<string>((resolve, reject) => {
             setTimeout(() => {
-                // Simulation aléatoire de succès ou d'erreur
                 Math.random() > 0.3 ? resolve("API Data") : reject(new Error("Server Error"));
             }, 2000);
         });
@@ -188,8 +188,8 @@ export function MyComponent() {
                     </div>
 
                     <div className="actions-group" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                        <button className="btn-launch" onClick={handleTest} style={{ flex: 1 }}>🚀 Standard Toast</button>
-                        <button className="btn-launch" onClick={handlePromiseTest} style={{ flex: 1, backgroundColor: '#6366f1' }}>⏳ Test Promise</button>
+                        <button className="btn-launch" onClick={handleTest} style={{ flex: 1 }}>🚀 Try Toast !</button>
+                        <button className="btn-launch" onClick={handlePromiseTest} style={{ flex: 1, backgroundColor: '#6366f1' }}>⏳ Promise Toast !</button>
                     </div>
                 </div>
 
@@ -213,6 +213,14 @@ export function MyComponent() {
                                 {copiedTs ? 'Copied! ✅' : 'Copy'}
                             </button>
                             <pre className="language-typescript"><code dangerouslySetInnerHTML={{ __html: highlightedTs }}></code></pre>
+                        </div>
+
+                        <h3>HTML / JSX</h3>
+                        <div className="code-block-wrapper">
+                            <button className={`btn-copy ${copiedHtml ? 'copied' : ''}`} onClick={() => copyToClipboard(htmlCode, 'html')}>
+                                {copiedHtml ? 'Copied! ✅' : 'Copy'}
+                            </button>
+                            <pre className="language-markup"><code dangerouslySetInnerHTML={{ __html: highlightedHtml }}></code></pre>
                         </div>
                     </div>
                 </div>
