@@ -208,7 +208,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.4"
     jsdom: "npm:^28.1.0"
     react: "npm:^19.2.4"
-    react-dom: "npm:^19.2.4"
+    react-dom: "npm:^19.2.7"
     typescript: "npm:5.9.3"
     vite: "npm:^7.3.1"
     vite-plugin-dts: "npm:^4.5.4"
@@ -3833,7 +3833,7 @@ __metadata:
     "@vitejs/plugin-react": "npm:^5.1.4"
     prismjs: "npm:^1.30.0"
     react: "npm:^19.2.4"
-    react-dom: "npm:^19.2.4"
+    react-dom: "npm:^19.2.7"
     sass-embedded: "npm:^1.98.0"
     typescript: "npm:~5.9.3"
     vite: "npm:^7.3.1"
@@ -6162,14 +6162,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-dom@npm:^19.2.4":
-  version: 19.2.4
-  resolution: "react-dom@npm:19.2.4"
+"react-dom@npm:^19.2.7":
+  version: 19.2.7
+  resolution: "react-dom@npm:19.2.7"
   dependencies:
     scheduler: "npm:^0.27.0"
   peerDependencies:
-    react: ^19.2.4
-  checksum: 10c0/f0c63f1794dedb154136d4d0f59af00b41907f4859571c155940296808f4b94bf9c0c20633db75b5b2112ec13d8d7dd4f9bf57362ed48782f317b11d05a44f35
+    react: ^19.2.7
+  checksum: 10c0/970ff600f6e80d47d39e2f226f12f226173b3cba3382efc97c5f0cd663de9af38c7a4c11c213fb936094faeac83060d660247accaa96b752180d5b951b9cfecb
   languageName: node
   linkType: hard
 
