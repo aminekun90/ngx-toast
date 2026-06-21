@@ -4,8 +4,8 @@
   "author": "aminekun90",
   "funding": "https://github.com/sponsors/aminekun90",
   "peerDependencies": {
-    "@angular/common": "^21.2.0",
-    "@angular/core": "^21.2.0",
+    "@angular/common": "^21.2.0 || ^22.0.0",
+    "@angular/core": "^21.2.0 || ^22.0.0",
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/fontawesome-svg-core": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0"

@@ -220,7 +220,7 @@ theme. Override tokens anywhere, or toggle dark mode with `.ngx-toast-dark`:
 
 | ngx-toast | Angular Version | Node.js Version | Change Detection   |
 |-----------|-----------------|-----------------|--------------------|
-| 1.2.x     | ^21.2.0         | ^22.x \| ^24.x  | Zoneless & Zone.js |
+| 1.2.x     | ^21.2.0 \| ^22  | ^22.x \| ^24.x  | Zoneless & Zone.js |
 | 1.0.x     | ^21.2.0         | ^22.x \| ^24.x  | Zoneless & Zone.js |
 
 This library is built with Angular 21 and above.
