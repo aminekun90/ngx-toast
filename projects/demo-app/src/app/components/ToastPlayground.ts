@@ -30,8 +30,17 @@ export class ToastPlayground {
   selectedIcon = signal<IconName | 'none'>('rocket');
   toastProgressAnimation = signal<Toast['progressAnimation']>('increasing');
   toastTheme = signal<string>('default');
+  colorScheme = signal<'auto' | 'light' | 'dark'>('auto');
 
   readonly themes = ['default', 'material', 'glass', 'minimal', 'neon', 'solid'];
+  readonly schemes = ['auto', 'light', 'dark'] as const;
+
+  setScheme(scheme: 'auto' | 'light' | 'dark') {
+    this.colorScheme.set(scheme);
+    const root = document.documentElement.classList;
+    root.toggle('ngx-toast-dark', scheme === 'dark');
+    root.toggle('ngx-toast-light', scheme === 'light');
+  }
 
   // --- COPY STATE ---
   copiedSetup = signal(false);

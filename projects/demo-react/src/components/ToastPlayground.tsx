@@ -5,7 +5,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/components/prism-markup';
 import 'prismjs/components/prism-typescript';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './ToastPlayground.scss';
 
 // Map icons to names for the select and code generation
@@ -24,6 +24,9 @@ type IconName = keyof typeof ICON_MAP;
 const THEMES = ['default', 'material', 'glass', 'minimal', 'neon', 'solid'] as const;
 type ThemeName = typeof THEMES[number];
 
+const SCHEMES = ['auto', 'light', 'dark'] as const;
+type SchemeName = typeof SCHEMES[number];
+
 export function ToastPlayground() {
     const { show, promise, clear } = useToast();
 
@@ -37,6 +40,13 @@ export function ToastPlayground() {
     const [toastProgressAnimation, setToastProgressAnimation] = useState<Toast['progressAnimation']>('increasing');
     const [selectedIconName, setSelectedIconName] = useState<IconName>('faUser');
     const [toastTheme, setToastTheme] = useState<ThemeName>('default');
+    const [colorScheme, setColorScheme] = useState<SchemeName>('auto');
+
+    useEffect(() => {
+        const root = document.documentElement.classList;
+        root.toggle('ngx-toast-dark', colorScheme === 'dark');
+        root.toggle('ngx-toast-light', colorScheme === 'light');
+    }, [colorScheme]);
 
     // Copy Button States
     const [copiedSetup, setCopiedSetup] = useState(false);
@@ -191,6 +201,14 @@ export function MyComponent() {
                             <select id="theme" value={toastTheme} onChange={(e) => setToastTheme(e.target.value as ThemeName)} className="form-control">
                                 {THEMES.map(theme => (
                                     <option key={theme} value={theme}>{theme}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="scheme">Color scheme</label>
+                            <select id="scheme" value={colorScheme} onChange={(e) => setColorScheme(e.target.value as SchemeName)} className="form-control">
+                                {SCHEMES.map(scheme => (
+                                    <option key={scheme} value={scheme}>{scheme}</option>
                                 ))}
                             </select>
                         </div>
