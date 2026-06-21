@@ -1,16 +1,23 @@
 import { createContext, useContext } from 'react';
-import { Toast, ToastConfig } from './types';
+import { Toast, ToastConfig, ToastPosition } from './types';
 
 interface ToastContextType {
-  show: (config: ToastConfig) => void;
-  success: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
-  error: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
-  warning: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
-  info: (message: string, title?: string, config?: Partial<ToastConfig>) => void;
+  show: (config: ToastConfig) => number;
+  success: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
+  error: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
+  warning: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
+  info: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
   loading: (message: string, title?: string, config?: Partial<ToastConfig>) => number;
-  promise: <T>(promise: Promise<T>, msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: any) => string) }, config?: Partial<ToastConfig>) => Promise<T>;
+  promise: <T>(
+    promise: Promise<T> | (() => Promise<T>),
+    msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: unknown) => string) },
+    config?: Partial<ToastConfig>
+  ) => Promise<T>;
   toasts: Toast[];
   remove: (id: number) => void;
+  clear: (position?: ToastPosition) => void;
+  pause: (id: number) => void;
+  resume: (id: number) => void;
   version: string;
 }
 

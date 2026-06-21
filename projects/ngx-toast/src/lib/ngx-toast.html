@@ -1,25 +1,25 @@
 <div
   class="toast-item"
-  [ngClass]="[toastClasses(), toast().toastClass]"
+  [ngClass]="[toastClasses(), themeClass(), toast().toastClass]"
   [class.closing]="toast().closing"
+  [class.pausable]="toast().pauseOnHover"
+  role="alert"
+  [attr.aria-live]="ariaLive()"
+  aria-atomic="true"
+  tabindex="0"
   (click)="onClose()"
-  (onKeyPress)="onKeyPressHandler($event)"
-  (onKeyDown)="onKeyDownHandler($event)"
-  (onKeyUp)="onKeyUpHandler($event)"
-  (keypress)="onKeyPressHandler($event)"
-  (keydown)="onKeyDownHandler($event)"
-  (keyup)="onKeyUpHandler($event)"
+  (keydown)="onKeydown($event)"
+  (mouseenter)="onMouseEnter()"
+  (mouseleave)="onMouseLeave()"
+  (focusin)="onMouseEnter()"
+  (focusout)="onMouseLeave()"
 >
   <div class="toast-icon-wrapper">
-    @if (toast().type === 'loading') {
-      <fa-icon [icon]="icon()" class="toast-icon spinning"></fa-icon>
-    } @else if (toast().type === 'success') {
-      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
-    } @else if (toast().type === 'error') {
-      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
-    } @else {
-      <fa-icon [icon]="icon()" class="toast-icon"></fa-icon>
-    }
+    <fa-icon
+      [icon]="icon()"
+      class="toast-icon"
+      [class.spinning]="toast().type === 'loading'"
+    ></fa-icon>
   </div>
 
   <div class="toast-content">
@@ -29,7 +29,14 @@
     <div class="toast-message">{{ toast().message }}</div>
   </div>
 
-  <button class="toast-close" (click)="onClose(); $event.stopPropagation()">&times;</button>
+  <button
+    type="button"
+    class="toast-close"
+    aria-label="Close notification"
+    (click)="onClose(); $event.stopPropagation()"
+  >
+    &times;
+  </button>
 
   @if (toast().progressBar && toast().duration) {
     <div

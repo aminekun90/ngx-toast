@@ -1,12 +1,11 @@
 import { CommonModule } from "@angular/common";
 import { Component, computed, inject, ViewEncapsulation } from "@angular/core";
-import { ToastPosition, ToastService } from "ngx-toast";
 import { ToastComponent } from "./ngx-toast";
-
-// --- Remplacer par vos imports locaux dans votre projet ---
+import { Toast, ToastPosition, ToastService } from "./services/Toast.service";
 
 export * from "./services/Toast.service";
-
+export * from "./services/toast.config";
+export * from "./services/toast-icons";
 
 @Component({
   selector: "ngx-toast",
@@ -14,27 +13,25 @@ export * from "./services/Toast.service";
   imports: [CommonModule, ToastComponent],
   template: `
     @for (position of positions(); track position) {
-    <div class="toast-container" [ngClass]="position">
-      @for (toast of toastsByPosition(position); track toast.id) {
-      <app-toast [toast]="toast"></app-toast>
-      }
-    </div>
+      <div class="toast-container" [ngClass]="position">
+        @for (toast of toastsByPosition(position); track toast.id) {
+          <ngx-toast-item [toast]="toast"></ngx-toast-item>
+        }
+      </div>
     }
   `,
   styleUrls: ["./ngx-toast.scss"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class ToastContainerComponent {
   private readonly toastService = inject(ToastService);
-  private readonly allToasts = this.toastService.toasts; // Notre Signal
+  private readonly allToasts = this.toastService.toasts;
 
-  // 1. Trouve toutes les positions uniques actuellement actives
-  positions = computed(() => [
+  readonly positions = computed(() => [
     ...new Set(this.allToasts().map((t) => t.position)),
   ]);
 
-  // 2. Fonction pour filtrer les toasts par position
-  toastsByPosition(position: ToastPosition) {
+  toastsByPosition(position: ToastPosition): Toast[] {
     return this.allToasts().filter((t) => t.position === position);
   }
 }

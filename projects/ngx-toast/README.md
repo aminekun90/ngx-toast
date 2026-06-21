@@ -21,7 +21,12 @@ A lightweight, high-performance, and **Zoneless-ready** toast notification libra
 * 📡 **Signal-based**: Built with Angular Signals for reactive and efficient state management.
 * 🎨 **FontAwesome Integration**: Built-in support for professional iconography.
 * 🛠 **Customizable**: Easy control over duration, progress bars, and screen positions.
-* 📦 **Yarn 4 Ready**: Developed and optimized using modern Yarn Berry.
+* ♿ **Accessible**: `role="alert"`, `aria-live`, keyboard dismissal (Enter/Space/Escape) and focus styles out of the box.
+* ⏸️ **Pause on hover**: Auto-dismiss timer and progress bar pause while the toast is hovered or focused.
+* 🌙 **Theming & dark mode**: Restyle everything through CSS variables; automatic `prefers-color-scheme` support plus an opt-in `.ngx-toast-dark` class.
+* 🧩 **Global defaults**: Configure position, duration, max stack, dedup and more via `provideToast()`.
+* 🔁 **Promise & loading toasts**: First-class `loading()` and `promise()` helpers that swap in place.
+* 🪶 **Zero runtime deps**: No RxJS — purely signal-driven.
 
 ---
 
@@ -113,20 +118,109 @@ export class MyComponent {
 }
 ```
 
-## API Reference
+### 3. Global Defaults (optional)
+
+Set app-wide defaults with `provideToast()`. Any value can still be overridden per call.
+
+```ts
+import { provideToast } from 'ngx-toast';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideToast({
+      position: 'top-right',
+      duration: 4000,
+      pauseOnHover: true,
+      maxToasts: 5,
+      preventDuplicates: true,
+      newestOnTop: true,
+    }),
+  ],
+};
+```
+
+### 4. Loading & Promise toasts
+
+```ts
+const id = this.toastService.loading('Uploading…');
+// later: this.toastService.success('Done!', undefined, { id });
+
+await this.toastService.promise(saveUser(), {
+  loading: 'Saving…',
+  success: (user) => `Saved ${user.name}`,
+  error: (err) => `Failed: ${err}`,
+});
+```
+
+## Service Methods
+
+| Method | Returns | Description |
+|-|-|-|
+| `show(config)` | `number` | Display a toast; returns its id. Reusing an `id` updates that toast in place. |
+| `success/error/warning/info(message, title?, config?)` | `number` | Typed shortcuts. |
+| `loading(message, title?, config?)` | `number` | Persistent loading toast (no auto-dismiss). |
+| `promise(promise, msgs, config?)` | `Promise<T>` | Shows loading, then swaps to success/error in place. |
+| `remove(id)` | `void` | Dismiss a single toast (with exit animation). |
+| `clear(position?)` | `void` | Dismiss all toasts, optionally filtered by position. |
+| `pause(id)` / `resume(id)` | `void` | Manually pause/resume the auto-dismiss timer. |
+
+## Config Reference
 
 | Property | Type | Default | Description |
-| -------- | ---- | ------- | ----------- |
-| type | 'success' \| 'error' \| 'warning' \| 'info' | 'info' | Defines the visual theme and icon of the toast. |
-| title | string | undefined | Optional bold heading displayed above the message. |
-| message | string | "" | The primary text content of the notification. |
-| duration | number | 5000 | Time in milliseconds before auto-close (0 for infinite). |
-| progressBar | boolean | false | If true, displays a visual countdown |
+|-|-|-|-|
+| type | 'success' \| 'error' \| 'warning' \| 'info' \| 'loading' | 'info' | Visual theme and default icon. |
+| title | string | undefined | Optional bold heading above the message. |
+| message | string | — | Primary text content. |
+| duration | number | 5000 | ms before auto-close (`0` = persistent). |
+| position | ToastPosition | 'bottom-right' | One of the six corners/centers. |
+| progressBar | boolean | false | Show a visual countdown bar. |
+| progressAnimation | 'increasing' \| 'decreasing' | 'increasing' | Progress bar fill direction. |
+| icon | [IconPrefix, IconName] | by type | Custom FontAwesome icon. |
+| toastClass | string | '' | Extra CSS class on the toast item. |
+| pauseOnHover | boolean | true | Pause timer/progress on hover/focus. |
+| theme | string | undefined | Built-in theme (`material` \| `glass` \| `minimal` \| `neon` \| `solid`) or a custom one. |
+
+### Global-only options (`provideToast`)
+
+| Property | Default | Description |
+|-|-|-|
+| maxToasts | 0 | Max simultaneous toasts (`0` = unlimited). |
+| preventDuplicates | false | Refresh an identical toast instead of stacking. |
+| newestOnTop | false | Insert new toasts at the top of the stack. |
+
+## Theming
+
+Five built-in themes — `material`, `glass`, `minimal`, `neon`, `solid` — applied
+per toast or globally:
+
+```ts
+this.toastService.success('Saved!', undefined, { theme: 'glass' });
+```
+
+```html
+<!-- or globally on a wrapper -->
+<body class="ngx-toast-theme-material">…</body>
+```
+
+Everything is CSS-variable driven, so you can fully restyle or define your own
+theme. Override tokens anywhere, or toggle dark mode with `.ngx-toast-dark`:
+
+```css
+:root {
+  --ngx-toast-radius: 12px;
+  --ngx-toast-width: 380px;
+  --ngx-toast-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+```
+
+📖 Full reference: [docs/THEMING.md](https://github.com/aminekun90/ngx-toast/blob/main/docs/THEMING.md) ·
+🏗️ [docs/ARCHITECTURE.md](https://github.com/aminekun90/ngx-toast/blob/main/docs/ARCHITECTURE.md)
 
 ## Compatibility
 
 | ngx-toast | Angular Version | Node.js Version | Change Detection   |
 |-----------|-----------------|-----------------|--------------------|
+| 1.2.x     | ^21.2.0         | ^22.x \| ^24.x  | Zoneless & Zone.js |
 | 1.0.x     | ^21.2.0         | ^22.x \| ^24.x  | Zoneless & Zone.js |
 
 This library is built with Angular 21 and above.

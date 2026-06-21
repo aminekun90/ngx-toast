@@ -2,74 +2,93 @@ import * as icons from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useMemo } from 'react';
 import { useToast } from './ToastContext';
-import { Toast } from './types';
+import { Toast, ToastPosition } from './types';
 
-// IMPORTANT: Importe le CSS ici pour qu'il soit inclus dans le build
+// Imported here so the CSS is bundled into the build.
 import './toast.styles.scss';
+
+const POSITIONS: readonly ToastPosition[] = [
+  'top-right', 'top-left', 'bottom-right', 'bottom-left', 'top-center', 'bottom-center',
+];
+
 const ToastItem: React.FC<{ toast: Toast }> = ({ toast }) => {
-    const { remove } = useToast();
-    const icon = useMemo(() => {
-        if (toast.icon) return toast.icon;
-        switch (toast.type) {
-            case 'success': return icons.faCheckCircle;
-            case 'error': return icons.faTimesCircle;
-            case 'warning': return icons.faExclamationTriangle;
-            case 'loading': return icons.faSpinner;
-            default: return icons.faInfoCircle;
-        }
-    }, [toast.type, toast.icon]);
+  const { remove, pause, resume } = useToast();
 
-    return (
+  const icon = useMemo(() => {
+    if (toast.icon) return toast.icon;
+    switch (toast.type) {
+      case 'success': return icons.faCheckCircle;
+      case 'error': return icons.faTimesCircle;
+      case 'warning': return icons.faExclamationTriangle;
+      case 'loading': return icons.faSpinner;
+      default: return icons.faInfoCircle;
+    }
+  }, [toast.type, toast.icon]);
 
-        <div // NOSONAR : annoying warning from sonarqube
-            key={toast.id}
-            className={`toast-item toast-${toast.type} ${toast.closing ? 'closing' : ''} ${toast.toastClass}`}
-            onClick={() => remove(toast.id)}
-        >
-            <div
-                // La key changeante force React à détruire et recréer le DOM de l'icône
-                key={`${toast.id}-${toast.type}`}
-                className={`toast-icon ${toast.type === 'loading' ? 'spinning' : ''}`}
-            >
-                <FontAwesomeIcon icon={icon} />
-            </div>
+  const onMouseEnter = () => { if (toast.pauseOnHover) pause(toast.id); };
+  const onMouseLeave = () => { if (toast.pauseOnHover) resume(toast.id); };
 
-            <div className="toast-content">
-                {toast.title && <div className="toast-title">{toast.title}</div>}
-                <div className="toast-message">{toast.message}</div>
-            </div>
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+      e.preventDefault();
+      remove(toast.id);
+    }
+  };
 
-            <button className="toast-close" onClick={(e) => {
-                e.stopPropagation();
-                remove(toast.id);
-            }}>
-                &times;
-            </button>
+  return (
+    <div
+      role="alert"
+      aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
+      aria-atomic="true"
+      tabIndex={0}
+      className={`toast-item toast-${toast.type} ${toast.closing ? 'closing' : ''} ${toast.pauseOnHover ? 'pausable' : ''} ${toast.theme ? `ngx-toast-theme-${toast.theme}` : ''} ${toast.toastClass}`}
+      onClick={() => remove(toast.id)}
+      onKeyDown={onKeyDown}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onFocus={onMouseEnter}
+      onBlur={onMouseLeave}
+    >
+      <div className={`toast-icon ${toast.type === 'loading' ? 'spinning' : ''}`}>
+        <FontAwesomeIcon icon={icon} />
+      </div>
 
-            {toast.progressBar && toast.duration && (
-                <div
-                    className={`toast-progress-bar ${toast.progressAnimation}`}
-                    style={{ animationDuration: `${toast.duration}ms` }}
-                ></div>
-            )}
-        </div>
-    );
+      <div className="toast-content">
+        {toast.title && <div className="toast-title">{toast.title}</div>}
+        <div className="toast-message">{toast.message}</div>
+      </div>
+
+      <button
+        type="button"
+        className="toast-close"
+        aria-label="Close notification"
+        onClick={(e) => { e.stopPropagation(); remove(toast.id); }}
+      >
+        &times;
+      </button>
+
+      {toast.progressBar && toast.duration && (
+        <div
+          className={`toast-progress-bar ${toast.progressAnimation}`}
+          style={{ animationDuration: `${toast.duration}ms` }}
+        ></div>
+      )}
+    </div>
+  );
 };
 
 export const ToastContainer: React.FC = () => {
-    const { toasts } = useToast();
-    const positions = ["top-right", "top-left", "bottom-right", "bottom-left", "top-center", "bottom-center"] as const;
+  const { toasts } = useToast();
 
-    return (
-        <>
-            {positions.map(pos => (
-                <div key={pos} className={`toast-container ${pos}`}>
-                    {toasts
-                        .filter(t => t.position === pos)
-                        .map(t => <ToastItem key={t.id} toast={t} />)
-                    }
-                </div>
-            ))}
-        </>
-    );
+  return (
+    <>
+      {POSITIONS.map((pos) => (
+        <div key={pos} className={`toast-container ${pos}`}>
+          {toasts.filter((t) => t.position === pos).map((t) => (
+            <ToastItem key={t.id} toast={t} />
+          ))}
+        </div>
+      ))}
+    </>
+  );
 };

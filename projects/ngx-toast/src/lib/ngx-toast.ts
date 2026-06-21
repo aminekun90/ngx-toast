@@ -1,55 +1,56 @@
 import { CommonModule } from "@angular/common";
-import { Component, computed, inject, input } from "@angular/core"; // 1. Utilise 'input'
+import { Component, computed, inject, input } from "@angular/core";
 import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import { IconName, IconPrefix } from "@fortawesome/fontawesome-svg-core";
 import { Toast, ToastService } from "./services/Toast.service";
+import { defaultIconFor } from "./services/toast-icons";
 
 @Component({
-  selector: "app-toast",
+  selector: "ngx-toast-item",
   standalone: true,
   imports: [CommonModule, FaIconComponent],
   templateUrl: "./ngx-toast.html",
   styleUrls: ["./ngx-toast.scss"],
 })
 export class ToastComponent {
-  // 2. Déclare l'input comme un signal. 
-  // Cela permet aux 'computed' de réagir aux changements de l'objet toast.
-  toast = input.required<Toast>();
-  
+  readonly toast = input.required<Toast>();
+
   private readonly toastService: ToastService = inject(ToastService);
 
-  // 3. Accède à la valeur du signal avec des parenthèses : this.toast()
-  toastClasses = computed(() => {
-    return `toast-${this.toast().type}`;
-  });
+  readonly toastClasses = computed(() => `toast-${this.toast().type}`);
 
-  icon = computed((): [IconPrefix, IconName] => {
-    const currentToast = this.toast();
+  readonly themeClass = computed(() =>
+    this.toast().theme ? `ngx-toast-theme-${this.toast().theme}` : "",
+  );
 
-    if (currentToast.icon) {
-      return currentToast.icon;
-    }
-    
-    switch (currentToast.type) {
-      case "loading":
-        return ["fas", "spinner"];
-      case "success":
-        return ["fas", "check-circle"];
-      case "error":
-        return ["fas", "times-circle"];
-      case "warning":
-        return ["fas", "exclamation-triangle"];
-      case "info":
-      default:
-        return ["fas", "info-circle"];
-    }
-  });
+  readonly icon = computed(
+    (): [IconPrefix, IconName] => this.toast().icon ?? defaultIconFor(this.toast().type),
+  );
 
-  onClose() {
+  readonly ariaLive = computed(() =>
+    this.toast().type === "error" ? "assertive" : "polite",
+  );
+
+  onClose(): void {
     this.toastService.remove(this.toast().id);
   }
 
-  onKeyPressHandler(_event: Event) { this.onClose(); }
-  onKeyDownHandler(_event: Event) { this.onClose(); }
-  onKeyUpHandler(_event: Event) { this.onClose(); }
+  onKeydown(event: KeyboardEvent): void {
+    if (event.key === "Enter" || event.key === " " || event.key === "Escape") {
+      event.preventDefault();
+      this.onClose();
+    }
+  }
+
+  onMouseEnter(): void {
+    if (this.toast().pauseOnHover) {
+      this.toastService.pause(this.toast().id);
+    }
+  }
+
+  onMouseLeave(): void {
+    if (this.toast().pauseOnHover) {
+      this.toastService.resume(this.toast().id);
+    }
+  }
 }

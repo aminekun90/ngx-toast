@@ -1,0 +1,366 @@
+@use "sass:map";
+
+// ============================================================================
+//  Shared toast stylesheet — single source of truth for both
+//  @aminekun90/ngx-toast (Angular) and @aminekun90/react-toast (React).
+//
+//  Everything is driven by CSS custom properties, so the toasts are fully
+//  customizable: override any `--ngx-toast-*` variable globally (on :root) or
+//  per-scope, or apply a built-in theme class (see "THEMES" at the bottom):
+//    .ngx-toast-theme-material | -glass | -minimal | -neon | -solid
+//  A theme can be applied per toast (via the `theme` option) or to a wrapper.
+// ============================================================================
+
+// Entrance feel: vertical slide + scale bounce.
+// Keep $animation-out-duration in sync with EXIT_ANIMATION_DURATION (engine.ts).
+$animation-duration: 350ms;
+$animation-out-duration: 400ms;
+
+$ease-in: cubic-bezier(0.21, 1.02, 0.73, 1);
+$ease-out: cubic-bezier(0.06, 0.71, 0.55, 1);
+
+// Per-type accent palette used to seed the internal CSS variables.
+$toast-types: (
+  "success": (accent: #52c41a, bg: #e6f7ed, fg: #135200),
+  "error":   (accent: #f5222d, bg: #fff1f0, fg: #5c0011),
+  "warning": (accent: #faad14, bg: #fffbe6, fg: #614700),
+  "info":    (accent: #1890ff, bg: #e6f7ff, fg: #003a8c),
+  "loading": (accent: #8c8c8c, bg: #f5f5f5, fg: #262626),
+);
+
+/* ----------------------------------------------------------------------------
+   THEME TOKENS — override these to restyle every toast.
+---------------------------------------------------------------------------- */
+:root {
+  --ngx-toast-radius: 8px;
+  --ngx-toast-width: 350px;
+  --ngx-toast-gap: 10px;
+  --ngx-toast-offset: 20px;
+  --ngx-toast-padding: 12px 16px;
+  --ngx-toast-z-index: 9999;
+  --ngx-toast-border-width: 5px;
+  --ngx-toast-icon-size: 20px;
+  --ngx-toast-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+  --ngx-toast-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --ngx-toast-close: #8c8c8c;
+  --ngx-toast-close-hover: #1f1f1f;
+  --ngx-toast-progress-track: rgba(0, 0, 0, 0.1);
+  --ngx-toast-backdrop: none;
+  // --ngx-toast-bg / --ngx-toast-accent / --ngx-toast-fg are derived per type
+  // below and may be overridden by a theme or by the consumer.
+}
+
+/* 1. CONTAINER (positions) */
+.toast-container {
+  position: fixed;
+  z-index: var(--ngx-toast-z-index);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ngx-toast-gap);
+  font-family: var(--ngx-toast-font);
+  pointer-events: none;
+
+  & > * { pointer-events: all; }
+  ngx-toast-item { display: block; }
+
+  &.top-right    { top: var(--ngx-toast-offset);    right: var(--ngx-toast-offset); align-items: flex-end; }
+  &.bottom-right { bottom: var(--ngx-toast-offset); right: var(--ngx-toast-offset); align-items: flex-end; }
+  &.top-left     { top: var(--ngx-toast-offset);    left: var(--ngx-toast-offset);  align-items: flex-start; }
+  &.bottom-left  { bottom: var(--ngx-toast-offset); left: var(--ngx-toast-offset);  align-items: flex-start; }
+
+  &.top-center {
+    top: var(--ngx-toast-offset);
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+
+  &.bottom-center {
+    bottom: var(--ngx-toast-offset);
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+
+  // All top positions slide down from above; all bottom positions slide up.
+  &.top-right .toast-item,
+  &.top-left .toast-item,
+  &.top-center .toast-item {
+    animation: hot-enter-top $animation-duration $ease-in forwards;
+    &.closing { animation: hot-exit-top $animation-out-duration $ease-out forwards; }
+  }
+  &.bottom-right .toast-item,
+  &.bottom-left .toast-item,
+  &.bottom-center .toast-item {
+    animation: hot-enter-bottom $animation-duration $ease-in forwards;
+    &.closing { animation: hot-exit-bottom $animation-out-duration $ease-out forwards; }
+  }
+}
+
+/* 2. TOAST ITEM */
+.toast-item {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  min-height: 60px;
+  align-items: center;
+  padding: var(--ngx-toast-padding);
+  border-radius: var(--ngx-toast-radius);
+  background: var(--ngx-toast-bg, #fff);
+  color: var(--ngx-toast-fg, #1f1f1f);
+  box-shadow: var(--ngx-toast-shadow);
+  width: var(--ngx-toast-width);
+  max-width: 90vw;
+  overflow: hidden;
+  opacity: 1;
+  will-change: transform, opacity;
+  backdrop-filter: var(--ngx-toast-backdrop);
+  -webkit-backdrop-filter: var(--ngx-toast-backdrop);
+
+  // Seed per-type colors into the public, overridable variables.
+  @each $type, $colors in $toast-types {
+    &.toast-#{$type} {
+      --ngx-toast-accent: var(--ngx-toast-#{$type}-accent, #{map.get($colors, accent)});
+      --ngx-toast-bg: var(--ngx-toast-#{$type}-bg, #{map.get($colors, bg)});
+      --ngx-toast-fg: var(--ngx-toast-#{$type}-fg, #{map.get($colors, fg)});
+    }
+  }
+
+  border-left: var(--ngx-toast-border-width) solid var(--ngx-toast-accent);
+
+  &:focus-visible {
+    outline: 2px solid var(--ngx-toast-accent);
+    outline-offset: 2px;
+  }
+
+  .toast-icon {
+    font-size: var(--ngx-toast-icon-size);
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ngx-toast-accent);
+    opacity: 0;
+    transform: scale(0.3) rotate(-25deg);
+    animation: icon-pop 0.45s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+    &.spinning {
+      animation:
+        icon-pop 0.45s 0.1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+        spin 1s linear infinite;
+    }
+  }
+
+  .toast-content { flex-grow: 1; text-align: left; min-width: 0; }
+  .toast-title { font-weight: 700; margin-bottom: 4px; font-size: 15px; }
+  .toast-message { font-size: 14px; overflow-wrap: anywhere; }
+
+  .toast-close {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: var(--ngx-toast-close);
+    cursor: pointer;
+    margin-left: 12px;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s;
+    &:hover { color: var(--ngx-toast-close-hover); }
+  }
+
+  &.pausable:hover .toast-progress-bar,
+  &.pausable:focus-within .toast-progress-bar {
+    animation-play-state: paused;
+  }
+
+  /* 3. PROGRESS BAR */
+  .toast-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    background: var(--ngx-toast-progress-track);
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--ngx-toast-accent);
+    }
+    &.decreasing::after { right: 0; left: auto; }
+
+    &.increasing { animation-name: fill-up; }
+    &.decreasing { animation-name: fill-down; }
+  }
+}
+
+/* 4. COLOR SCHEME
+   - Auto dark via `prefers-color-scheme` (opt out with `.ngx-toast-light` on :root).
+   - Force dark anywhere with `.ngx-toast-dark`.
+   - Force light anywhere with `.ngx-toast-light` (overrides auto + `.ngx-toast-dark`). */
+@mixin toast-dark {
+  --ngx-toast-close: #bfbfbf;
+  --ngx-toast-close-hover: #fff;
+  --ngx-toast-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --ngx-toast-progress-track: rgba(255, 255, 255, 0.15);
+
+  .toast-item {
+    @each $type, $colors in $toast-types {
+      &.toast-#{$type} {
+        --ngx-toast-bg: #262626;
+        --ngx-toast-fg: #f0f0f0;
+      }
+    }
+  }
+}
+
+@mixin toast-light {
+  --ngx-toast-close: #8c8c8c;
+  --ngx-toast-close-hover: #1f1f1f;
+  --ngx-toast-shadow: 0 3px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.05);
+  --ngx-toast-progress-track: rgba(0, 0, 0, 0.1);
+
+  .toast-item {
+    @each $type, $colors in $toast-types {
+      &.toast-#{$type} {
+        --ngx-toast-bg: var(--ngx-toast-#{$type}-bg, #{map.get($colors, bg)});
+        --ngx-toast-fg: var(--ngx-toast-#{$type}-fg, #{map.get($colors, fg)});
+      }
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.ngx-toast-light) { @include toast-dark; }
+}
+
+// Force dark; `.ngx-toast-light` is declared last so it always wins a toggle.
+.ngx-toast-dark { @include toast-dark; }
+.ngx-toast-light { @include toast-light; }
+
+/* 5. REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+  .toast-item,
+  .toast-item .toast-icon,
+  .toast-item.closing {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  .toast-item .toast-icon.spinning { animation: spin 1s linear infinite !important; }
+}
+
+/* ============================================================================
+   THEMES — apply to a wrapper element or to a single toast (the `theme` option
+   adds `ngx-toast-theme-<name>` to that toast item).
+   ============================================================================ */
+@mixin theme-vars($vars) {
+  @each $name, $value in $vars { #{$name}: #{$value}; }
+}
+
+// Helper: apply a theme block both when the class is on a wrapper and on the item.
+@mixin theme($name) {
+  .ngx-toast-theme-#{$name} .toast-item,
+  .toast-item.ngx-toast-theme-#{$name} { @content; }
+}
+
+/* Material — bold, elevated, rounded, white surface with colored bar */
+@include theme("material") {
+  --ngx-toast-radius: 4px;
+  --ngx-toast-border-width: 0px;
+  --ngx-toast-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14);
+  --ngx-toast-bg: #fff;
+  --ngx-toast-fg: #212121;
+  font-weight: 500;
+  border-bottom: 3px solid var(--ngx-toast-accent);
+}
+
+/* Glass — frosted glassmorphism */
+@include theme("glass") {
+  --ngx-toast-radius: 16px;
+  --ngx-toast-border-width: 0px;
+  --ngx-toast-bg: rgba(255, 255, 255, 0.55);
+  --ngx-toast-fg: #1a1a1a;
+  --ngx-toast-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --ngx-toast-backdrop: blur(12px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.ngx-toast-light) {
+    @include theme("glass") {
+      --ngx-toast-bg: rgba(30, 30, 30, 0.5);
+      --ngx-toast-fg: #f0f0f0;
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+/* Minimal — flat, borderless, subtle */
+@include theme("minimal") {
+  --ngx-toast-radius: 6px;
+  --ngx-toast-border-width: 0px;
+  --ngx-toast-bg: #fff;
+  --ngx-toast-fg: #333;
+  --ngx-toast-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  --ngx-toast-padding: 10px 14px;
+  min-height: 44px;
+}
+
+/* Neon — dark surface, glowing accent */
+@include theme("neon") {
+  --ngx-toast-radius: 10px;
+  --ngx-toast-border-width: 1px;
+  --ngx-toast-bg: #0d0f1a;
+  --ngx-toast-fg: #e8e8ff;
+  --ngx-toast-close: #9aa;
+  --ngx-toast-close-hover: #fff;
+  --ngx-toast-progress-track: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--ngx-toast-accent);
+  box-shadow: 0 0 0 1px var(--ngx-toast-accent),
+    0 0 18px -2px var(--ngx-toast-accent);
+  .toast-icon { filter: drop-shadow(0 0 6px var(--ngx-toast-accent)); }
+}
+
+/* Solid — accent-colored background, white text */
+@include theme("solid") {
+  --ngx-toast-radius: 8px;
+  --ngx-toast-border-width: 0px;
+  --ngx-toast-bg: var(--ngx-toast-accent);
+  --ngx-toast-fg: #fff;
+  --ngx-toast-close: rgba(255, 255, 255, 0.8);
+  --ngx-toast-close-hover: #fff;
+  --ngx-toast-progress-track: rgba(255, 255, 255, 0.25);
+  .toast-icon { color: #fff; }
+  .toast-progress-bar::after { background: rgba(255, 255, 255, 0.9); }
+}
+
+/* 6. KEYFRAMES — vertical slide + scale .6 bounce */
+@keyframes hot-enter-top {
+  0%   { transform: translate3d(0, -200%, 0) scale(0.6); opacity: 0.5; }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+}
+@keyframes hot-exit-top {
+  0%   { transform: translate3d(0, 0, -1px) scale(1); opacity: 1; }
+  100% { transform: translate3d(0, -150%, -1px) scale(0.6); opacity: 0; }
+}
+@keyframes hot-enter-bottom {
+  0%   { transform: translate3d(0, 200%, 0) scale(0.6); opacity: 0.5; }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+}
+@keyframes hot-exit-bottom {
+  0%   { transform: translate3d(0, 0, -1px) scale(1); opacity: 1; }
+  100% { transform: translate3d(0, 150%, -1px) scale(0.6); opacity: 0; }
+}
+
+@keyframes fill-up   { from { width: 0%; }   to { width: 100%; } }
+@keyframes fill-down { from { width: 100%; } to { width: 0%; } }
+
+@keyframes icon-pop {
+  0%   { opacity: 0; transform: scale(0.3) rotate(-25deg); }
+  70%  { transform: scale(1.15) rotate(5deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
