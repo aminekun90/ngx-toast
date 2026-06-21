@@ -21,8 +21,11 @@ const ICON_MAP = {
 
 type IconName = keyof typeof ICON_MAP;
 
+const THEMES = ['default', 'material', 'glass', 'minimal', 'neon', 'solid'] as const;
+type ThemeName = typeof THEMES[number];
+
 export function ToastPlayground() {
-    const { show, promise } = useToast();
+    const { show, promise, clear } = useToast();
 
     // Builder States
     const [toastTitle, setToastTitle] = useState('Custom Message');
@@ -33,6 +36,7 @@ export function ToastPlayground() {
     const [toastProgressBar, setToastProgressBar] = useState(true);
     const [toastProgressAnimation, setToastProgressAnimation] = useState<Toast['progressAnimation']>('increasing');
     const [selectedIconName, setSelectedIconName] = useState<IconName>('faUser');
+    const [toastTheme, setToastTheme] = useState<ThemeName>('default');
 
     // Copy Button States
     const [copiedSetup, setCopiedSetup] = useState(false);
@@ -50,6 +54,7 @@ root.render(
     const tsCode = useMemo(() => {
         const titleLine = toastTitle ? `\n      title: '${toastTitle}',` : '';
         const iconLine = ICON_MAP[selectedIconName] ? `\n      icon: ${selectedIconName},` : '';
+        const themeLine = toastTheme !== 'default' ? `\n      theme: '${toastTheme}',` : '';
 
         return `import { useToast } from '@aminekun90/react-toast';
 import { ${selectedIconName} } from '@fortawesome/free-solid-svg-icons';
@@ -64,7 +69,7 @@ export function MyComponent() {
       position: '${toastPosition}',
       duration: ${toastDuration},
       progressBar: ${toastProgressBar},
-      progressAnimation: '${toastProgressAnimation}',${iconLine}
+      progressAnimation: '${toastProgressAnimation}',${iconLine}${themeLine}
     });
   };
 
@@ -80,7 +85,7 @@ export function MyComponent() {
 
   return <button onClick={handleAction}>Show Toast</button>;
 }`;
-    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, toastProgressAnimation, selectedIconName]);
+    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, toastProgressAnimation, selectedIconName, toastTheme]);
 
     const htmlCode = `<button onClick={handleAction}>\n  Show Toast\n</button>`;
 
@@ -97,6 +102,7 @@ export function MyComponent() {
             duration: toastDuration,
             progressBar: toastProgressBar,
             progressAnimation: toastProgressAnimation,
+            theme: toastTheme === 'default' ? undefined : toastTheme,
             icon: ICON_MAP[selectedIconName]
         });
     };
@@ -111,10 +117,11 @@ export function MyComponent() {
         promise(myPromise, {
             loading: 'Fetching data...',
             success: (data: string) => `Loaded: ${data}`,
-            error: (err: Error) => `Failed: ${err.message}`,
+            error: (err: unknown) => `Failed: ${(err as Error).message}`,
         }, {
             position: toastPosition,
-            progressBar: true
+            progressBar: true,
+            theme: toastTheme === 'default' ? undefined : toastTheme
         });
     };
 
@@ -179,6 +186,14 @@ export function MyComponent() {
                                 <option value="decreasing">Decreasing</option>
                             </select>
                         </div>
+                        <div className="form-group">
+                            <label htmlFor="theme">Theme</label>
+                            <select id="theme" value={toastTheme} onChange={(e) => setToastTheme(e.target.value as ThemeName)} className="form-control">
+                                {THEMES.map(theme => (
+                                    <option key={theme} value={theme}>{theme}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="form-group checkbox-group">
                             <label className="checkbox-label">
                                 <input type="checkbox" checked={toastProgressBar} onChange={(e) => setToastProgressBar(e.target.checked)} />
@@ -187,9 +202,10 @@ export function MyComponent() {
                         </div>
                     </div>
 
-                    <div className="actions-group" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-                        <button className="btn-launch" onClick={handleTest} style={{ flex: 1 }}>🚀 Try Toast !</button>
-                        <button className="btn-launch" onClick={handlePromiseTest} style={{ flex: 1, backgroundColor: '#6366f1' }}>⏳ Promise Toast !</button>
+                    <div className="actions-group">
+                        <button className="btn-launch" onClick={handleTest}>🚀 Try Toast !</button>
+                        <button className="btn-launch btn-promise" onClick={handlePromiseTest}>⏳ Promise Toast !</button>
+                        <button className="btn-launch btn-clear" onClick={() => clear()}>🧹 Clear all</button>
                     </div>
                 </div>
 

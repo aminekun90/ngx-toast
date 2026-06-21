@@ -29,6 +29,9 @@ export class ToastPlayground {
   toastProgressBar = signal(true);
   selectedIcon = signal<IconName | 'none'>('rocket');
   toastProgressAnimation = signal<Toast['progressAnimation']>('increasing');
+  toastTheme = signal<string>('default');
+
+  readonly themes = ['default', 'material', 'glass', 'minimal', 'neon', 'solid'];
 
   // --- COPY STATE ---
   copiedSetup = signal(false);
@@ -52,9 +55,12 @@ export const appConfig: ApplicationConfig = {
   // --- 2. USAGE CODE (component.ts) ---
   tsCode = computed(() => {
     const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
-    const iconLine = this.selectedIcon() === 'none' 
-      ? '' 
+    const iconLine = this.selectedIcon() === 'none'
+      ? ''
       : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
+    const themeLine = this.toastTheme() === 'default'
+      ? ''
+      : `\n      theme: '${this.toastTheme()}',`;
 
     return `import { Component, inject } from '@angular/core';
 import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
@@ -71,7 +77,17 @@ import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
 export class MyComponent {
   private readonly toastService = inject(ToastService);
 
-  // Example using Promise
+  show() {
+    this.toastService.show({
+      type: '${this.toastType()}',${title}
+      message: '${this.toastMessage()}',
+      position: '${this.toastPosition()}',
+      duration: ${this.toastDuration()},
+      progressBar: ${this.toastProgressBar()},${iconLine}${themeLine}
+    });
+  }
+
+  // Example using a Promise (loading → success/error, swapped in place)
   load() {
     const myPromise = new Promise((resolve) => setTimeout(() => resolve('Done!'), 2000));
 
@@ -108,8 +124,13 @@ export class MyComponent {
       duration: this.toastDuration(),
       progressBar: this.toastProgressBar(),
       progressAnimation: this.toastProgressAnimation(),
+      theme: this.toastTheme() === 'default' ? undefined : this.toastTheme(),
       icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName]
     });
+  }
+
+  clearAll() {
+    this.toastService.clear();
   }
 
   testPromise() {
@@ -121,13 +142,14 @@ export class MyComponent {
 
     this.toastService.promise(myPromise, {
       loading: 'Loading from server...',
-      success: (data:string) => `Loaded: ${data}`,
-      error: (err:Error) => `Error: ${err.message}`
-    }, { 
+      success: (data: string) => `Loaded: ${data}`,
+      error: (err: unknown) => `Error: ${(err as Error).message}`
+    }, {
       duration: this.toastDuration(),
       icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName],
       position: this.toastPosition(),
       progressBar: this.toastProgressBar(),
+      theme: this.toastTheme() === 'default' ? undefined : this.toastTheme(),
       title: this.toastTitle(),
       message: this.toastMessage(),
       type: this.toastType(),
