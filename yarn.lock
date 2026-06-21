@@ -179,13 +179,13 @@ __metadata:
   dependencies:
     "@angular/common": "npm:^21.2.2"
     "@angular/core": "npm:^21.2.2"
-    "@fortawesome/angular-fontawesome": "npm:^4.0.0"
+    "@fortawesome/angular-fontawesome": "npm:^5.0.0"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
   peerDependencies:
     "@angular/common": ^21.2.0 || ^22.0.0
     "@angular/core": ^21.2.0 || ^22.0.0
-    "@fortawesome/angular-fontawesome": ^4.0.0
+    "@fortawesome/angular-fontawesome": ^5.0.0
     "@fortawesome/fontawesome-svg-core": ^7.0.0
     "@fortawesome/free-solid-svg-icons": ^7.0.0
   languageName: unknown
@@ -197,7 +197,7 @@ __metadata:
   dependencies:
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
-    "@fortawesome/react-fontawesome": "npm:^3.2.0"
+    "@fortawesome/react-fontawesome": "npm:^3.3.1"
     "@testing-library/dom": "npm:^10.4.1"
     "@testing-library/jest-dom": "npm:^6.9.1"
     "@testing-library/react": "npm:^16.3.2"
@@ -1146,15 +1146,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/angular-fontawesome@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "@fortawesome/angular-fontawesome@npm:4.0.0"
+"@fortawesome/angular-fontawesome@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "@fortawesome/angular-fontawesome@npm:5.0.0"
   dependencies:
-    "@fortawesome/fontawesome-svg-core": "npm:^7.1.0"
+    "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     tslib: "npm:^2.8.1"
   peerDependencies:
-    "@angular/core": ^21.0.0
-  checksum: 10c0/e603ec0b1160215be1293d7cf4cb5fdbeb4feba4c886cb048a3bb1a305341062d39805fe4379c535d036fa0ad2684560557d8ed6f59a589e3e015bdc3dda1a99
+    "@angular/core": ^22.0.0
+  checksum: 10c0/f969a479addad5664d72c13051c4f23c82cb1271002c586b22fce6bf665b311cf90167cb1a0daa9332595c771a10908f22a9dd0a48005dab7a6c6df67765a3b0
   languageName: node
   linkType: hard
 
@@ -1165,7 +1165,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/fontawesome-svg-core@npm:^7.1.0, @fortawesome/fontawesome-svg-core@npm:^7.2.0":
+"@fortawesome/fontawesome-svg-core@npm:^7.2.0":
   version: 7.2.0
   resolution: "@fortawesome/fontawesome-svg-core@npm:7.2.0"
   dependencies:
@@ -1183,13 +1183,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@fortawesome/react-fontawesome@npm:^3.2.0":
-  version: 3.2.0
-  resolution: "@fortawesome/react-fontawesome@npm:3.2.0"
+"@fortawesome/react-fontawesome@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "@fortawesome/react-fontawesome@npm:3.3.1"
   peerDependencies:
     "@fortawesome/fontawesome-svg-core": ~6 || ~7
     react: ^18.0.0 || ^19.0.0
-  checksum: 10c0/bd9534ae317d6a2a7db032f48e8780cdb3a0842f1dc58335cfa8508d7e73ab02c5a9684becec06a05c36848c6c8039ffee74a4336c3622a832eb5aed6cd27a7a
+  checksum: 10c0/aaa4d907418829367177dc1a34c3446377582ec0127ba1c510b29927059557ecf49eec2fed5d737002bec1e5360a57607909aac1b616c7f4039e3b0f9732c98c
   languageName: node
   linkType: hard
 
@@ -3826,7 +3826,7 @@ __metadata:
     "@aminekun90/react-toast": "workspace:*"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
-    "@fortawesome/react-fontawesome": "npm:^3.2.0"
+    "@fortawesome/react-fontawesome": "npm:^3.3.1"
     "@types/prismjs": "npm:^1.26.6"
     "@types/react": "npm:^19.2.14"
     "@types/react-dom": "npm:^19.2.3"
@@ -5527,7 +5527,7 @@ __metadata:
     "@angular/forms": "npm:^21.2.2"
     "@angular/platform-browser": "npm:^21.2.2"
     "@angular/router": "npm:^21.2.2"
-    "@fortawesome/angular-fontawesome": "npm:^4.0.0"
+    "@fortawesome/angular-fontawesome": "npm:^5.0.0"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
     "@types/prismjs": "npm:^1.26.6"
