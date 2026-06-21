@@ -45,6 +45,10 @@ jobs:
         shell: bash
         run: yarn install --immutable
 
+      - name: 🔄 Sync shared core
+        shell: bash
+        run: yarn sync:core
+
       - name: 🎭 Install Playwright Browsers
         run: npx playwright install chromium --with-deps
 
@@ -52,7 +56,7 @@ jobs:
         shell: bash
         run: |
           yarn build:ng
-          cd projects/react-toast && yarn build
+          yarn build:react
 
       - name: 🧪 Run tests
         shell: bash

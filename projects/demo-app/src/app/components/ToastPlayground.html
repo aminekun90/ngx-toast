@@ -59,6 +59,22 @@
                         <option value="decreasing">Decreasing</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="theme">Theme</label>
+                    <select id="theme" [(ngModel)]="toastTheme" class="form-control">
+                        @for (theme of themes; track theme) {
+                            <option [value]="theme">{{ theme }}</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="scheme">Color scheme</label>
+                    <select id="scheme" [ngModel]="colorScheme()" (ngModelChange)="setScheme($event)" class="form-control">
+                        @for (scheme of schemes; track scheme) {
+                            <option [value]="scheme">{{ scheme }}</option>
+                        }
+                    </select>
+                </div>
                 <div class="form-group checkbox-group">
                     <label class="checkbox-label">
                         <input type="checkbox" [(ngModel)]="toastProgressBar">
@@ -67,9 +83,10 @@
                 </div>
             </div>
 
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn-launch" style="flex: 1;" (click)="showCustomToast()">🚀 Try me!</button>
-                <button class="btn-launch" style="flex: 1; background-color: #6366f1;" (click)="testPromise()">⏳ Promise</button>
+            <div class="action-buttons">
+                <button class="btn-launch" (click)="showCustomToast()">🚀 Try me!</button>
+                <button class="btn-launch btn-promise" (click)="testPromise()">⏳ Promise</button>
+                <button class="btn-launch btn-clear" (click)="clearAll()">🧹 Clear all</button>
             </div>
         </div>
 

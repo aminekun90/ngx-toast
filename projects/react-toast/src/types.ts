@@ -1,26 +1,16 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { EngineConfig, EngineToast } from "./core";
 
-export type ToastPosition = "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center" | "bottom-center";
-export type ToastType = "success" | "error" | "warning" | "info" | "loading";
+export type {
+  ToastPosition,
+  ToastType,
+  ProgressAnimation,
+  ToastGlobalConfig,
+} from "./core";
+export { DEFAULT_TOAST_CONFIG, TOAST_POSITIONS } from "./core";
 
-export interface ToastConfig {
-  id?: number;
-  message: string;
-  title?: string;
-  type?: ToastType;
-  duration?: number;
-  position?: ToastPosition;
-  progressBar?: boolean; 
-  progressAnimation?: "increasing" | "decreasing";
-  icon?: IconDefinition;
-  toastClass?: string;
-}
+/** Per-call options (React icon form). */
+export type ToastConfig = EngineConfig<IconDefinition>;
 
-export interface Toast extends Required<Omit<ToastConfig, 'title' | 'duration' | 'toastClass' | 'icon'>> {
-  id: number;
-  duration?: number;
-  closing: boolean;
-  toastClass: string;
-  title?: string;
-  icon?: IconDefinition;
-}
+/** Resolved toast state (React icon form). */
+export type Toast = EngineToast<IconDefinition>;

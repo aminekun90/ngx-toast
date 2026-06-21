@@ -182,11 +182,12 @@ __metadata:
     "@fortawesome/angular-fontawesome": "npm:^4.0.0"
     "@fortawesome/fontawesome-svg-core": "npm:^7.2.0"
     "@fortawesome/free-solid-svg-icons": "npm:^7.2.0"
-    rxjs: "npm:^7.8.0"
   peerDependencies:
-    "@angular/common": ^21.2.0
-    "@angular/core": ^21.2.0
-    rxjs: ^7.8.0
+    "@angular/common": ^21.2.0 || ^22.0.0
+    "@angular/core": ^21.2.0 || ^22.0.0
+    "@fortawesome/angular-fontawesome": ^4.0.0
+    "@fortawesome/fontawesome-svg-core": ^7.0.0
+    "@fortawesome/free-solid-svg-icons": ^7.0.0
   languageName: unknown
   linkType: soft
 
@@ -6468,7 +6469,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:7.8.2, rxjs@npm:^7.4.0, rxjs@npm:^7.8.0, rxjs@npm:^7.8.1, rxjs@npm:~7.8.2":
+"rxjs@npm:7.8.2, rxjs@npm:^7.4.0, rxjs@npm:^7.8.1, rxjs@npm:~7.8.2":
   version: 7.8.2
   resolution: "rxjs@npm:7.8.2"
   dependencies:

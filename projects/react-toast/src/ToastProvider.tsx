@@ -1,89 +1,77 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { DEFAULT_TOAST_CONFIG, ToastEngine, ToastGlobalConfig } from './core';
 import { ToastContext } from './ToastContext';
 import { version } from './current-version';
 import { Toast, ToastConfig } from './types';
 
-export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ToastProvider: React.FC<{
+  children: React.ReactNode;
+  config?: Partial<ToastGlobalConfig>;
+}> = ({ children, config: userConfig }) => {
   const [toasts, setToasts] = useState<Toast[]>([]);
-  const idCounter = useRef(0);
-  const ANIMATION_DURATION = 500;
 
-  const destroy = useCallback((id: number) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
+  // Resolved config kept in a ref so the engine always reads the latest value.
+  const configRef = useRef<ToastGlobalConfig>({ ...DEFAULT_TOAST_CONFIG, ...userConfig });
+  configRef.current = useMemo(
+    () => ({ ...DEFAULT_TOAST_CONFIG, ...userConfig }),
+    [userConfig]
+  );
 
-  const remove = useCallback((id: number) => {
-    setToasts((prev) => prev.map((t) => (t.id === id ? { ...t, closing: true } : t)));
-    setTimeout(() => destroy(id), ANIMATION_DURATION);
-  }, [destroy]);
+  // One engine instance for the lifetime of the provider.
+  const engineRef = useRef<ToastEngine<IconDefinition> | null>(null);
+  if (!engineRef.current) {
+    engineRef.current = new ToastEngine<IconDefinition>(
+      () => configRef.current,
+      (next) => setToasts(next as Toast[])
+    );
+  }
+  const engine = engineRef.current;
 
-  const show = useCallback((config: ToastConfig ) => {
-    const id = config.id ?? idCounter.current++;
-    const duration = config.duration === 0 ? undefined : config.duration || 5000;
-    
-    const newToast: Toast = {
-      id,
-      message: config.message,
-      title: config.title,
-      type: config.type || "info",
-      position: config.position || "bottom-right",
-      duration,
-      closing: false,
-      progressBar: config.progressBar ?? false,
-      progressAnimation: config.progressAnimation || "increasing",
-      toastClass: config.toastClass || "",
-      icon: config.icon
+  const value = useMemo(() => {
+    const show = (cfg: ToastConfig) => engine.show(cfg);
+    const shortcut =
+      (type: ToastConfig['type']) =>
+      (message: string, title?: string, cfg: Partial<ToastConfig> = {}) =>
+        engine.show({ ...cfg, message, title, type });
+
+    const loading = (message: string, title?: string, cfg: Partial<ToastConfig> = {}) =>
+      engine.show({ ...cfg, message, title, type: 'loading', duration: 0 });
+
+    const success = shortcut('success');
+    const error = shortcut('error');
+
+    const promise = <T,>(
+      promise: Promise<T> | (() => Promise<T>),
+      msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: unknown) => string) },
+      cfg: Partial<ToastConfig> = {}
+    ): Promise<T> => {
+      const id = loading(msgs.loading, cfg.title, cfg);
+      const p = typeof promise === 'function' ? promise() : promise;
+      p.then((data) => {
+        success(typeof msgs.success === 'function' ? msgs.success(data) : msgs.success, cfg.title, { ...cfg, id });
+      }).catch((err: unknown) => {
+        error(typeof msgs.error === 'function' ? msgs.error(err) : msgs.error, cfg.title, { ...cfg, id });
+      });
+      return p;
     };
 
-    setToasts((prev) => {
-      const exists = prev.find(t => t.id === id);
-      if (exists) return prev.map(t => t.id === id ? newToast : t);
-      return [...prev, newToast];
-    });
+    return {
+      show,
+      success,
+      error,
+      warning: shortcut('warning'),
+      info: shortcut('info'),
+      loading,
+      promise,
+      remove: (id: number) => engine.remove(id),
+      clear: (position?: Toast['position']) => engine.clear(position),
+      pause: (id: number) => engine.pause(id),
+      resume: (id: number) => engine.resume(id),
+      version,
+      toasts,
+    };
+  }, [engine, toasts]);
 
-    if (duration) setTimeout(() => remove(id), duration);
-    return id;
-  }, [remove]);
-
-  const loading = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "loading", duration: 0 });
-  const success = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "success" });
-  const error = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "error" });
-  const warning = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "warning" });
-  const info = (m: string, t?: string, c = {}) => show({ ...c, message: m, title: t, type: "info" });
-
-  const promise = useCallback(<T,>(
-    promise: Promise<T> | (() => Promise<T>),
-    msgs: { loading: string; success: string | ((data: T) => string); error: string | ((err: any) => string) },
-    config = {}
-  ) => {
-    const id = loading(msgs.loading, undefined, config);
-    const p = typeof promise === 'function' ? promise() : promise;
-
-    p.then((data) => {
-      const msg = typeof msgs.success === 'function' ? msgs.success(data) : msgs.success;
-      success(msg, undefined, { ...config, id });
-    }).catch((err) => {
-      const msg = typeof msgs.error === 'function' ? msgs.error(err) : msgs.error;
-      error(msg, undefined, { ...config, id });
-    });
-
-    return p;
-  }, [show]);
-
-  return (
-  <ToastContext.Provider value={useMemo(() => ({
-    show,
-    success,
-    error,
-    warning,
-    info,
-    loading,
-    toasts,
-    remove,
-    version,
-    promise
-  }), [show, success, error, warning, info, toasts, remove, version, promise, loading])}>
-    {children}
-  </ToastContext.Provider>
-);
+  return <ToastContext.Provider value={value}>{children}</ToastContext.Provider>;
 };

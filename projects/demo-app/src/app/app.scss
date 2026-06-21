@@ -16,7 +16,9 @@
 
 .hero-section {
   text-align: center;
-  
+  width: 100%;
+  max-width: 1140px;
+
   .badge {
     background-color: #e2e8f0;
     color: #475569;
@@ -29,7 +31,7 @@
   }
 
   h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2rem, 8vw, 3.5rem);
     font-weight: 800;
     margin: 1rem 0;
     background: linear-gradient(to right, #3b82f6, #2563eb);
@@ -39,7 +41,7 @@
   }
 
   p {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem);
     line-height: 1.6;
     color: #64748b;
     margin-bottom: 2rem;

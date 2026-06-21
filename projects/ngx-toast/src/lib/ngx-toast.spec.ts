@@ -7,7 +7,7 @@ import { ToastComponent } from './ngx-toast';
 @Component({
   standalone: true,
   imports: [ToastComponent],
-  template: `<app-toast [toast]="mockToast"></app-toast>`
+  template: `<ngx-toast-item [toast]="mockToast"></ngx-toast-item>`
 })
 class TestHostComponent {
   mockToast: any = {
@@ -19,7 +19,9 @@ class TestHostComponent {
     position: 'bottom-right',
     progressBar: true,
     progressAnimation: 'increasing',
-    toastClass: ''
+    toastClass: '',
+    icon: ['fas', 'check-circle'],
+    pauseOnHover: true
   };
 }
 
@@ -40,7 +42,7 @@ describe('ToastComponent', () => {
   });
 
   it('should create', () => {
-    const element = fixture.nativeElement.querySelector('app-toast');
+    const element = fixture.nativeElement.querySelector('ngx-toast-item');
     expect(element).toBeTruthy();
   });
 });
