@@ -84,5 +84,20 @@ See [THEMING.md](./THEMING.md) for the CSS-variable model and built-in themes.
 | `./run-demos.sh [angular\|react\|both]` | serve the demos |
 
 Releases are driven by the root `package.json` version (`set-version.js`
-propagates it). CI: `.github/workflows/test.yml` (build + test matrix),
-`release-main.yml` (publish + GitHub Pages), and Dependabot keeps deps current.
+propagates it). CI: `.github/workflows/test.yml` (build + test matrix) and
+`release-main.yml` (publish + GitHub Pages).
+
+## Dependencies
+
+The two published packages have **different runtime dependencies on purpose** —
+it's a toolchain difference, both are correct:
+
+| Package | `dependencies` | Why |
+|-|-|-|
+| `@aminekun90/ngx-toast` (Angular) | `tslib` | The root `tsconfig` uses `importHelpers: true`, so TypeScript emits calls to `tslib` helpers (`__decorate`, `__spreadArray`…) instead of inlining them. **ng-packagr injects `tslib` automatically** into the published `package.json` (it is *not* in our source). This is the Angular standard — every Angular library ships `tslib`, and it is deduplicated across all Angular libs in a consuming app (so effectively zero extra cost). |
+| `@aminekun90/react-toast` (React) | *(none)* | Built with Vite/Rollup targeting ES2022, which inlines/bundles helpers — no `tslib` extraction. `react` / `react-dom` (and FontAwesome) are **peerDependencies**, not dependencies. |
+
+> We deliberately keep `importHelpers: true` for the Angular lib (idiomatic,
+> dedup-friendly). To make it zero-dependency too, one could set
+> `importHelpers: false` so helpers inline and ng-packagr stops adding `tslib` —
+> at the cost of a slightly larger bundle and losing tslib deduplication.
