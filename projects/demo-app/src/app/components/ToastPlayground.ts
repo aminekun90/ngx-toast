@@ -70,6 +70,9 @@ export const appConfig: ApplicationConfig = {
     const themeLine = this.toastTheme() === 'default'
       ? ''
       : `\n      theme: '${this.toastTheme()}',`;
+    const schemeNote = this.colorScheme() === 'auto'
+      ? ''
+      : `\n    // Color scheme is toggled with a class on a wrapper (e.g. <html>)\n    document.documentElement.classList.add('ngx-toast-${this.colorScheme()}');\n`;
 
     return `import { Component, inject } from '@angular/core';
 import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
@@ -86,13 +89,14 @@ import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
 export class MyComponent {
   private readonly toastService = inject(ToastService);
 
-  show() {
+  show() {${schemeNote}
     this.toastService.show({
       type: '${this.toastType()}',${title}
       message: '${this.toastMessage()}',
       position: '${this.toastPosition()}',
       duration: ${this.toastDuration()},
-      progressBar: ${this.toastProgressBar()},${iconLine}${themeLine}
+      progressBar: ${this.toastProgressBar()},
+      progressAnimation: '${this.toastProgressAnimation()}',${iconLine}${themeLine}
     });
   }
 

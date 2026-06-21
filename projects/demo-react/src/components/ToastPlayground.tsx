@@ -65,6 +65,9 @@ root.render(
         const titleLine = toastTitle ? `\n      title: '${toastTitle}',` : '';
         const iconLine = ICON_MAP[selectedIconName] ? `\n      icon: ${selectedIconName},` : '';
         const themeLine = toastTheme !== 'default' ? `\n      theme: '${toastTheme}',` : '';
+        const schemeNote = colorScheme === 'auto'
+            ? ''
+            : `\n    // Color scheme is toggled with a class on a wrapper (e.g. <html>)\n    document.documentElement.classList.add('ngx-toast-${colorScheme}');\n`;
 
         return `import { useToast } from '@aminekun90/react-toast';
 import { ${selectedIconName} } from '@fortawesome/free-solid-svg-icons';
@@ -72,7 +75,7 @@ import { ${selectedIconName} } from '@fortawesome/free-solid-svg-icons';
 export function MyComponent() {
   const { show, promise } = useToast();
 
-  const handleAction = () => {
+  const handleAction = () => {${schemeNote}
     show({
       type: '${toastType}',${titleLine}
       message: '${toastMessage}',
@@ -95,7 +98,7 @@ export function MyComponent() {
 
   return <button onClick={handleAction}>Show Toast</button>;
 }`;
-    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, toastProgressAnimation, selectedIconName, toastTheme]);
+    }, [toastTitle, toastMessage, toastType, toastPosition, toastDuration, toastProgressBar, toastProgressAnimation, selectedIconName, toastTheme, colorScheme]);
 
     const htmlCode = `<button onClick={handleAction}>\n  Show Toast\n</button>`;
 
