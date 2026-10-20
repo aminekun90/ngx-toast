@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,8 @@ import { ToastComponent } from './ngx-toast';
 @Component({
   standalone: true,
   imports: [ToastComponent],
-  template: `<ngx-toast-item [toast]="mockToast"></ngx-toast-item>`
+  changeDetection: ChangeDetectionStrategy.Eager,
+  template: `<ngx-toast-item [toast]="mockToast"></ngx-toast-item>`,
 })
 class TestHostComponent {
   mockToast: any = {
@@ -21,7 +22,7 @@ class TestHostComponent {
     progressAnimation: 'increasing',
     toastClass: '',
     icon: ['fas', 'check-circle'],
-    pauseOnHover: true
+    pauseOnHover: true,
   };
 }
 

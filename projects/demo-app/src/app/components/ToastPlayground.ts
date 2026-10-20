@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IconName } from '@fortawesome/fontawesome-svg-core';
@@ -14,7 +14,8 @@ import 'prismjs/components/prism-typescript';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './ToastPlayground.html',
-  styleUrls: ['./ToastPlayground.scss']
+  changeDetection: ChangeDetectionStrategy.Eager,
+  styleUrls: ['./ToastPlayground.scss'],
 })
 export class ToastPlayground {
   private readonly toastService = inject(ToastService);
@@ -64,15 +65,14 @@ export const appConfig: ApplicationConfig = {
   // --- 2. USAGE CODE (component.ts) ---
   tsCode = computed(() => {
     const title = this.toastTitle() ? `\n      title: '${this.toastTitle()}',` : '';
-    const iconLine = this.selectedIcon() === 'none'
-      ? ''
-      : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
-    const themeLine = this.toastTheme() === 'default'
-      ? ''
-      : `\n      theme: '${this.toastTheme()}',`;
-    const schemeNote = this.colorScheme() === 'auto'
-      ? ''
-      : `\n    // Color scheme is toggled with a class on a wrapper (e.g. <html>)\n    document.documentElement.classList.add('ngx-toast-${this.colorScheme()}');\n`;
+    const iconLine =
+      this.selectedIcon() === 'none' ? '' : `\n      icon: ['fas', '${this.selectedIcon()}'],`;
+    const themeLine =
+      this.toastTheme() === 'default' ? '' : `\n      theme: '${this.toastTheme()}',`;
+    const schemeNote =
+      this.colorScheme() === 'auto'
+        ? ''
+        : `\n    // Color scheme is toggled with a class on a wrapper (e.g. <html>)\n    document.documentElement.classList.add('ngx-toast-${this.colorScheme()}');\n`;
 
     return `import { Component, inject } from '@angular/core';
 import { ToastService, ToastContainerComponent } from '@aminekun90/ngx-toast';
@@ -138,7 +138,7 @@ export class MyComponent {
       progressBar: this.toastProgressBar(),
       progressAnimation: this.toastProgressAnimation(),
       theme: this.toastTheme() === 'default' ? undefined : this.toastTheme(),
-      icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName]
+      icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName],
     });
   }
 
@@ -149,29 +149,33 @@ export class MyComponent {
   testPromise() {
     const myPromise = new Promise<string>((resolve, reject) => {
       setTimeout(() => {
-        Math.random() > 34 ? resolve("API Success") : reject(new Error("Network Error"));
+        Math.random() > 34 ? resolve('API Success') : reject(new Error('Network Error'));
       }, 2000);
     });
 
-    this.toastService.promise(myPromise, {
-      loading: 'Loading from server...',
-      success: (data: string) => `Loaded: ${data}`,
-      error: (err: unknown) => `Error: ${(err as Error).message}`
-    }, {
-      duration: this.toastDuration(),
-      icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName],
-      position: this.toastPosition(),
-      progressBar: this.toastProgressBar(),
-      theme: this.toastTheme() === 'default' ? undefined : this.toastTheme(),
-      title: this.toastTitle(),
-      message: this.toastMessage(),
-      type: this.toastType(),
-    });
+    this.toastService.promise(
+      myPromise,
+      {
+        loading: 'Loading from server...',
+        success: (data: string) => `Loaded: ${data}`,
+        error: (err: unknown) => `Error: ${(err as Error).message}`,
+      },
+      {
+        duration: this.toastDuration(),
+        icon: this.selectedIcon() === 'none' ? undefined : ['fas', this.selectedIcon() as IconName],
+        position: this.toastPosition(),
+        progressBar: this.toastProgressBar(),
+        theme: this.toastTheme() === 'default' ? undefined : this.toastTheme(),
+        title: this.toastTitle(),
+        message: this.toastMessage(),
+        type: this.toastType(),
+      },
+    );
   }
 
   copyCode(code: string, type: 'setup' | 'ts' | 'html') {
     navigator.clipboard.writeText(code).then(() => {
-      const isTs = type === 'ts'?this.copiedTs:this.copiedHtml;
+      const isTs = type === 'ts' ? this.copiedTs : this.copiedHtml;
       const state = type === 'setup' ? this.copiedSetup : isTs;
       state.set(true);
       setTimeout(() => state.set(false), 2000);
