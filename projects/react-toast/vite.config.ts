@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url';
 import { defineConfig, UserConfig } from 'vite';
 import dts from 'vite-plugin-dts';
 import { libInjectCss } from 'vite-plugin-lib-inject-css';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { InlineConfig } from 'vitest/node';
 
 interface VitestConfigExport extends UserConfig {
@@ -22,15 +21,8 @@ export default defineConfig({
         dts({
             insertTypesEntry: true,
             include: ['src'],
-            outDir: 'dist',
-            rollupTypes: true 
-        }),
-        viteStaticCopy({
-            targets: [
-                { src: 'README.md', dest: '.' },
-                { src: 'LICENSE', dest: '.' },
-                { src: 'package.json', dest: '.' },
-            ]
+            exclude: ['src/test'],
+            outDir: 'dist'
         })
     ],
     build: {
